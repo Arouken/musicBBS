@@ -9,5 +9,8 @@ public interface testUserDao {
 	
 	@Select("select * from user_info where userName = #{userName} and password = #{password}")
 	public testUser findUserInfoByCond(@Param("userName") String userName, @Param("password") String password);
+	
+	//hellooooooo
+	
 
 }
