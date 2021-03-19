@@ -8,5 +8,6 @@
 </head>
 <body>
 	欢迎您，登录成功！
+	<a href="login.jsp">登陆页</a>
 </body>
 </html>

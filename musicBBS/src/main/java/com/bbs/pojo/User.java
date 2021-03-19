@@ -1,14 +1,10 @@
-package com.ssm.pojo;
+package com.bbs.pojo;
 
-public class testUser {
+public class User {
+
 	private int id;
 	private String userName;
 	private String password;
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 
 	public int getId() {
 		return id;
@@ -33,7 +29,5 @@ public class testUser {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 
 }

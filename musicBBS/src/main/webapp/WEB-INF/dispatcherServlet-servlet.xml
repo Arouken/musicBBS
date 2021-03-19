@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<!-- 启动注解扫描功能  -->
-	<context:component-scan base-package="com.ssm" use-default-filters="false">
+	<context:component-scan base-package="com.bbs" use-default-filters="false">
 		<!--只扫描控制器  -->
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
@@ -24,5 +24,5 @@
 	<mvc:default-servlet-handler/>
 	<!-- 能支持springmvc更高级的一些功能，JSR303校验，快捷的ajax...映射动态请求 -->
 	<mvc:annotation-driven/>
-
+	
 </beans>
