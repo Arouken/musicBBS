@@ -11,5 +11,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="addUser" parameterType="com.bbs.pojo.User">
 		insert into user(userName,password) values(#{userName},#{password})
 	</insert>
+	
+	<select id="getUserList"  resultType="com.bbs.pojo.User">
+		select * from user
+	</select>
 
 </mapper>

@@ -9,6 +9,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
+	<!-- Spring通过注解实现对象创建，这里配置扫描，除了contrillerz注解，都要扫描 -->
 	<context:component-scan base-package="com.bbs">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
@@ -28,9 +29,21 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描mapping.xml文件 -->  
-        <property name="mapperLocations" value="classpath:com/bbs/mapper/*.xml"></property>  
+        <property name="mapperLocations" value="classpath:com/bbs/mapper/*.xml"></property> 
+        <property name="plugins">
+		    <array>
+		      <bean class="com.github.pagehelper.PageInterceptor">
+		        <property name="properties">
+		          <!-- config params as the following -->
+		          <value>
+		            helperDialect=mysql
+		          </value>
+		        </property>
+		      </bean>
+		    </array>
+  		</property>
 	</bean>
-
+	
 	<!-- 配置MapperScannerConfigurer,Dao接口所在包名，Spring会自动查找其下的类 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.bbs.dao" />
