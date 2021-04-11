@@ -51,15 +51,19 @@ layui.use('table', function(){
       ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
       ,{field:'userName', title:'用户名', width:120, edit: 'text'}
       ,{field:'password', title:'密码', width:100}
+       ,{field:'gender', title:'性别', width:80, edit: 'text', sort: true,templet: function(d){if(d.gender == 1){return '男'}else{return '女'}}}
+       ,{field:'phoneNum', title:'电话号码', width:120}
+       ,{field:'createDate', title:'注册时间', width:220}
+       
      /* ,{field:'email', title:'邮箱', width:150, edit: 'text', templet: function(res){
         return '<em>'+ res.email +'</em>'
       }}
-      ,{field:'sex', title:'性别', width:80, edit: 'text', sort: true}
+     
       ,{field:'city', title:'城市', width:100}
       ,{field:'sign', title:'签名'}
       ,{field:'ip', title:'IP', width:120}
       ,{field:'logins', title:'登入次数', width:100, sort: true}
-      ,{field:'joinTime', title:'加入时间', width:120}*/
+      */
       ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
     ]]
     ,page: true//开启分页

@@ -48,9 +48,8 @@ public class UserController {
 	@RequestMapping("/regist")
 	public String regist(User user,Model model){
 		
-		System.out.println("用户注册："+user.getUserName()+user.getPassword());				
+		System.out.println("用户注册："+user.getUserName()+"  "+user.getPassword());				
 		userService.regist(user);		
-		model.addAttribute("msg", "注册成功");
 		//注册成功后跳转success.jsp页面
 		return "redirect:/user_login.jsp";
 	}
