@@ -5,12 +5,20 @@ import java.util.Date;
 public class User {
 
 	private int id;
+	private int competence;
 	private String userName;
 	private String password;
 	private int gender;
 	private String phoneNum;
 	private Date createDate;
 	
+	public int getCompetence() {
+		return competence;
+	}
+
+	public void setCompetence(int competence) {
+		this.competence = competence;
+	}
 
 	public String getPhoneNum() {
 		return phoneNum;

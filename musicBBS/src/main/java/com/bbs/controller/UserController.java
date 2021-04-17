@@ -27,24 +27,36 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	//用户登陆
 	@RequestMapping("/login")
 	public String login(User ui) {
 		User tempUi = userService.login(ui.getUserName(), ui.getPassword());
 	
 		if (tempUi != null && tempUi.getUserName() != null) {
-			System.out.println("登陆成功");
-			return "index";
-		} else {
+			if(tempUi.getCompetence()==1) {
+				System.out.println("管理员登陆成功");
+				System.out.println(tempUi.getCompetence());
+				return "index";				
+			}
+			else {
+				System.out.println("用户登陆成功");
+				System.out.println(tempUi.getCompetence());
+				return "/bbs_front/user_index";		
+			}			
+		} 
+		else {
 			System.out.println("登陆失败");
 			return "redirect:/user_login.jsp";
 		}
 	}
+	
 	
 	@RequestMapping("/userlist")
 	public String userlist() {
 		return "redirect:/testtable.jsp";
 	}
 	
+	//用户注册
 	@RequestMapping("/regist")
 	public String regist(User user,Model model){
 		
@@ -67,7 +79,7 @@ public class UserController {
 		map.put("code", 0);
 		map.put("msg", "操作成功");
 		map.put("count", userPageInfo.getTotal());
-		map.put("data", userPageInfo.getList());//最最最关键的代码，layui的table会自动获取并显示该数据集
+		map.put("data", userPageInfo.getList());//layui的table会自动获取并显示该数据集
 		return map;
 	}
 	
