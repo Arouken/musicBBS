@@ -46,9 +46,9 @@
         <li class="layui-nav-item layui-nav-itemed">
           <a class="" href="javascript:;">用户管理</a>
           <dl class="layui-nav-child">
-            <dd><a href="${pageContext.request.contextPath}/user_list.jsp" target="usermain">用户列表</a></dd>
+            <dd><a href="${pageContext.request.contextPath}/bbs_back/user_list.jsp" target="usermain">用户列表</a></dd>
             <dd><a href="${pageContext.request.contextPath}/user_login.jsp" target="usermain">登陆测试</a></dd>
-            <dd><a href="${pageContext.request.contextPath}/mainPost_list.jsp" target="usermain">主贴列表</a></dd>
+            <dd><a href="${pageContext.request.contextPath}/bbs_back/mainPost_list.jsp" target="usermain">主贴列表</a></dd>
             <dd><a href="">超链接</a></dd>
           </dl>
         </li>

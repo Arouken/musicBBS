@@ -11,7 +11,14 @@ public class MainPost {
 	private int mainPostGoodCount;
 	private int mainPostBadCount;
 	private int mainPostIsLOcked;
-	//private int mainPostID;
+	private String mainPostImg;
+	
+	public String getMainPostImg() {
+		return mainPostImg;
+	}
+	public void setMainPostImg(String mainPostImg) {
+		this.mainPostImg = mainPostImg;
+	}
 	public int getMainPostID() {
 		return mainPostID;
 	}

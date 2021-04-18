@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bbs.pojo.User;
 import com.bbs.service.UserService;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -36,7 +35,7 @@ public class UserController {
 			if(tempUi.getCompetence()==1) {
 				System.out.println("管理员登陆成功");
 				System.out.println(tempUi.getCompetence());
-				return "index";				
+				return "/bbs_back/admin_index";				
 			}
 			else {
 				System.out.println("用户登陆成功");

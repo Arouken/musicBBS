@@ -53,7 +53,7 @@
         </div>
         <div class="chooseDevide">
             <div class="chooseDevide_left">
-                所在分类
+                                所在分类
             </div>
             <div class="chooseDevide_right">
                 <div class="nice-select" name="nice-select">

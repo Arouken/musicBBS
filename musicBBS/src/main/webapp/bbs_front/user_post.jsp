@@ -1,8 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>我的帖子</title>
+    <title>我收藏的贴</title>
     <link rel="stylesheet" href="css/reset.css"/>
     <link rel="stylesheet" href="css/homeHead.css"/>
     <link rel="stylesheet" href="css/homePublic.css"/>
@@ -12,7 +15,7 @@
 <header class="zyHead">
     <div class="zyHead_cen">
         <a href=""><img src="img/per-con.png" alt="" class="headPic1"/></a>
-        <a href="" class="backIndex">返回首页</a>
+        <a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" class="backIndex">返回首页</a>
         <!--未登入开始-->
         <!--<div class="ltForm">-->
         <!--<a href=""><img src="img/indexForm_bg.png" alt="" class="headPic2"/></a>-->
@@ -35,18 +38,16 @@
 <div class="homeCen">
     <div class="homeCen_left">
         <ul>
-            <li><a href="">我的主页</a></li>
-            <li><a href="">基本设置</a></li>
-            <li class="on"><a href="">我的贴子</a></li>
-            <li><a href="">我的消息</a></li>
-            <li><a href="">我的订单</a></li>
+            <li><a href="${pageContext.request.contextPath}/bbs_front/user_home.jsp">我的主页</a></li>
+            <li><a href="${pageContext.request.contextPath}/bbs_front/user_info.jsp">基本设置</a></li>
+            <li class="on"><a href="${pageContext.request.contextPath}/bbs_front/user_post.jsp">我的贴子</a></li>
         </ul>
     </div>
     <div class="homeCen_right">
         <div class="baseHead">
             <ul>
-                <li><a href="" class="on">我的发帖</a></li>
-                <li><a href="">我收藏的贴</a></li>
+                <li><a href="">我的发帖</a></li>
+                <li><a href="" class="on">我收藏的贴</a></li>
             </ul>
         </div>
         <div class="myWrite_con">
@@ -60,7 +61,7 @@
                 <div class="writeFoot1"><p><a href="">今天天气怎么样？</a></p></div>
                 <div class="writeFoot2">2018.02.23 14:36:24</div>
                 <div class="writeFoot3">2601</div>
-                <div class="writeFoot4"><a href="javascript:">删除</a></div>
+                <div class="writeFoot4"><a href="javascript:">取消收藏</a></div>
             </div>
         </div>
         <div class="indexFooter">

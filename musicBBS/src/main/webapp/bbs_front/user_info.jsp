@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -12,7 +15,7 @@
 <header class="zyHead">
     <div class="zyHead_cen">
         <a href=""><img src="img/per-con.png" alt="" class="headPic1"/></a>
-        <a href="" class="backIndex">返回首页</a>
+        <a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" class="backIndex">返回首页</a>
         <!--未登入开始-->
         <!--<div class="ltForm">-->
         <!--<a href=""><img src="img/indexForm_bg.png" alt="" class="headPic2"/></a>-->
@@ -35,11 +38,9 @@
 <div class="homeCen">
     <div class="homeCen_left">
         <ul>
-            <li><a href="">我的主页</a></li>
-            <li class="on"><a href="">基本设置</a></li>
-            <li><a href="">我的贴子</a></li>
-            <li><a href="">我的消息</a></li>
-            <li><a href="">我的订单</a></li>
+            <li><a href="${pageContext.request.contextPath}/bbs_front/user_home.jsp">我的主页</a></li>
+            <li  class="on"><a href="${pageContext.request.contextPath}/bbs_front/user_info.jsp">基本设置</a></li>
+            <li><a href="${pageContext.request.contextPath}/bbs_front/user_post.jsp">我的贴子</a></li>
         </ul>
     </div>
     <div class="homeCen_right">

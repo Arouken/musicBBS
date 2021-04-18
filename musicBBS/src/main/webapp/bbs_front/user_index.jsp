@@ -41,7 +41,7 @@
         <!-- 登入结束-->
         <div class="navFix">
             <!--登入开始-->
-            <a href="" class="navMe">花花</a>
+            <a href="${pageContext.request.contextPath}/bbs_front/user_home.jsp" class="navMe">花花</a>
             <!--登入结束-->
             <!--未登入开始-->
             <!--<a href="" class="navLogin">登录</a>-->
@@ -59,10 +59,14 @@
             </ul>
         </div>
         <div class="indexMain_left_con">
-            <!--有主题图循环开始-->
+                       <!--帖子循环开始-->     
             <c:forEach items="${pageInfo.list}" var="mainPostList">
+            <!--有主题图循环开始-->
+            <c:if test="${mainPostList.mainPostImg!=null}">
             <div class="indexCon_msg">
-                <div class="indexCon_msg_pic"></div>
+                <div class="indexCon_msg_pic">
+                <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a>
+                </div>
                 <div class="indexCon_msg_detail">
                     <a href="${pageContext.request.contextPath}/bbs_front/mainPostContent.jsp">
                         <div class="indexCon_msg_detail_tittle">
@@ -75,184 +79,58 @@
                     </div>
                     <div class="indexCon_msg_detail_other">
                         <ul>                        
-                            <li>${mainPostList.mainPostTime}</li>
-                            <li>${mainPostList.mainPostGoodCount}</li>
-                            <li>${mainPostList.mainPostBadCount}</li>
+                            <li>发帖时间：${mainPostList.mainPostTime}</li>
+                            <li>
+                            <input type="image" src="${pageContext.request.contextPath}/image/agree.png"  name="img"  style="width:15px;height:15px" />  <!--图片按钮-->
+                            ${mainPostList.mainPostGoodCount}</li>
+                            <li>
+                            <input type="image" src="${pageContext.request.contextPath}/image/disagree.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
+                            ${mainPostList.mainPostBadCount}</li>
+                            <li>
+                            <input type="image" src="${pageContext.request.contextPath}/image/comment.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
+                            ${mainPostList.mainPostBadCount}</li>
+                            
                         </ul>
                     </div>
                 </div>
                 <div class="clear"></div>
             </div>
-            </c:forEach>
+            </c:if>
             <!--有主题图循环结束-->
             <!--无主题图循环开始-->
+            <c:if test="${mainPostList.mainPostImg==null}">
             <div class="indexCon_msg">
-                <div class="indexCon_msg_pic"></div>
+                <div class="indexCon_msg_pic">
+                <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a>
+                </div>
                 <div class="indexCon_msg_detail">
-                    <a href="">
+                    <a href="${pageContext.request.contextPath}/bbs_front/mainPostContent.jsp">
                         <div class="indexCon_msg_detail_tittle">
-                           
-                            <p>关注上海车牌竞拍方面的资讯，对当月竞拍分析发表独到见解</p>
+                            <span><li>${mainPostList.userID}</li></span>
+                            <p>${mainPostList.mainPostTitle}</p>
                         </div>
                     </a>
                     <div class="indexCon_msg_detail_other">
-                        <ul>
-                            <li>花开花落</li>
-                            <li>1天前</li>
-                            <li>21</li>
-                            <li>28</li>
+                       <ul>                        
+                            <li>发帖时间：${mainPostList.mainPostTime}</li>
+                            <li>
+                            <input type="image" src="${pageContext.request.contextPath}/image/agree.png"  name="img"  style="width:15px;height:15px" />  <!--图片按钮-->
+                            ${mainPostList.mainPostGoodCount}</li>
+                            <li>
+                            <input type="image" src="${pageContext.request.contextPath}/image/disagree.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
+                            ${mainPostList.mainPostBadCount}</li>
+                            <li>
+                            <input type="image" src="${pageContext.request.contextPath}/image/comment.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
+                            ${mainPostList.mainPostBadCount}</li>
+                            <li>
                         </ul>
                     </div>
                 </div>
                 <div class="clear"></div>
             </div>
+            </c:if>
             <!--无主题图循环结束-->
-            <div class="indexCon_msg">
-                <div class="indexCon_msg_pic"></div>
-                <div class="indexCon_msg_detail">
-                    <a href="">
-                        <div class="indexCon_msg_detail_tittle">
-                            <span>竞拍</span>
-                            <p>关注上海车牌竞拍方面的资讯，对当月竞拍分析发表独到见解</p>
-                        </div>
-                    </a>
-                    <div class="indexCon_msg_detail_other">
-                        <ul>
-                            <li>花开花落</li>
-                            <li>1天前</li>
-                            <li>21</li>
-                            <li>28</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="indexCon_msg">
-                <div class="indexCon_msg_pic"></div>
-                <div class="indexCon_msg_detail">
-                    <a href="">
-                        <div class="indexCon_msg_detail_tittle">
-                            <span>竞拍</span>
-                            <p>关注上海车牌竞拍方面的资讯，对当月竞拍分析发表独到见解</p>
-                        </div>
-                    </a>
-                    <div class="havePic">
-                        <a href=""><div class="havePic_head"></div></a>
-                    </div>
-                    <div class="indexCon_msg_detail_other">
-                        <ul>
-                            <li>花开花落</li>
-                            <li>1天前</li>
-                            <li>21</li>
-                            <li>28</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="indexCon_msg">
-                <div class="indexCon_msg_pic"></div>
-                <div class="indexCon_msg_detail">
-                    <a href="">
-                        <div class="indexCon_msg_detail_tittle">
-                            <span>竞拍</span>
-                            <p>关注上海车牌竞拍方面的资讯，对当月竞拍分析发表独到见解</p>
-                        </div>
-                    </a>
-                    <div class="indexCon_msg_detail_other">
-                        <ul>
-                            <li>花开花落</li>
-                            <li>1天前</li>
-                            <li>21</li>
-                            <li>28</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="indexCon_msg">
-                <div class="indexCon_msg_pic"></div>
-                <div class="indexCon_msg_detail">
-                    <a href="">
-                        <div class="indexCon_msg_detail_tittle">
-                            <span>竞拍</span>
-                            <p>关注上海车牌竞拍方面的资讯，对当月竞拍分析发表独到见解</p>
-                        </div>
-                    </a>
-                    <div class="indexCon_msg_detail_other">
-                        <ul>
-                            <li>花开花落</li>
-                            <li>1天前</li>
-                            <li>21</li>
-                            <li>28</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="indexCon_msg">
-                <div class="indexCon_msg_pic"></div>
-                <div class="indexCon_msg_detail">
-                    <a href="">
-                        <div class="indexCon_msg_detail_tittle">
-                            <span>竞拍</span>
-                            <p>关注上海车牌竞拍方面的资讯，对当月竞拍分析发表独到见解</p>
-                        </div>
-                    </a>
-                    <div class="havePic">
-                        <a href=""><div class="havePic_head"></div></a>
-                    </div>
-                    <div class="indexCon_msg_detail_other">
-                        <ul>
-                            <li>花开花落</li>
-                            <li>1天前</li>
-                            <li>21</li>
-                            <li>28</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="indexCon_msg">
-                <div class="indexCon_msg_pic"></div>
-                <div class="indexCon_msg_detail">
-                    <a href="">
-                        <div class="indexCon_msg_detail_tittle">
-                            <span>竞拍</span>
-                            <p>关注上海车牌竞拍方面的资讯，对当月竞拍分析发表独到见解</p>
-                        </div>
-                    </a>
-                    <div class="indexCon_msg_detail_other">
-                        <ul>
-                            <li>花开花落</li>
-                            <li>1天前</li>
-                            <li>21</li>
-                            <li>28</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="indexCon_msg">
-                <div class="indexCon_msg_pic"></div>
-                <div class="indexCon_msg_detail">
-                    <a href="">
-                        <div class="indexCon_msg_detail_tittle">
-                            <span>竞拍</span>
-                            <p>关注上海车牌竞拍方面的资讯，对当月竞拍分析发表独到见解</p>
-                        </div>
-                    </a>
-                    <div class="indexCon_msg_detail_other">
-                        <ul>
-                            <li>花开花落</li>
-                            <li>1天前</li>
-                            <li>21</li>
-                            <li>28</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
+           </c:forEach>                                            
         </div>
         <div class="indexFooter">
             <div class="indexFooter_con">

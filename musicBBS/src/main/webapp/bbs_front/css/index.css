@@ -171,16 +171,16 @@ body{
     height: 18px;
     line-height: 18px;
 }
-.indexCon_msg_detail_other li:nth-child(3){
+/* .indexCon_msg_detail_other li:nth-child(3){
     text-indent: 25px;
-    background: url("../img/indexEye.png") no-repeat 0 center;
+   background: url("../img/indexEye.png") no-repeat 0 center;
 }
 .indexCon_msg_detail_other li:nth-child(4){
     float: right;
     margin-right: 10px;
     text-indent: 20px;
     background: url("../img/replayIcon.png") no-repeat 0 center;
-}
+}*/
 .indexCon_msg_replay{
     width: 70px;
     height: 46px;

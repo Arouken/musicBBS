@@ -1,18 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>修改头像</title>
+    <title>我的主页</title>
     <link rel="stylesheet" href="css/reset.css"/>
     <link rel="stylesheet" href="css/homeHead.css"/>
     <link rel="stylesheet" href="css/homePublic.css"/>
-    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/home.css"/>
 </head>
 <body>
 <header class="zyHead">
     <div class="zyHead_cen">
         <a href=""><img src="img/per-con.png" alt="" class="headPic1"/></a>
-        <a href="" class="backIndex">返回首页</a>
+        <a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" class="backIndex">返回首页</a>
         <!--未登入开始-->
         <!--<div class="ltForm">-->
         <!--<a href=""><img src="img/indexForm_bg.png" alt="" class="headPic2"/></a>-->
@@ -35,31 +38,20 @@
 <div class="homeCen">
     <div class="homeCen_left">
         <ul>
-            <li><a href="">我的主页</a></li>
-            <li class="on"><a href="">基本设置</a></li>
-            <li><a href="">我的贴子</a></li>
-            <li><a href="">我的消息</a></li>
-            <li><a href="">我的订单</a></li>
+            <li class="on"><a href="${pageContext.request.contextPath}/bbs_front/user_home.jsp">我的主页</a></li>
+            <li><a href="${pageContext.request.contextPath}/bbs_front/user_info.jsp">基本设置</a></li>
+            <li><a href="${pageContext.request.contextPath}/bbs_front/user_post.jsp">我的贴子</a></li>
         </ul>
     </div>
     <div class="homeCen_right">
-        <div class="baseHead">
+        <div class="home_self"></div>
+        <!--男性为male，女性为female-->
+        <div class="home_name"><p class="female">花花画花画</p></div>
+        <div class="home_msg">
             <ul>
-                <li><a href="">我的资料</a></li>
-                <li><a href="" class="on">头像</a></li>
-                <li><a href="">密码</a></li>
+                <li>已注册拍王账号50天</li>
+                <li>上海</li>
             </ul>
-        </div>
-        <div class="baseCon">
-            <div class="upImg">
-                <div class="Imgbtn">上传头像
-                    <input type="file" class="uploadPic"/>
-                </div>
-                <p>建议尺寸168*168，支持jpg、png、gif,最大不能超过50KB</p>
-                <div class="mypic">
-                    <img src="img/cs.png" alt=""/>
-                </div>
-            </div>
         </div>
     </div>
 </div>
