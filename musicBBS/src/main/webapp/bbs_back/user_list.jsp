@@ -28,8 +28,47 @@
   <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
-  
-          
+
+<script type="text/html" id="switchTpl">
+  <!-- 这里的 checked 的状态只是演示 -->
+  <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="女|男" lay-filter="sexDemo" {{ d.id == 10003 ? 'checked' : '' }}>
+</script>
+ 
+<script type="text/html" id="checkboxTpl">
+  <!-- 这里的 checked 的状态只是演示 -->
+  <input type="checkbox" name="lock" value="{{d.id}}" title="锁定" lay-filter="lockDemo" {{ d.id == 10006 ? 'checked' : '' }}>
+</script>
+
+
+ <!--table日期转换格式-->
+<script>
+    function Format(datetime,fmt) {
+        if (parseInt(datetime)==datetime) {
+            if (datetime.length==10) {
+                datetime=parseInt(datetime)*1000;
+            } else if(datetime.length==13) {
+                datetime=parseInt(datetime);
+            }
+        }
+        datetime=new Date(datetime);
+        var o = {
+            "M+" : datetime.getMonth()+1,                 //月份
+            "d+" : datetime.getDate(),                    //日
+            "h+" : datetime.getHours(),                   //小时
+            "m+" : datetime.getMinutes(),                 //分
+            "s+" : datetime.getSeconds(),                 //秒
+            "q+" : Math.floor((datetime.getMonth()+3)/3), //季度
+            "S"  : datetime.getMilliseconds()             //毫秒
+        };
+        if(/(y+)/.test(fmt))
+            fmt=fmt.replace(RegExp.$1, (datetime.getFullYear()+"").substr(4 - RegExp.$1.length));
+        for(var k in o)
+            if(new RegExp("("+ k +")").test(fmt))
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+        return fmt;
+    }
+</script>
+
 <script src="${pageContext.request.contextPath}/layui-v2.6.1/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 --> 
  
@@ -48,13 +87,20 @@ layui.use('table', function(){
     ,title: '用户数据表'
     ,cols: [[//表头
       {type: 'checkbox', fixed: 'left'}
-      ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
+      ,{field:'userID', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
       ,{field:'userName', title:'用户名', width:120, edit: 'text'}
       ,{field:'password', title:'密码', width:100}
-       ,{field:'gender', title:'性别', width:80, edit: 'text', sort: true,templet: function(d){if(d.gender == 1){return '男'}else{return '女'}}}
-       ,{field:'phoneNum', title:'电话号码', width:120}
-       ,{field:'createDate', title:'注册时间', width:220}
-       
+//    ,{field:'gender', title:'性别', width:85, templet: '#switchTpl', unresize: true}
+      ,{field:'gender', title:'性别', width:80, edit: 'text', sort: true,
+    	   templet: function(d){if(d.gender == 1){return '男'}else{return '女'}}}
+      ,{field:'phoneNum', title:'电话号码', width:120}
+      ,{field:'createDate', title:'注册时间', width:120, sort: true,templet:'<div>{{ Format(d.createDate,"yyyy-MM-dd")}}</div>'}
+    	
+ //    ,{field:'lock', title:'是否锁定', width:110, templet: '#checkboxTpl', unresize: true}
+       ,{field:'photo',title: '头像',width:120,templet:'<div><img src="/userPhoto/{{d.photo}}"></div>'}
+//        ,{field:'photo',title: '头像',width:120,templet:function(d){  
+//     	   return '<div οnclick="show_img(this)" ><img src="/userPhoto/{{d.photo}}" alt="" width="50px" height="50px"></a></div>';}}
+       ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
      /* ,{field:'email', title:'邮箱', width:150, edit: 'text', templet: function(res){
         return '<em>'+ res.email +'</em>'
       }}
@@ -64,7 +110,7 @@ layui.use('table', function(){
       ,{field:'ip', title:'IP', width:120}
       ,{field:'logins', title:'登入次数', width:100, sort: true}
       */
-      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+     
     ]]
     ,page: true//开启分页
   });
@@ -92,6 +138,7 @@ layui.use('table', function(){
     };
   });
   
+
   //监听行工具事件
   table.on('tool(test)', function(obj){
     var data = obj.data;
@@ -112,7 +159,32 @@ layui.use('table', function(){
         layer.close(index);
       });
     }
-  });
+  }); 
+  
+
+  
+//   table.on('tool(demo)', function (obj) {
+//       var data = obj.data;
+//       if (obj.event === "showPic") {
+//           layer.photos({
+//               photos: '#pic_' + data.id,
+//               //0-6的选择，指定弹出图片动画类型，默认随机
+//               anim: 5
+//           });
+//       }
+//   });
+
+  
+// //监听锁定操作
+//   form.on('checkbox(lockDemo)', function(obj){
+//     layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+//   });
+  
+// //监听性别操作
+//   form.on('switch(sexDemo)', function(obj){
+//     layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+//   });
+  
 });
 </script>
 

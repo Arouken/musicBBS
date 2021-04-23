@@ -14,5 +14,8 @@ public interface MainPostService {
 	public List<MainPost> getMainPostListUser(Map<String,Integer> map);
 	//用户主页展示帖子2
 	public PageInfo<MainPost> pageHelperList(Integer page,Integer size);
+	//登陆时初始化10条帖子
+	PageInfo<MainPost> userPostInit(Integer page, Integer size);
+	
 
 }

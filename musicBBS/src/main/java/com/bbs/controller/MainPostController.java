@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bbs.pojo.MainPost;
-import com.bbs.pojo.User;
 import com.bbs.service.MainPostService;
 import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("/MainPost")
-public class MainPostControler {
+public class MainPostController {
 	
 	@Autowired
 	private MainPostService mainPostService;
@@ -56,6 +55,6 @@ public class MainPostControler {
 	    System.out.println("Ç°Ì¨Ìû×Ócontroller");
 	    return "/bbs_front/user_index";
 	}
-
+	
 
 }

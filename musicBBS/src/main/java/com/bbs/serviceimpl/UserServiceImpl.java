@@ -21,26 +21,31 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
 
+	//登陆
 	@Override
-	public User login(String userName, String password) {		
-		return userDao.findUserInfoByCond(userName, password);
+	public User login(String userID, String password) {		
+		return userDao.findUserInfoByCond(userID, password);
 	}
 
+	//注册
 	@Override
 	public void regist(User user) {
 		// TODO Auto-generated method stub
 		userDao.addUser(user);
 	}
 
+	//用户分页
 	@Override
 	public List<User> getUserPage(Integer page, Integer limit) {
 		//使用PageHelper.startPage静态方法调用
 		//startPage后面的第一个对数据库操作的方法，将自动进行分页，sql语句无需添加limit关键字
 		PageHelper.startPage(page, limit);//page为申请查询的页码，limit为一页显示多少条数据
-		List<User> users = userDao.getUserList();//PageHelper.startPage()后面必须紧接查询数据的方法
-		return users;		
+		List<User> user = userDao.getUserList();//PageHelper.startPage()后面必须紧接查询数据的方法
+		return user;		
 	}
 
+	
+	//验证码比较
 	@Override
 	public int checkImgCode(String code, HttpSession session) {
 		System.out.println("开始比较");
@@ -58,5 +63,15 @@ public class UserServiceImpl implements UserService {
 		System.out.println("验证码错误");
 		return 0;
 	}
+
+	@Override
+	public void uploadUserPhoto(String userID, String photo) {
+		
+		userDao.uploadUserPhoto(userID,photo);
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 
 }

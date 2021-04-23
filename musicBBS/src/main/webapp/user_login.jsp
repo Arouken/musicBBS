@@ -59,7 +59,7 @@
 			.font-set{
 				font-size: 13px;
 				text-decoration: none; 
-				margin-left: 120px;
+				margin-left: 60px;
 			}
 			a:hover{
 			 text-decoration: underline; 
@@ -82,16 +82,16 @@
         </style>
     </head>
     <body>
-    	<form class="layui-form" action="user/login" method="post" id="userLoginFrom" >
+    	<form class="layui-form" action="${pageContext.request.contextPath}/user/login" method="post" id="userLoginFrom" >
     		<div class="container">
     			
     			<div class="layui-form-mid layui-word-aux">
     							
     			</div>
 			  <div class="layui-form-item">
-			    <label class="layui-form-label">用户名</label>
+			    <label class="layui-form-label">用户ID</label>
 			    <div class="layui-input-block">
-			      <input type="text" name="userName" id="userName" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+			      <input type="text" name="userID" id="userID" required  lay-verify="required" placeholder="请输入用户ID" autocomplete="off" class="layui-input">
 			    </div>
 			  </div>
 			  <div class="layui-form-item">
@@ -129,7 +129,9 @@
 			      <button class="layui-btn layui-btn-normal" id="login">登陆</button>	     
 			    </div>
 			  </div>
-			   <a href="" class="font-set">忘记密码?</a>  <a href="user_regist.jsp" class="font-set">立即注册</a>
+			   <a href="" class="font-set">忘记密码?</a>
+			   <a href="" class="font-set">手机登陆</a>  
+			   <a href="user_regist.jsp" class="font-set">立即注册</a>
 			</div>
 		</form>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/layui-v2.6.1/layui/layui.js"></script>
@@ -193,8 +195,8 @@
 				this.src="${pageContext.request.contextPath }/authImage/imgCode?date="+new Date();
 			})
 			
-			$("#userName").blur(function(){
-			var username=$("#userName").val();
+			$("#userID").blur(function(){
+			var username=$("#userID").val();
 	        if($.trim(username).length==0){
 	         	$(this).attr('placeholder',"输入错误，账号不能为空！");
 	         	

@@ -43,6 +43,16 @@ public class MainPostServiceImpl implements MainPostService {
 	    return new PageInfo<MainPost>(mainPostList);
 	}
 	
+	@Override
+	public PageInfo<MainPost> userPostInit(Integer page, Integer size) {
+		//1）静态分页
+	    PageHelper.startPage(page,size);
+	    //2）集合查询
+	    List<MainPost> mainPostList = mainPostDao.getMainPostList();
+	    //3）返回PageInfo:包含数据结果集+分页信息
+	    return new PageInfo<MainPost>(mainPostList);
+	}
+	
 	
     
 	

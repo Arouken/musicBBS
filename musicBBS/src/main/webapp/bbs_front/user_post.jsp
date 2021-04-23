@@ -14,7 +14,7 @@
 <body>
 <header class="zyHead">
     <div class="zyHead_cen">
-        <a href=""><img src="img/per-con.png" alt="" class="headPic1"/></a>
+        <a href=""><img src="" alt="" class="headPic1"/></a>
         <a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" class="backIndex">返回首页</a>
         <!--未登入开始-->
         <!--<div class="ltForm">-->
@@ -28,8 +28,8 @@
         <!-- 登入开始，未登入时以下隐藏-->
         <div class="lt_login">
             <ul>
-                <li><a href="">花开花落</a></li>
-                <li><a href="">退出</a></li>
+                <li><a href="">${userSession.userName}</a></li>
+                <li><a href="${pageContext.request.contextPath}/user/quite">退出</a></li>
             </ul>
         </div>
         <!-- 登入结束-->

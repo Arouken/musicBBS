@@ -28,7 +28,7 @@
         <!-- 登入开始，未登入时以下隐藏-->
         <div class="lt_login">
             <ul>
-                <li><a href="">花开花落</a></li>
+                <li><a href="">${userSession.userName}</a></li>
                 <li><a href="">退出</a></li>
             </ul>
         </div>
@@ -44,12 +44,14 @@
         </ul>
     </div>
     <div class="homeCen_right">
-        <div class="home_self"></div>
+        <div class="home_self">
+        <img src="/userPhoto/${userSession.photo}" alt="" />
+        </div>
         <!--男性为male，女性为female-->
-        <div class="home_name"><p class="female">花花画花画</p></div>
+        <div class="home_name"><p class="female">${userSession.userName}</p></div>
         <div class="home_msg">
             <ul>
-                <li>已注册拍王账号50天</li>
+                <li>已注册bbs账号50天</li>
                 <li>上海</li>
             </ul>
         </div>

@@ -29,13 +29,13 @@
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
         <a href="javascript:;">
-          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">管理员 </a>
+          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">${userSession.userName} </a>
         <dl class="layui-nav-child">
           <dd><a href="">基本资料</a></dd>
           <dd><a href="">安全设置</a></dd>
         </dl>
       </li>
-      <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/user_login.jsp">退出</a></li>
+      <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/user/quite">退出</a></li>
     </ul>
   </div>
   

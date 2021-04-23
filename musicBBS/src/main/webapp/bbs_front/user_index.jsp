@@ -15,7 +15,7 @@
     <div class="ltHead_cen">
         <a href=""><img src="" alt="" class="headPic1"/></a>
         <ul class="headNav">
-            <li><a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser">首页</a></li>
+            <li><a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" id="indexBBS">首页</a></li>
             <li><a href="">音乐交流</a></li>
             <li><a href="">心情分享</a></li>
             <li><a href="">站内公告</a></li>
@@ -23,6 +23,7 @@
             <li><a href="">我的收藏</a></li>
         </ul>
         <!--未登入开始-->
+        <c:if test="${userSession.userName==null}">
         <div class="ltForm appear">
             <a href=""><img src="" alt="" class="headPic2"/></a>
             <ul>
@@ -30,24 +31,28 @@
                 <li><a href="${pageContext.request.contextPath}/user_regist.jsp">注册</a></li>
             </ul>
         </div>
+        </c:if>
         <!-- 未登入结束-->
         <!-- 登入开始，未登入时以下隐藏-->
-        <!--<div class="lt_login appear">-->
-        <!--<ul>-->
-        <!--<li><a href="">花开花落</a></li>-->
-        <!--<li><a href="">退出</a></li>-->
-        <!--</ul>-->
-        <!--</div>-->
+        <c:if test="${userSession.userName!=null}">
+        <div class="lt_login appear">
+        <ul>
+        <li><a href="${pageContext.request.contextPath}/bbs_front/user_home.jsp">${userSession.userName}</a></li>
+        <li><a href="${pageContext.request.contextPath}/user/quite">退出</a></li>
+        </ul>
+        </div>
+        
         <!-- 登入结束-->
         <div class="navFix">
             <!--登入开始-->
-            <a href="${pageContext.request.contextPath}/bbs_front/user_home.jsp" class="navMe">花花</a>
+            <a href="${pageContext.request.contextPath}/bbs_front/user_home.jsp" class="navMe">${userSession.userName}</a>
             <!--登入结束-->
             <!--未登入开始-->
-            <!--<a href="" class="navLogin">登录</a>-->
+            <!--<a href="" class="navLogin">退出</a>-->
             <!--未登入结束-->
-            <a href="" class="navWrite">发新帖</a>
+            <a href="${pageContext.request.contextPath }/bbs_front/newMainPost.jsp" class="navWrite">发帖</a>
         </div>
+        </c:if>
     </div>
 </header>
 <div class="indexMain">
@@ -75,7 +80,9 @@
                         </div>
                     </a>
                     <div class="havePic">
-                        <a href=""><div class="havePic_head"></div></a>
+                        <a href=""><div class="havePic_head">
+                        <img src="/userPhoto/${mainPostList.mainPostImg}" alt="" />
+                        </div></a>
                     </div>
                     <div class="indexCon_msg_detail_other">
                         <ul>                        
@@ -224,8 +231,13 @@
             $(".navFix").hide();
             $(".ltHead").removeClass("navTop");
         }
-    };
+    }; 
     
    
+    
 </script>
+
+
+
+
 </html>

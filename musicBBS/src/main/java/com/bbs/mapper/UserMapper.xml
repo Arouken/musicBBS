@@ -5,15 +5,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 根据用户编号获取用户信息 -->
 	<select id="findUserInfoByCond"  resultType="com.bbs.pojo.User">
-		select * from user where userName = #{userName} and password = #{password}
+		select * from user where userID = #{userID} and password = #{password}
 	</select>
 	
 	<insert id="addUser" parameterType="com.bbs.pojo.User">
-		insert into user(userName,password) values(#{userName},#{password})
+		insert into user(userID,password,createDate,userName) values(#{userID},#{password},#{createDate},#{userName})
 	</insert>
+	
+	<update  id="uploadUserPhoto" parameterType="String">
+	    update  user set photo = #{photo} where userID=#{userID}		
+	</update>
 	
 	<select id="getUserList"  resultType="com.bbs.pojo.User">
 		select * from user
+	</select>
+	
+	<select id="getUser"  resultType="com.bbs.pojo.User">
+		select * from user where userID = #{userID}
 	</select>
 
 </mapper>

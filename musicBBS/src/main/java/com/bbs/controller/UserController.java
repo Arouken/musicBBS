@@ -1,12 +1,18 @@
 package com.bbs.controller;
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +20,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.bbs.pojo.MainPost;
 import com.bbs.pojo.User;
+import com.bbs.service.MainPostService;
 import com.bbs.service.UserService;
 import com.github.pagehelper.PageInfo;
+import com.bbs.utils.UploadTool;
+
+
+
+//支持上传的注解:servlet3.0版本提供的
 
 @Controller
 @RequestMapping("/user")
@@ -28,19 +43,20 @@ public class UserController {
 	
 	//用户登陆
 	@RequestMapping("/login")
-	public String login(User ui) {
-		User tempUi = userService.login(ui.getUserName(), ui.getPassword());
-	
-		if (tempUi != null && tempUi.getUserName() != null) {
+	public String login(User ui,HttpSession session,Model model) {
+		User tempUi = userService.login(ui.getUserID(), ui.getPassword());	
+		if (tempUi != null && tempUi.getUserID() != null) {
+			//保存登陆对象
+			session.setAttribute("userSession", tempUi);
 			if(tempUi.getCompetence()==1) {
+				//session.setAttribute("userSession", tempUi);
 				System.out.println("管理员登陆成功");
 				System.out.println(tempUi.getCompetence());
 				return "/bbs_back/admin_index";				
 			}
 			else {
 				System.out.println("用户登陆成功");
-				System.out.println(tempUi.getCompetence());
-				return "/bbs_front/user_index";		
+				return "redirect:/MainPost/getMainPostListUser";
 			}			
 		} 
 		else {
@@ -50,16 +66,14 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping("/userlist")
-	public String userlist() {
-		return "redirect:/testtable.jsp";
-	}
+	
 	
 	//用户注册
 	@RequestMapping("/regist")
 	public String regist(User user,Model model){
-		
-		System.out.println("用户注册："+user.getUserName()+"  "+user.getPassword());				
+		Date createDate = new Date();
+		user.setCreateDate(createDate);
+		System.out.println("用户注册："+user.getUserID()+"  "+user.getPassword());				
 		userService.regist(user);		
 		//注册成功后跳转success.jsp页面
 		return "redirect:/user_login.jsp";
@@ -104,4 +118,33 @@ public class UserController {
 		}
 	}
 	
+	//退出清除session
+	@RequestMapping("/quite")
+	public String quite(HttpSession session) {
+		
+		session.removeAttribute("userSession");	
+		System.out.println("清除session！");			
+	    return "redirect:/user_login.jsp";
+	}
+	
+	
+	@RequestMapping("/uploadPhoto")
+	public String uploadPhoto(HttpServletRequest request,
+			HttpServletResponse response,HttpSession session) throws IOException, ServletException {
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		MultipartFile file = multipartRequest.getFile("photo");
+		//原图名字
+		String fileName = file.getOriginalFilename();
+		//改名的图的名字
+		String uploadPhoto = UploadTool.uploadImg(file);
+		//获取当前登陆对象id
+		User user = (User) session.getAttribute("userSession");
+		String userID = user.getUserID();
+		userService.uploadUserPhoto(userID, uploadPhoto);
+		System.out.println(userID);
+		System.out.println(fileName);
+		System.out.println(uploadPhoto);
+		return "redirect:/bbs_front/user_info_img.jsp";	
+		
+	}			
 }

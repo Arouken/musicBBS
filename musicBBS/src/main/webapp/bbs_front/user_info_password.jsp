@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>我的资料</title>
+    <title>修改密码</title>
     <link rel="stylesheet" href="css/reset.css"/>
     <link rel="stylesheet" href="css/homeHead.css"/>
     <link rel="stylesheet" href="css/homePublic.css"/>
@@ -46,45 +47,38 @@
     <div class="homeCen_right">
         <div class="baseHead">
             <ul>
-                <li><a href="${pageContext.request.contextPath }/bbs_front/user_info.jsp" class="on">我的资料</a></li>
-                <li><a href="${pageContext.request.contextPath }/bbs_front/user_info_img.jsp" >头像</a></li>
-                <li><a href="${pageContext.request.contextPath }/bbs_front/user_info_password.jsp" >密码</a></li>
+                <li><a href="${pageContext.request.contextPath }/bbs_front/user_info.jsp">我的资料</a></li>
+                <li><a href="${pageContext.request.contextPath }/bbs_front/user_info_img.jsp">头像</a></li>
+                <li><a href="${pageContext.request.contextPath }/bbs_front/user_info_password.jsp" class="on">密码</a></li>
             </ul>
         </div>
-        <form>
         <div class="baseCon">
             <div class="baseCon_son">
                 <div class="baseCon_son_left">
-                    昵称
+                    当前密码
                 </div>
                 <div class="baseCon_son_right">
-                    <input type="text" value="${userSession.userName}"/>
+                    <input type="text"/>
                 </div>
             </div>
             <div class="baseCon_son">
                 <div class="baseCon_son_left">
-                    电话号码
+                    新密码
                 </div>
                 <div class="baseCon_son_right">
-                    <input type="text" value="${userSession.phoneNum}"/>
+                    <input type="text"/>
                 </div>
             </div>
-<!--             <div class="baseCon_son"> -->
-<!--                 <div class="baseCon_son_left"> -->
-<!--                     常用邮箱 -->
-<!--                 </div> -->
-<!--                 <div class="baseCon_son_right"> -->
-<!--                     <input type="text"  name="password" id="password"/> -->
-<!--                 </div> -->
-<!--             </div> -->
-            <div class="chooseSex">
-                <p><input type="radio" name="sex" checked/><label>男</label></p>
-                <p><input type="radio" name="sex"/><label>女</label></p>
+            <div class="baseCon_son">
+                <div class="baseCon_son_left">
+                    确认密码
+                </div>
+                <div class="baseCon_son_right">
+                    <input type="text"/>
+                </div>
             </div>
-            <input type="button" value="发送验证码" class="upload_sure"/>
             <input type="submit" value="确认修改" class="upload_sure"/>
         </div>
-       </form>
     </div>
 </div>
 </body>

@@ -4,13 +4,14 @@ import java.util.Date;
 
 public class User {
 
-	private int id;
+	private String userID;
 	private int competence;
 	private String userName;
 	private String password;
 	private int gender;
 	private String phoneNum;
 	private Date createDate;
+	private String photo;
 	
 	public int getCompetence() {
 		return competence;
@@ -44,13 +45,6 @@ public class User {
 		this.gender = gender;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getUserName() {
 		return userName;
@@ -66,6 +60,22 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 }

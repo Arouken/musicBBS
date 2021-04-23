@@ -31,4 +31,12 @@ public class DateTool {
 		String string = sdf.format(date);
 		return string;
 	}
+	
+	
+	public static String DateToString(Date date, String pattern) {    
+        String strDateTime = null;    
+        SimpleDateFormat formater = new SimpleDateFormat(pattern);    
+        strDateTime = date == null ? null : formater.format(date);    
+        return strDateTime;    
+    }  
 }

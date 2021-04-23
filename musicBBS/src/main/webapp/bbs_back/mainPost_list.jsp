@@ -28,6 +28,35 @@
   <a class="layui-btn layui-btn-xs" lay-event="edit">锁定</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
+
+ <!--table日期转换格式-->
+<script>
+    function Format(datetime,fmt) {
+        if (parseInt(datetime)==datetime) {
+            if (datetime.length==10) {
+                datetime=parseInt(datetime)*1000;
+            } else if(datetime.length==13) {
+                datetime=parseInt(datetime);
+            }
+        }
+        datetime=new Date(datetime);
+        var o = {
+            "M+" : datetime.getMonth()+1,                 //月份
+            "d+" : datetime.getDate(),                    //日
+            "h+" : datetime.getHours(),                   //小时
+            "m+" : datetime.getMinutes(),                 //分
+            "s+" : datetime.getSeconds(),                 //秒
+            "q+" : Math.floor((datetime.getMonth()+3)/3), //季度
+            "S"  : datetime.getMilliseconds()             //毫秒
+        };
+        if(/(y+)/.test(fmt))
+            fmt=fmt.replace(RegExp.$1, (datetime.getFullYear()+"").substr(4 - RegExp.$1.length));
+        for(var k in o)
+            if(new RegExp("("+ k +")").test(fmt))
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+        return fmt;
+    }
+</script>
   
           
 <script src="${pageContext.request.contextPath}/layui-v2.6.1/layui/layui.js" charset="utf-8"></script>
@@ -52,11 +81,11 @@ layui.use('table', function(){
       ,{field:'userID', title:'发帖用户', width:100, edit: 'text'}
       ,{field:'mainPostTitle', title:'帖子名', width:100}
       ,{field:'mainPostContent', title:'帖子内容', width:220,height:100}
-      ,{field:'mainPostTime', title:'发帖时间', width:120}
+      ,{field:'mainPostTime', title:'发帖时间', width:160,sort: true,templet:'<div>{{ Format(d.mainPostTime,"yyyy-MM-dd hh:mm:ss")}}</div>'}
       ,{field:'mainPostGoodCount', title:'点赞数', width:120}
       ,{field:'mainPostBadCount', title:'点踩数', width:120}
       ,{field:'mainPostIsLOcked', title:'是否锁定', width:120,templet: function(d){if(d.gender == 1){return '是'}else{return '否'}}}
-       
+      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150} 
      /* ,{field:'email', title:'邮箱', width:150, edit: 'text', templet: function(res){
         return '<em>'+ res.email +'</em>'
       }}
@@ -66,7 +95,7 @@ layui.use('table', function(){
       ,{field:'ip', title:'IP', width:120}
       ,{field:'logins', title:'登入次数', width:100, sort: true}
       */
-      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+      
     ]]
     ,page: true//开启分页
   });
@@ -115,6 +144,9 @@ layui.use('table', function(){
       });
     }
   });
+  
+  
+  
 });
 </script>
 

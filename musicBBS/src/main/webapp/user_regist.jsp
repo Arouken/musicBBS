@@ -8,7 +8,7 @@
         <style type="text/css">
       		.container{
       			width: 420px;
-      			height: 320px;
+      			height: 420px;
 		 		 min-height: 320px;  
 		 		 max-height: 320px;  
 		 		 position: absolute;   
@@ -68,22 +68,29 @@
         </style>
     </head>
     <body >
-    	<form class="layui-form" action="user/regist" method="post">
+    	<form class="layui-form" action="${pageContext.request.contextPath}/user/regist" method="post">
     		<div class="container">
-    			<button class="close" title="">X</button>
-    			<div class="layui-form-mid layui-word-aux">
+    			
+    			<div style="height:14px">
     							
     			</div>
 			  <div class="layui-form-item">
-			    <label class="layui-form-label">用 &nbsp;户&nbsp;名</label>
+			    <label class="layui-form-label">用 户&nbsp;&nbsp;ID</label>
 			    <div class="layui-input-block">
-			      <input type="text" name="userName" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+			      <input type="text" name="userID" required  lay-verify="required" placeholder="请输入用户ID" autocomplete="off" class="layui-input">
 			    </div>
 			  </div>
 			  <div class="layui-form-item">
 			    <label class="layui-form-label">密  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
 			    <div class="layui-input-inline">
 			      <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+			    </div>
+			    <!-- <div class="layui-form-mid layui-word-aux">辅助文字</div> -->
+			  </div>
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">昵  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</label>
+			    <div class="layui-input-inline">
+			      <input type="text" name="userName" required lay-verify="required" placeholder="请输入昵称" autocomplete="off" class="layui-input">
 			    </div>
 			    <!-- <div class="layui-form-mid layui-word-aux">辅助文字</div> -->
 			  </div>
