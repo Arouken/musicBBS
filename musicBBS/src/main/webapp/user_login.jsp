@@ -211,9 +211,9 @@
 					return;
 				}
 
-				//验证手机号码是否被注册过
+				//验证账号是否被注册过
 				//超链接  表单  提交数据最终都需要刷新整个页面。
-				//但是我们验证手机号的时候需要的是局部刷新技术:ajax
+				//但是我们验证账号的时候需要的是局部刷新技术:ajax
 				$.ajax({
 					url:"${pageContext.request.contextPath }/user/idIsExist",  //请求的目标地址路径：目标servlet的映射路径以及对应的增删改查的方法
 					type:"post",  //请求后台的方式：get/post
