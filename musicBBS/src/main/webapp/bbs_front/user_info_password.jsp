@@ -110,11 +110,7 @@
 					}			
 				})	
 				return false;
-			})
-			
-
-			
-			
+			})	
 			
 	 </script>
 </body>
