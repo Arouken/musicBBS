@@ -22,6 +22,7 @@ public class MainPostController {
 	@Autowired
 	private MainPostService mainPostService;
 	
+	//后台主贴显示
 	@ResponseBody //自动返回json格式的数据
 	@RequestMapping("/getMainPostList")
 	public Map<String, Object> getMainPostList(@RequestParam("page")Integer page,@RequestParam("limit")Integer limit){
@@ -34,16 +35,12 @@ public class MainPostController {
 		map.put("code", 0);
 		map.put("msg", "操作成功");
 		map.put("count", mainPostPageInfo.getTotal());
-		map.put("data", mainPostPageInfo.getList());//最最最关键的代码，layui的table会自动获取并显示该数据集
+		map.put("data", mainPostPageInfo.getList());//layui的table会自动获取并显示该数据集
 		return map;
 	}	
 	
 	
-	/***
-	 * 前台主贴展示
-	 * @param model
-	 * @return
-	 */
+	//前台主贴显示
 	@RequestMapping("/getMainPostListUser")
 	public String getMainPostListUser(@RequestParam(value = "page",required = false,defaultValue = "1")int page,
 	                   @RequestParam(value = "size",required = false,defaultValue = "10")int size,

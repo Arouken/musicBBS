@@ -67,9 +67,10 @@
  
         </style>
     </head>
+<!--     padding-top:80px;padding-left:40px; -->
     <body >
     	<form class="layui-form" action="${pageContext.request.contextPath}/user/regist" method="post">
-    		<div class="container">
+    		<div class="container" >
     			
     			<div style="height:14px">
     							
@@ -77,15 +78,10 @@
 			  <div class="layui-form-item">
 			    <label class="layui-form-label">用 户&nbsp;&nbsp;ID</label>
 			    <div class="layui-input-block">
-			      <input type="text" name="userID" required  lay-verify="required" placeholder="请输入用户ID" autocomplete="off" class="layui-input">
+			      <input type="text" name="userID" id="userID" required  lay-verify="required" 
+			      placeholder="请输入用户ID" autocomplete="off" onblur="idIsExist()" class="layui-input ">
+			      <span id="userID_mess"></span> 
 			    </div>
-			  </div>
-			  <div class="layui-form-item">
-			    <label class="layui-form-label">密  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
-			    <div class="layui-input-inline">
-			      <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
-			    </div>
-			    <!-- <div class="layui-form-mid layui-word-aux">辅助文字</div> -->
 			  </div>
 			  <div class="layui-form-item">
 			    <label class="layui-form-label">昵  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</label>
@@ -94,10 +90,21 @@
 			    </div>
 			    <!-- <div class="layui-form-mid layui-word-aux">辅助文字</div> -->
 			  </div>
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">密  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+			    <div class="layui-input-block">
+			      <input type="password" name="password" id="password" required lay-verify="required" 
+			      placeholder="请输入密码" autocomplete="off" class="layui-input" onblur="passwordFormat()">
+			      <span id="password_mess"></span> 
+			    </div>
+			    <!-- <div class="layui-form-mid layui-word-aux">辅助文字</div> -->
+			  </div>
 			   <div class="layui-form-item">
 			    <label class="layui-form-label">确认密码</label>
 			    <div class="layui-input-inline">
-			      <input type="text" name="title" required  lay-verify="required" placeholder="请再次输入密码" autocomplete="off" class="layui-input verity">
+			      <input type="password" name="sepassword" id="sepassword" required  lay-verify="required" 
+			      placeholder="请再次输入密码" autocomplete="off" class="layui-input verity" onkeyup="passwordSame()">
+			      <span id="sepassword_mess"></span> 
 			    </div>
 			    <!--<div class="layui-form-mid layui-word-aux">辅助文字</div> -->
 			      
@@ -111,13 +118,14 @@
  
 			  <div class="layui-form-item">
 			    <div class="layui-input-block">
-			      <button class="layui-btn" lay-submit lay-filter="formDemo" type="submit" >注册</button>	     
+			      <button class="layui-btn" lay-submit lay-filter="formDemo" type="submit" id="regist">注册</button>	     
 			    </div>
 			  </div>
 			   <a href="" class="font-set">忘记密码?</a>  <a href="user_login.jsp" class="font-set">立即登陆</a>
 			</div>
 		</form>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/layui-v2.6.1/layui/layui.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/layui-v2.6.1/layui/jquery-3.3.1.js"></script>
 		<script>
 			layui.use(['form', 'layedit', 'laydate'], function(){
 			  var form = layui.form
@@ -167,20 +175,76 @@
 			    })
 			    return false;
 			  });
-			 
-			  //表单初始赋值
-			 /* form.val('example', {
-			    "username": "贤心" // "name": "value"
-			    ,"password": "123456"
-			    ,"interest": 1
-			    ,"like[write]": true //复选框选中状态
-			    ,"close": true //开关状态
-			    ,"sex": "女"
-			    ,"desc": "我爱 layui"
-			  })*/
-			  
-			  
+			 		  
 			});
+			
+			//判断密码格式
+			function passwordFormat(){
+				$("#password_mess").html("");
+				var password = document.getElementById("password").value;    		
+				var reg=/^[a-zA-z]\w{3,9}$/;
+				//判断手机格式是否正确:test()
+				if(!reg.test(password)){
+					//错误提示
+					$("#password_mess").html("格式错误!字母数字组成,字母开头,4-10位").css("color","red");
+					return;
+				}					    		
+			}
+			
+			//判断两次密码是否一致
+			function passwordSame(){
+				var password = document.getElementById("password").value;
+	    		var repassword = document.getElementById("sepassword").value;	    		
+	    		if(password == repassword) {
+	    			 $("#sepassword_mess").html("").css("color","green");
+	    			 document.getElementById("regist").disabled = false;
+	    			
+				 }else {
+					 $("#sepassword_mess").html("两次输入的密码不一致").css("color","red");
+		    		 document.getElementById("regist").disabled = true; 
+				 }			
+			}
+			
+			//账号验证
+			function idIsExist(){
+				//清空错误提示
+				$("#userID_mess").html("");
+				//手机号码非空
+				var userID=$("#userID").val();//账号
+			    if($.trim(userID).length==0){
+					$("#userID_mess").html("账号不能为空！").css("color","red");
+					return;
+				}
+				//验证账号格式：正则表达式验证
+				var reg=/^[a-zA-z]\w{3,15}$/;
+				//判断手机格式是否正确:test()
+				if(!reg.test(userID)){
+					//错误提示
+					$("#userID_mess").html("格式错误!字母数字组成,字母开头,4-16位").css("color","red");
+					return;
+				}
+				//验证账号是否被注册过
+				//超链接  表单  提交数据最终都需要刷新整个页面。
+				$.ajax({
+					url:"${pageContext.request.contextPath }/user/idIsExist",  //请求的目标地址路径
+					type:"post",  //请求后台的方式：get/post
+					dataType:"text",//服务器响应给客户端的数据类型：html  xml  json  text
+					data:"userID="+userID,//请求中携带的参数：账号
+					success:function(obj){//根据服务器响应的参数进行处理：成功的回调函数
+						//obj是ok或者是no
+						console.log(obj);
+						if(obj=="ok"){
+							//可以注册
+							$("#userID_mess").html("");
+						}else{
+							//提示已经注册
+							$("#userID_mess").html("该账号已被占用,请重新输入").css("color","red");
+						}
+					}
+				})			
+			}
+			
+			
 			</script>
     </body>
 </html>

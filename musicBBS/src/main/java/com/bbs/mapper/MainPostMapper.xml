@@ -3,14 +3,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bbs.dao.MainPostDao">
 	
-	<!-- 根据用户编号获取用户信息 -->
+	<!-- 获取所有帖子信息 -->
 	<select id="getMainPostList"  resultType="com.bbs.pojo.MainPost">
 		select * from main_post
 	</select>
 	
-	<select id="getMainPostListUser"  resultType="com.bbs.pojo.MainPost">
-		select * from main_post limit #{startIndex},#{pageSize}
-	</select>
+<!-- 	<select id="getMainPostListUser"  resultType="com.bbs.pojo.MainPost"> -->
+<!-- 		select * from main_post limit #{startIndex},#{pageSize} -->
+<!-- 	</select> -->
 	
 	<insert id="addMainPost" parameterType="com.bbs.pojo.MainPost">
 		insert into main_post(userName,password) values(#{userName},#{password})

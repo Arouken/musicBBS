@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class User {
 
-	private String userID;
-	private int competence;
-	private String userName;
+	private String userID;//ID
+	private int competence;//È¨ÏŞ
+	private String userName;//ÃÜÂë
 	private String password;
 	private int gender;
 	private String phoneNum;

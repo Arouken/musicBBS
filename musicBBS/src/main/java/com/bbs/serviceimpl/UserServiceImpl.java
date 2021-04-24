@@ -26,11 +26,17 @@ public class UserServiceImpl implements UserService {
 	public User login(String userID, String password) {		
 		return userDao.findUserInfoByCond(userID, password);
 	}
+	
+	//用户注册时检测ID是否重复
+	@Override
+	public User idIsExist(String userID) {
+			
+		return userDao.findUser(userID);
+	}
 
 	//注册
 	@Override
-	public void regist(User user) {
-		// TODO Auto-generated method stub
+	public void regist(User user) {		
 		userDao.addUser(user);
 	}
 
@@ -63,15 +69,18 @@ public class UserServiceImpl implements UserService {
 		System.out.println("验证码错误");
 		return 0;
 	}
-
+	
+    //用户修改头像
 	@Override
 	public void uploadUserPhoto(String userID, String photo) {
 		
-		userDao.uploadUserPhoto(userID,photo);
-		// TODO Auto-generated method stub
-		
+		userDao.uploadUserPhoto(userID,photo);		
 	}
-
-	
+    //用户修改密码
+	@Override
+	public void updateUserPassword(String userID, String password) {
+		// TODO Auto-generated method stub	
+		userDao.updateUserPassword(userID, password);
+	}	
 
 }

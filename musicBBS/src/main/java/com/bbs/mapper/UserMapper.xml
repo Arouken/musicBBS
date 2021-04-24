@@ -3,25 +3,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bbs.dao.UserDao">
 	
-	<!-- 根据用户编号获取用户信息 -->
+<!-- 	根据用户编号获取用户信息 -->
 	<select id="findUserInfoByCond"  resultType="com.bbs.pojo.User">
 		select * from user where userID = #{userID} and password = #{password}
 	</select>
-	
+<!-- 	添加用户 -->
 	<insert id="addUser" parameterType="com.bbs.pojo.User">
 		insert into user(userID,password,createDate,userName) values(#{userID},#{password},#{createDate},#{userName})
 	</insert>
-	
+<!--	更换头像 -->
 	<update  id="uploadUserPhoto" parameterType="String">
 	    update  user set photo = #{photo} where userID=#{userID}		
 	</update>
-	
+<!--	获取所有用户列表-->
 	<select id="getUserList"  resultType="com.bbs.pojo.User">
 		select * from user
 	</select>
-	
+<!-- 	获取单个用户信息 -->
 	<select id="getUser"  resultType="com.bbs.pojo.User">
 		select * from user where userID = #{userID}
 	</select>
+<!-- 	判断用户ID信息 -->
+	<select id="findUser"  resultType="com.bbs.pojo.User">
+		select * from user where userID = #{userID}
+	</select>
+<!-- 	修改用户昵称 -->
+	<update  id="updateUserName" parameterType="String">
+	    update  user set userName = #{userName} where userID=#{userID}		
+	</update>
+<!-- 	修改用户密码 -->
+	<update  id="updateUserPassword" parameterType="String">
+	    update  user set password = #{password} where userID=#{userID}		
+	</update>
 
 </mapper>

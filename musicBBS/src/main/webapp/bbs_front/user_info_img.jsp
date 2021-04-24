@@ -52,20 +52,20 @@
                 <li><a href="${pageContext.request.contextPath }/bbs_front/user_info_password.jsp">密码</a></li>
             </ul>
         </div>
-        <div class="baseCon">
+        <div class="baseCon" >
         <form action="${pageContext.request.contextPath}/user/uploadPhoto" method="post" id="" enctype="multipart/form-data">
-            <div class="upImg">
+            <div class="upImg" style="height:500px;">
 <!--                 <div class="Imgbtn">选择头像 -->
 <!--                     <input type="file" class="uploadPic" name="photo" id="photo" /> -->
 <!--                 </div> -->
                 
-                <div class="writePic">
+                <div class="writePic" style="padding-top:80px;padding-left:40px;width:80%; height:10%;">
             		<input type="file" accept=".jpeg, .jpg, .png" class="upload_file" name="photo" id="photo"/>
+            		<p>建议尺寸168*168，支持jpg、png、gif,最大不能超过50KB</p>
         		</div>
-                
-                <p>建议尺寸168*168，支持jpg、png、gif,最大不能超过50KB</p>
+                         
                 <!--  虚拟挂载 -->
-                <div class="mypic">
+                <div class="mypic" style="padding-top:80px;">
                     <img src="/userPhoto/${userSession.photo}" alt="" />
                 </div> 
                 <div class="Imgbtn">上传头像

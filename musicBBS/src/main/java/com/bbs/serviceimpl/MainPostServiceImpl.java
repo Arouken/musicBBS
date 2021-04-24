@@ -1,7 +1,6 @@
 package com.bbs.serviceimpl;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +14,8 @@ import com.github.pagehelper.PageInfo;
 @Service("MainPostService")
 public class MainPostServiceImpl implements MainPostService {
 	
-	//不需要set方法，这个autowrite注解已经封装了
-	//根据类型进行
+	//后台展示帖子
+	//根据类型进行，不需要set方法，这个autowrite注解已经封装了
 	@Autowired
 	private MainPostDao mainPostDao;
 
@@ -27,12 +26,7 @@ public class MainPostServiceImpl implements MainPostService {
 		return mainPostList;		
 	}
 
-	@Override
-	public List<MainPost> getMainPostListUser(Map<String, Integer> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+    //前台展示帖子
 	@Override
 	public PageInfo<MainPost> pageHelperList(Integer page, Integer size) {
 		//1）静态分页
@@ -43,6 +37,7 @@ public class MainPostServiceImpl implements MainPostService {
 	    return new PageInfo<MainPost>(mainPostList);
 	}
 	
+	//后台初始化10条
 	@Override
 	public PageInfo<MainPost> userPostInit(Integer page, Integer size) {
 		//1）静态分页

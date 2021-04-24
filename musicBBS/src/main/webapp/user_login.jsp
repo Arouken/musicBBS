@@ -83,7 +83,7 @@
     </head>
     <body>
     	<form class="layui-form" action="${pageContext.request.contextPath}/user/login" method="post" id="userLoginFrom" >
-    		<div class="container">
+    		<div class="container" style>
     			
     			<div class="layui-form-mid layui-word-aux">
     							
@@ -91,26 +91,31 @@
 			  <div class="layui-form-item">
 			    <label class="layui-form-label">用户ID</label>
 			    <div class="layui-input-block">
-			      <input type="text" name="userID" id="userID" required  lay-verify="required" placeholder="请输入用户ID" autocomplete="off" class="layui-input">
+			      <input type="text" name="userID" id="userID" required  onkeyup="idIsExist()"
+			      lay-verify="required" placeholder="请输入用户ID" autocomplete="off" class="layui-input">
+			      <span id="userID_mess"></span> 
 			    </div>
 			  </div>
 			  <div class="layui-form-item">
 			    <label class="layui-form-label">密 &nbsp;&nbsp;码</label>
-			    <div class="layui-input-inline">
-			      <input type="password" name="password" id="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+			    <div class="layui-input-block">
+			      <input type="password" name="password" id="password" required lay-verify="required" 
+			      placeholder="请输入密码" autocomplete="off" class="layui-input" onkeyup="passIsNull()">
+			      <span id="password_mess"></span> 
 			    </div>
-			    <!-- <div class="layui-form-mid layui-word-aux">辅助文字</div> -->
+<!-- 			    <div class="layui-form-mid layui-word-aux">辅助文字</div> -->
 			  </div>
 			   <div class="layui-form-item">
 			    <label class="layui-form-label">验证码</label>
 			    <div class="layui-input-inline">
-			      <input type="text" name="imgCode" id="imgCode" required  lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input verity">
+			      <input type="text" name="imgCode" id="imgCode" required  lay-verify="required" 
+			      placeholder="请输入验证码" autocomplete="off" class="layui-input verity">	
+			      <span id="imgCode_mess"></span> 		      
 			    </div>
 			    
-			    <div class="layui-form-mid layui-word-aux">
+			    <div class="layui-form-mid layui-word-aux"style="padding-left:4px;">
 			      <!-- 图形验证码图片, src属性直接访问后台的servlet映射路径即可   -->
-                <img id="loginImg" src="${pageContext.request.contextPath }/authImage/imgCode" 
-                style="width: 98px;height: 43px;">
+                <img id="loginImg" src="${pageContext.request.contextPath }/authImage/imgCode" style="width:100%;">
 			    </div> 			      
 			  </div>
 			  
@@ -195,25 +200,59 @@
 				this.src="${pageContext.request.contextPath }/authImage/imgCode?date="+new Date();
 			})
 			
-			$("#userID").blur(function(){
-			var username=$("#userID").val();
-	        if($.trim(username).length==0){
-	         	$(this).attr('placeholder',"输入错误，账号不能为空！");
-	         	
-	        	}
-	    	});
+			//2.账号验证
+			function idIsExist(){
+				//清空错误提示
+				$("#userID_mess").html("");
+				//手机号码非空
+				var userID=$("#userID").val();//账号
+			    if($.trim(userID).length==0){
+					$("#userID_mess").html("账号不能为空！").css("color","red");
+					return;
+				}
+
+				//验证手机号码是否被注册过
+				//超链接  表单  提交数据最终都需要刷新整个页面。
+				//但是我们验证手机号的时候需要的是局部刷新技术:ajax
+				$.ajax({
+					url:"${pageContext.request.contextPath }/user/idIsExist",  //请求的目标地址路径：目标servlet的映射路径以及对应的增删改查的方法
+					type:"post",  //请求后台的方式：get/post
+					dataType:"text",//服务器响应给客户端的数据类型：html  xml  json  text
+					data:"userID="+userID,//请求中携带的参数：账号
+					success:function(obj){//根据服务器响应的参数进行处理：成功的回调函数
+						//obj是ok或者是no
+						console.log(obj);
+						if(obj=="ok"){
+							//提示可以注册
+							$("#userID_mess").html("该账号不存在,可选择注册").css("color","red");
+							 document.getElementById("login").disabled = true; 
+						}else{
+							//已经注册
+							$("#userID_mess").html("");
+							document.getElementById("login").disabled = false; 
+						}
+					}
+				})			
+			}
 			
-			$("#password").blur(function(){
-			var pw=$("#password").val();
-		        if($.trim(pw).length==0){
-		         	$(this).attr('placeholder',"输入错误，密码不能为空！");
-		        	}
-		    	});
+			
+			function passIsNull(){
+				var pw=$("#password").val();
+			    $("#password_mess").html("");
+			    if($.trim(pw).length==0)
+			    {
+		           $("#password_mess").html("密码不能为空").css("color","red");		          
+		        }
+			    
+			}
+			
+			
 			
 			$("#imgCode").blur(function(){
+				$("#imgCode_mess").html("");			
 				var imgcode=$("#imgCode").val();
 			        if($.trim(imgcode).length==0){
-			         	$(this).attr('placeholder',"验证码不能为空！");
+			        	$("#imgCode_mess").html("验证码不能为空").css("color","red");			        	
 			        	}
 			    	});
 			
@@ -234,7 +273,7 @@
 							$("#userLoginFrom").submit();		
 						}else{
 							//验证码错误
-							$("#msg").html("验证码输入错误！");
+							$("#imgCode_mess").html("验证码错误").css("color","red");
 							return;
 						}
 					}			

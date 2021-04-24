@@ -48,8 +48,7 @@ public class UserController {
 		if (tempUi != null && tempUi.getUserID() != null) {
 			//保存登陆对象
 			session.setAttribute("userSession", tempUi);
-			if(tempUi.getCompetence()==1) {
-				//session.setAttribute("userSession", tempUi);
+			if(tempUi.getCompetence()==1) {				
 				System.out.println("管理员登陆成功");
 				System.out.println(tempUi.getCompetence());
 				return "/bbs_back/admin_index";				
@@ -65,8 +64,19 @@ public class UserController {
 		}
 	}
 	
-	
-	
+	//判断用户是否存在，用于检测注册时ID是否重复
+	@RequestMapping("/idIsExist")
+	public void idIsExist(HttpServletRequest request,HttpServletResponse response,Model model) throws IOException{		
+		String userid = request.getParameter("userID");	
+		User tempUi = userService.idIsExist(userid);	
+		if (tempUi == null) {
+			//不存在
+			response.getWriter().write("ok");
+		}else {
+			//存在
+			response.getWriter().write("no");
+		}
+	}
 	
 	//用户注册
 	@RequestMapping("/regist")
@@ -79,7 +89,7 @@ public class UserController {
 		return "redirect:/user_login.jsp";
 	}
 	
-	//使用pagerHelper实现分页
+	//后台用户列表，使用pagerHelper实现分页
 	@ResponseBody //自动返回json格式的数据
 	@RequestMapping("/getUserList")
 	public Map<String, Object> getPage(@RequestParam("page")Integer page,@RequestParam("limit")Integer limit){
@@ -96,9 +106,7 @@ public class UserController {
 		return map;
 	}
 	
-	/**
-	 * 校验输入的图形验证码是否正确
-	 */
+	// 校验输入的图形验证码是否正确
 	@RequestMapping("/checkImgCode")
 	public void checkImgCode(HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
@@ -127,7 +135,7 @@ public class UserController {
 	    return "redirect:/user_login.jsp";
 	}
 	
-	
+	//用户头像上传
 	@RequestMapping("/uploadPhoto")
 	public String uploadPhoto(HttpServletRequest request,
 			HttpServletResponse response,HttpSession session) throws IOException, ServletException {
@@ -144,7 +152,19 @@ public class UserController {
 		System.out.println(userID);
 		System.out.println(fileName);
 		System.out.println(uploadPhoto);
-		return "redirect:/bbs_front/user_info_img.jsp";	
-		
-	}			
+		return "redirect:/bbs_front/user_info_img.jsp";			
+	}
+	
+	//用户更新密码
+	@RequestMapping("/updatePassword")
+	public String updatePassword(@RequestParam("newPassword") String password,HttpSession session){				
+		//获取当前登陆对象id
+		User user = (User) session.getAttribute("userSession");
+		String userID = user.getUserID();
+		System.out.println("新的密码："+password);
+		userService.updateUserPassword(userID, password);
+		return "redirect:/user_login.jsp";			
+	}
+	
+	
 }

@@ -53,33 +53,67 @@
             </ul>
         </div>
         <div class="baseCon">
+        <form action="${pageContext.request.contextPath}/user/updatePassword" method="post" id="updateNewPassword">
             <div class="baseCon_son">
                 <div class="baseCon_son_left">
-                    当前密码
+                    		当前密码
                 </div>
                 <div class="baseCon_son_right">
-                    <input type="text"/>
+                    <input type="text" id="oldPassword" name="oldPassword"/>
+                    <span id="oldPassword_mess"></span> 	
                 </div>
             </div>
             <div class="baseCon_son">
                 <div class="baseCon_son_left">
-                    新密码
+                   			新密码
                 </div>
                 <div class="baseCon_son_right">
-                    <input type="text"/>
+                    <input type="text" id="newPassword" name="newPassword"/>
                 </div>
             </div>
             <div class="baseCon_son">
                 <div class="baseCon_son_left">
-                    确认密码
+                    		确认密码
                 </div>
                 <div class="baseCon_son_right">
-                    <input type="text"/>
+                    <input type="text" id="newSePassword" name="newSePassword"/>
                 </div>
             </div>
-            <input type="submit" value="确认修改" class="upload_sure"/>
-        </div>
+            <input type="submit" value="确认修改" id="updatePassword" class="upload_sure"/>
+            <input type="button" value="忘记密码" class="upload_sure"/>
+        </form>
+        </div>   
     </div>
 </div>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/layui-v2.6.1/layui/jquery-3.3.1.js"></script>
+	      <script>
+         //2.点击登录
+			$("#updatePassword").click(function(){	
+				var oldPassword=$("#oldPassword").val();	
+				//验证码是否正确：ajax		
+				$.ajax({
+					url:"${pageContext.request.contextPath }/user/checkOldPassword",
+					type:"post",
+					dataType:"text",
+					async:false,
+					data:"oldPassword="+oldPassword,
+					success:function(obj){
+						if(obj=="ok"){
+							//验证码正确，提交表单根据账号密码验证登录
+							$("#updateNewPassword").submit();		
+						}else{
+							//验证码错误
+							$("#oldPassword_mess").html("当前密码错误！").css("color","red");
+							return;
+						}
+					}			
+				})	
+				return false;
+			})
+			
+			
+			
+	 </script>
 </body>
 </html>
