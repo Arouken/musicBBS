@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class MainPost {
 	private int mainPostID;
-	private int userID;
+	private String userID;
 	private String mainPostTitle;
 	private Date mainPostTime;
 	private String mainPostContent;
@@ -25,12 +25,7 @@ public class MainPost {
 	public void setMainPostID(int mainPostID) {
 		this.mainPostID = mainPostID;
 	}
-	public int getUserID() {
-		return userID;
-	}
-	public void setUserID(int userID) {
-		this.userID = userID;
-	}
+	
 	public String getMainPostTitle() {
 		return mainPostTitle;
 	}
@@ -66,6 +61,12 @@ public class MainPost {
 	}
 	public void setMainPostIsLOcked(int mainPostIsLOcked) {
 		this.mainPostIsLOcked = mainPostIsLOcked;
+	}
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 
 }

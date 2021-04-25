@@ -16,6 +16,8 @@ public interface MainPostService {
 	
 	//用户主页展示帖子
 	PageInfo<MainPost> pageHelperList(Integer page, Integer size);
+    //发布主贴
+	public void addMainPost(MainPost mainpost);
 	
 
 }

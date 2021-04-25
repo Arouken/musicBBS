@@ -23,7 +23,9 @@ public interface UserService {
 	public int checkImgCode(String code, HttpSession session);
 	//²åÈëÍ¼Æ¬
 	public void uploadUserPhoto(String userID,String photo);
-	//²åÈëÍ¼Æ¬
-	public void updateUserPassword(String userID,String password);
+	//¸üĞÂÃÜÂë
+	public void updateUserPassword(String userID,String password);	
+	//¼ì²é¾ÉÃÜÂë
+    public User checkOldPassword(String userID, String password);
 
 }

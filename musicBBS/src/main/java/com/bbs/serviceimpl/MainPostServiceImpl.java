@@ -47,6 +47,12 @@ public class MainPostServiceImpl implements MainPostService {
 	    //3）返回PageInfo:包含数据结果集+分页信息
 	    return new PageInfo<MainPost>(mainPostList);
 	}
+
+	//发布主贴
+	@Override
+	public void addMainPost(MainPost mainpost) {
+		mainPostDao.addMainPost(mainpost);
+	}
 	
 	
     

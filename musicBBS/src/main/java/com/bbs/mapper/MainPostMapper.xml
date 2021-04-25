@@ -13,7 +13,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 	</select> -->
 	
 	<insert id="addMainPost" parameterType="com.bbs.pojo.MainPost">
-		insert into main_post(userName,password) values(#{userName},#{password})
+		insert into main_post(userID,mainPostTitle,mainPostTime,mainPostContent,mainPostImg) 
+		values(#{userID},#{mainPostTitle},#{mainPostTime},#{mainPostContent},#{mainPostImg})
 	</insert>
 
 </mapper>

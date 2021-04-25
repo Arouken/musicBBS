@@ -166,5 +166,23 @@ public class UserController {
 		return "redirect:/user_login.jsp";			
 	}
 	
+	//检测用户旧密码
+	@RequestMapping("/checkOldPassword")
+	public void checkOldPassword(@RequestParam("oldPassword") String oldPassword,
+			HttpServletResponse response,HttpSession session)throws Exception{				
+		//获取当前登陆对象id
+		User user = (User) session.getAttribute("userSession");
+		String userID = user.getUserID();
+		System.out.println("旧的密码："+oldPassword);
+		User userPass = userService.checkOldPassword(userID, oldPassword);	    
+	    if (userPass != null && userPass.getUserID() != null) {
+	    	response.getWriter().write("ok");			
+		} 
+		else {
+			response.getWriter().write("no");			
+		}			
+	}
+	
+	
 	
 }

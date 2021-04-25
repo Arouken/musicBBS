@@ -81,6 +81,13 @@ public class UserServiceImpl implements UserService {
 	public void updateUserPassword(String userID, String password) {
 		// TODO Auto-generated method stub	
 		userDao.updateUserPassword(userID, password);
+	}
+
+	//ºÏ≤Èæ…√‹¬Î
+	@Override
+	public User checkOldPassword(String userID, String password) {
+		// TODO Auto-generated method stub
+		return userDao.findUserInfoByCond(userID, password);		
 	}	
 
 }

@@ -1,8 +1,16 @@
 package com.bbs.controller;
 
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,9 +18,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bbs.pojo.MainPost;
+import com.bbs.pojo.User;
 import com.bbs.service.MainPostService;
+import com.bbs.utils.UploadTool;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -39,18 +51,54 @@ public class MainPostController {
 		return map;
 	}	
 	
-	
 	//前台主贴显示
 	@RequestMapping("/getMainPostListUser")
-	public String getMainPostListUser(@RequestParam(value = "page",required = false,defaultValue = "1")int page,
-	                   @RequestParam(value = "size",required = false,defaultValue = "10")int size,
-	                   Model model){
+	public String getMainPostListUser(Model model,
+			@RequestParam(value = "page",required = false,defaultValue = "1")int page,
+			@RequestParam(value = "size",required = false,defaultValue = "10")int size){
 	    //集合查询
 	    PageInfo<MainPost> pageInfo = mainPostService.pageHelperList(page,size);
 	    //将数据存入到Model中
 	    model.addAttribute("pageInfo",pageInfo);
 	    System.out.println("前台帖子controller");
 	    return "/bbs_front/user_index";
+	}
+	
+	//发布帖子
+	@RequestMapping("/writeMainPost")
+	public String writeMainPost(@RequestParam("mainPostTitle") String mainPostTitle,
+			@RequestParam("mainPostContent") String mainPostContent,
+			HttpServletRequest request,HttpSession session) throws IOException,ServletException{				
+		MainPost mainpost=new MainPost();
+		//获取帖子名字，内容
+		mainpost.setMainPostTitle(mainPostTitle);
+		mainpost.setMainPostContent(mainPostContent);
+		//获取发布对象id
+		User user = (User) session.getAttribute("userSession");
+		String userID = user.getUserID();
+		mainpost.setUserID(userID);
+		//获取发布时间
+		Date createDate = new Date();
+		Timestamp timestamp = new Timestamp(createDate.getTime()); //2013-01-14 22:45:36.484 
+		mainpost.setMainPostTime(timestamp);
+		//获取帖子图片
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		MultipartFile file = multipartRequest.getFile("mainPostImg");
+		String picname = file.getOriginalFilename();
+		System.out.println("测试file的值："+picname);
+		if(picname == "") {
+			System.out.println("无图方法");
+			mainpost.setMainPostImg(null);
+		}else {
+			//改名的图的名字
+			String uploadPhoto = UploadTool.uploadImg(file);
+			mainpost.setMainPostImg(uploadPhoto);	
+		}
+		
+		//执行添加
+		mainPostService.addMainPost(mainpost);
+		return "redirect:/MainPost/getMainPostListUser";
+		
 	}
 	
 
