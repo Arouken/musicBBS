@@ -1,0 +1,18 @@
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.dao.SecondaryPostDao">
+	
+	<!-- 根据主贴ID获取所有回帖信息 -->
+	<select id="getSecondaryPostList"  resultType="com.bbs.pojo.SecondaryPost">
+		select * from secondary_post where mainPostID = #{mainPostID}
+	</select>
+	
+	<!-- 回帖子 -->
+	<insert id="addSecondaryPost" parameterType="com.bbs.pojo.SecondaryPost">
+		insert into secondary_post(mainPostID,userID,secondaryPostContent,secondaryPostTime) 
+		values(#{mainPostID},#{userID},#{secondaryPostContent},#{secondaryPostTime})
+	</insert>
+	
+
+</mapper>
