@@ -11,10 +11,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 	<select id="getMainPostListUser"  resultType="com.bbs.pojo.MainPost"> -->
 <!-- 		select * from main_post limit #{startIndex},#{pageSize} -->
 <!-- 	</select> -->
-	
+	<!-- 发帖子 -->
 	<insert id="addMainPost" parameterType="com.bbs.pojo.MainPost">
 		insert into main_post(userID,mainPostTitle,mainPostTime,mainPostContent,mainPostImg) 
 		values(#{userID},#{mainPostTitle},#{mainPostTime},#{mainPostContent},#{mainPostImg})
 	</insert>
+	<!-- 获取一个帖子信息 -->
+	<select id="getOneMainPost" parameterType="int" resultType="com.bbs.pojo.MainPost">
+		select * from main_post where mainPostID = #{mainPostID}
+	</select>
 
 </mapper>

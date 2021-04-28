@@ -37,21 +37,18 @@ public class MainPostServiceImpl implements MainPostService {
 	    return new PageInfo<MainPost>(mainPostList);
 	}
 	
-	//后台初始化10条
-	@Override
-	public PageInfo<MainPost> userPostInit(Integer page, Integer size) {
-		//1）静态分页
-	    PageHelper.startPage(page,size);
-	    //2）集合查询
-	    List<MainPost> mainPostList = mainPostDao.getMainPostList();
-	    //3）返回PageInfo:包含数据结果集+分页信息
-	    return new PageInfo<MainPost>(mainPostList);
-	}
 
 	//发布主贴
 	@Override
 	public void addMainPost(MainPost mainpost) {
 		mainPostDao.addMainPost(mainpost);
+	}
+
+	//查询单个帖子信息
+	@Override
+	public MainPost getOneMainPost(int mainPostID) {
+		MainPost mainpost = mainPostDao.getOneMainPost(mainPostID);
+		return mainpost;
 	}
 	
 	

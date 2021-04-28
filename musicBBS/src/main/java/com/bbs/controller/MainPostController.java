@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bbs.pojo.MainPost;
 import com.bbs.pojo.User;
@@ -100,6 +101,20 @@ public class MainPostController {
 		return "redirect:/MainPost/getMainPostListUser";
 		
 	}
+	
+	//查询单个帖子信息
+	@RequestMapping("/getMainPostContent")
+	public String getMainPostContent(HttpSession session,RedirectAttributes attributes,int mainPostID){
+		
+		System.out.println("测试帖子ID值："+mainPostID);
+		MainPost mainpost = mainPostService.getOneMainPost(mainPostID);
+		//model.addAttribute("mainpost",mainpost);
+		session.setAttribute("mainpost", mainpost);
+	    attributes.addAttribute("mainPostID", mainPostID); 
+	    return "redirect:/SecondaryPost/getSecondaryPostList";
+	}
+	
+	
 	
 
 }

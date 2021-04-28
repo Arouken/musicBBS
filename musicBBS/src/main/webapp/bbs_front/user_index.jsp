@@ -73,7 +73,7 @@
                 <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a>
                 </div>
                 <div class="indexCon_msg_detail">
-                    <a href="${pageContext.request.contextPath}/bbs_front/mainPostContent.jsp">
+                    <a href="${pageContext.request.contextPath}/MainPost/getMainPostContent?mainPostID=${mainPostList.mainPostID}">
                         <div class="indexCon_msg_detail_tittle">
                             <span><li>${mainPostList.userID}</li></span>
                             <p>${mainPostList.mainPostTitle}</p>
@@ -111,7 +111,7 @@
                 <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a>
                 </div>
                 <div class="indexCon_msg_detail">
-                    <a href="${pageContext.request.contextPath}/bbs_front/mainPostContent.jsp">
+                    <a href="${pageContext.request.contextPath}/MainPost/getMainPostContent?mainPostID=${mainPostList.mainPostID}">
                         <div class="indexCon_msg_detail_tittle">
                             <span><li>${mainPostList.userID}</li></span>
                             <p>${mainPostList.mainPostTitle}</p>

@@ -10,7 +10,9 @@ public interface MainPostDao {
 	//后台查询主贴列表
 	public List<MainPost> getMainPostList();
 	//发布主贴
-	public void addMainPost(MainPost mainpost);
+	public void addMainPost(MainPost mainpost);	
+	//查询单个主贴信息
+	public MainPost getOneMainPost(int mainPostID);
 	
 	
 }

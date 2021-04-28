@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
     <title>帖子</title>
-    <link rel="stylesheet" href="css/reset.css"/>
-    <link rel="stylesheet" href="css/public.css"/>
-    <link rel="stylesheet" href="css/index.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/reset.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/public.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/index.css"/>
 </head>
 <body>
 <header class="ltHead">
@@ -22,21 +23,27 @@
             <li><a href="">我的收藏</a></li>
         </ul>
         <!--未登入开始-->
-        <div class="ltForm">
-            <a href=""><img src="img/indexForm_bg.png" alt="" class="headPic2"/></a>
+        <!--未登入开始-->
+        <c:if test="${userSession.userName==null}">
+        <div class="ltForm appear">
+            <a href=""><img src="" alt="" class="headPic2"/></a>
             <ul>
-                <li><a href="">登入</a></li>
-                <li><a href="">注册</a></li>
+                <li><a href="${pageContext.request.contextPath}/user_login.jsp">登入</a></li>
+                <li><a href="${pageContext.request.contextPath}/user_regist.jsp">注册</a></li>
             </ul>
         </div>
+        </c:if>
         <!-- 未登入结束-->
         <!-- 登入开始，未登入时以下隐藏-->
-        <!--<div class="lt_login">-->
-        <!--<ul>-->
-        <!--<li><a href="">花开花落</a></li>-->
-        <!--<li><a href="">退出</a></li>-->
-        <!--</ul>-->
-        <!--</div>-->
+        <c:if test="${userSession.userName!=null}">
+        <div class="lt_login appear">
+        <ul>
+        <li><a href="${pageContext.request.contextPath}/bbs_front/user_home.jsp">${userSession.userName}</a></li>
+        <li><a href="${pageContext.request.contextPath}/user/quite">退出</a></li>
+        </ul>
+        </div>
+        </c:if>
+        <!-- 登入结束-->
         <!-- 登入结束-->
     </div>
 </header>
@@ -46,17 +53,17 @@
             <div class="tzCon_head">
                 <div class="tzCon_head_left"></div>
                 <div class="tzCon_head_right">
-                    <h1>${mainPostList.mainPostTitle}</h1>
+                    <h1>${mainpost.userID}</h1>
                     <ul>
-                        <li>${mainPostList.userID}</li>
+                        <li>${mianpost.userID}</li>
                         <li>1天前</li>
                         <li>21</li>
                     </ul>
                 </div>
-                <div class="clear"></div>
+                <div class="clear">${mainpost.mainPostTitle}</div>
             </div>
             <div class="tzCon_con">
-               ${mainPostList.mainPostBadCount}
+               ${mainpost.mainPostContent}
             </div>
             <div class="tzCon_foot">
                 <div class="tzCollect">
@@ -68,159 +75,63 @@
         <div class="newPending">
             <div class="newPending_head">
                 <div class="tzHeng"></div>
-                <div class="newPending_head_tittle">最新评论(52)</div>
+                <div class="newPending_head_tittle">最新评论</div>
             </div>
             <!--楼主可以删除评论、自己可以删除自己的评论删除按钮酌情出现-->
+            <c:forEach items="${secondaryPostList.list}" var="secondaryPostList">           
             <div class="newPending_son">
-                <div class="pendPic"></div>
+                <div class="pendPic">
+                <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a>
+                </div>
                 <div class="pendDetail">
                     <div class="pendDetail_head">
-                        <p>花开花落 <span>1天前</span></p>
+                        <p>${secondaryPostList.userID} <span>${secondaryPostList.secondaryPostTime}</span></p>
                         <i>2楼</i>
                     </div>
                     <div class="pendDetail_con">
-                        <p>测试一下图片,4文档和3文档差别很大测试一下图片,4文档和3文档差别很大</p>
+                        <p>${secondaryPostList.secondaryPostContent}</p>
                     </div>
                     <div class="pendDetail_btn">
                         <ul>
-                            <li>361</li>
-                            <li class="replayBtn">278</li>
-                            <li class="delateBtn">删除</li>
+                            <li>${secondaryPostList.secondaryPostGoodCount}</li>
+                            <li class="replayBtn">${secondaryPostList.secondaryPostGoodCount}</li>
+<!--                             <li class="delateBtn">删除</li> -->
                         </ul>
                     </div>
                     <div class="pendDetail_action">
-                        <input type="text" value="回复XXX:"/>
+                        <input type="text" value="回复    ${secondaryPostList.userID} "/>
                         <button>评论</button>
                         <button>取消</button>
                     </div>
                 </div>
                 <div class="clear"></div>
-            </div>
+            </div>          
             <!--回复后的情况-->
-            <div class="newPending_son">
-                <div class="pendPic"></div>
-                <div class="pendDetail">
-                    <div class="pendDetail_head">
-                        <p>花开花落 <span>1天前</span></p>
-                        <i>2楼</i>
-                    </div>
-                    <div class="pendDetail_con">
-                        <p>测试一下图片,4文档和3文档差别很大测试一下图片,4文档和3文档差别很大</p>
-                    </div>
-                    <div class="pendDetail_replayCon">
-                        <p>回复桃花朵朵开：确实，正确的。</p>
-                    </div>
-                    <div class="pendDetail_btn">
-                        <ul>
-                            <li>361</li>
-                            <li class="delateBtn">删除</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <!--测试内容-->
-            <div class="newPending_son">
-                <div class="pendPic"></div>
-                <div class="pendDetail">
-                    <div class="pendDetail_head">
-                        <p>花开花落 <span>1天前</span></p>
-                        <i>2楼</i>
-                    </div>
-                    <div class="pendDetail_con">
-                        <p>测试一下图片,4文档和3文档差别很大测试一下图片,4文档和3文档差别很大</p>
-                    </div>
-                    <div class="pendDetail_btn">
-                        <ul>
-                            <li>361</li>
-                            <li class="replayBtn">278</li>
-                            <li class="delateBtn">删除</li>
-                        </ul>
-                    </div>
-                    <div class="pendDetail_action">
-                        <input type="text" value="回复XXX:"/>
-                        <button>评论</button>
-                        <button>取消</button>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="newPending_son">
-                <div class="pendPic"></div>
-                <div class="pendDetail">
-                    <div class="pendDetail_head">
-                        <p>花开花落 <span>1天前</span></p>
-                        <i>2楼</i>
-                    </div>
-                    <div class="pendDetail_con">
-                        <p>测试一下图片,4文档和3文档差别很大测试一下图片,4文档和3文档差别很大</p>
-                    </div>
-                    <div class="pendDetail_btn">
-                        <ul>
-                            <li>361</li>
-                            <li class="replayBtn">278</li>
-                            <li class="delateBtn">删除</li>
-                        </ul>
-                    </div>
-                    <div class="pendDetail_action">
-                        <input type="text" value="回复XXX:"/>
-                        <button>评论</button>
-                        <button>取消</button>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="newPending_son">
-                <div class="pendPic"></div>
-                <div class="pendDetail">
-                    <div class="pendDetail_head">
-                        <p>花开花落 <span>1天前</span></p>
-                        <i>2楼</i>
-                    </div>
-                    <div class="pendDetail_con">
-                        <p>测试一下图片,4文档和3文档差别很大测试一下图片,4文档和3文档差别很大</p>
-                    </div>
-                    <div class="pendDetail_btn">
-                        <ul>
-                            <li>361</li>
-                            <li class="replayBtn">278</li>
-                            <li class="delateBtn">删除</li>
-                        </ul>
-                    </div>
-                    <div class="pendDetail_action">
-                        <input type="text" value="回复XXX:"/>
-                        <button>评论</button>
-                        <button>取消</button>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="newPending_son">
-                <div class="pendPic"></div>
-                <div class="pendDetail">
-                    <div class="pendDetail_head">
-                        <p>花开花落 <span>1天前</span></p>
-                        <i>2楼</i>
-                    </div>
-                    <div class="pendDetail_con">
-                        <p>测试一下图片,4文档和3文档差别很大测试一下图片,4文档和3文档差别很大</p>
-                    </div>
-                    <div class="pendDetail_btn">
-                        <ul>
-                            <li>361</li>
-                            <li class="replayBtn">278</li>
-                            <li class="delateBtn">删除</li>
-                        </ul>
-                    </div>
-                    <div class="pendDetail_action">
-                        <input type="text" value="回复XXX:"/>
-                        <button>评论</button>
-                        <button>取消</button>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
+<!--             <div class="newPending_son"> -->
+<!--                 <div class="pendPic"></div> -->
+<!--                 <div class="pendDetail"> -->
+<!--                     <div class="pendDetail_head"> -->
+<!--                         <p>花开花落 <span>1天前</span></p> -->
+<!--                         <i>2楼</i> -->
+<!--                     </div> -->
+<!--                     <div class="pendDetail_con"> -->
+<!--                         <p>测试一下图片,4文档和3文档差别很大测试一下图片,4文档和3文档差别很大</p> -->
+<!--                     </div> -->
+<!--                     <div class="pendDetail_replayCon"> -->
+<!--                         <p>回复桃花朵朵开：确实，正确的。</p> -->
+<!--                     </div> -->
+<!--                     <div class="pendDetail_btn"> -->
+<!--                         <ul> -->
+<!--                             <li>361</li> -->
+<!--                             <li class="delateBtn">删除</li> -->
+<!--                         </ul> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--                 <div class="clear"></div> -->
+<!--             </div> -->
+      
             <!--测试内容结束、十条内容分页-->
+        </c:forEach>   
         </div>
         <div class="indexFooter">
             <div class="indexFooter_con">
@@ -236,10 +147,13 @@
                 <div class="tzHeng"></div>
                 <div class="newPending_head_tittle">评论</div>
             </div>
+            <form action="${pageContext.request.contextPath}/SecondaryPost/writeSecondaryPost" 
+            method="post" autocomplete="off">
             <div class="writePending_con">
-                <input type="text" placeholder="写下你的评论..."/>
+                <input type="text" placeholder="写下你的评论..." name="secondaryPostContent" id="secondaryPostContent"/>
                 <input type="submit" value="评论"/>
             </div>
+            </form>
         </div>
     </div>
     <div class="indexMain_right">
@@ -247,7 +161,7 @@
         <div class="myMsg">
             <div class="myMsg_con">
                 <div class="myMsg_conPic"></div>
-                <p>花开花落</p>
+                <p>${mainpost.userID}</p>
             </div>
             <div  class="myMsg_footer">
                 <ul>
@@ -306,12 +220,12 @@
     <div class="clear"></div>
 </div>
 <footer class="publicFooter">
-    <p>Copyrigh &copy; 2017-2018 PaiWang 上海钦合投资管理有限公司版权所有 沪ICP备16032224号-2</p>
+    <p>Copyrigh &copy; 2021 ZhouCheng 版权所有 音乐论坛 </p>
 </footer>
 </body>
-</html>
-<script src="js/jquery-1.8.3.min.js"></script>
-<script src="js/tiezi.js"></script>
+<script src="${pageContext.request.contextPath}/bbs_front/js/jquery-1.8.3.min.js"></script>
+<script src="${pageContext.request.contextPath}/bbs_front/js/tiezi.js"></script>
 <script>
 
 </script>
+</html>
