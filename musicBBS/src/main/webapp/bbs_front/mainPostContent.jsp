@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -60,9 +61,9 @@
                 <div class="tzCon_head_right">
                     <h1>${mainpost.user.userName}</h1>
                     <ul>
-                        <li>${mianpost.user.userName}</li>
-                        <li>1天前</li>
-                        <li>21</li>
+                        <li>${mainpost.user.userName}</li>
+                        <li>${mainpost.mainPostTime}</li>
+                        <li>${mainpost.mainPostGoodCount}</li>
                     </ul>
                 </div>
                 <div class="clear">${mainpost.mainPostTitle}</div>
@@ -94,7 +95,7 @@
                 </div>
                 <div class="pendDetail">
                     <div class="pendDetail_head">                                                                  	
-                        <p>${secondaryPostList.user.userName} <span>发布于：${secondaryPostList.secondaryPostTime}</span></p>
+                        <p>${secondaryPostList.user.userName} <span>发布于：<fmt:formatDate type="both" value="${secondaryPostList.secondaryPostTime}"/></span></p>
                         <i>2楼</i>
                     </div>
                     <div class="pendDetail_con">
@@ -144,11 +145,8 @@
         </div>
         <div class="indexFooter">
             <div class="indexFooter_con">
-                <a href="javascript:"><</a>
-                <a href="" class="on">1</a>
-                <a href="">2</a>
-                <a href="">3</a>
-                <a href="javascript:">></a>
+                <a href="${pageContext.request.contextPath}/SecondaryPost/getSecondaryPostList?page=${secondaryPostList.pageNum-1}&size=${secondaryPostList.pageSize}&mainPostID=${mainpost.mainPostID}"><</a>
+                <a href="${pageContext.request.contextPath}/SecondaryPost/getSecondaryPostList?page=${secondaryPostList.pageNum+1}&size=${secondaryPostList.pageSize}&mainPostID=${mainpost.mainPostID}">></a>
             </div>
         </div>
         <div class="writePending">

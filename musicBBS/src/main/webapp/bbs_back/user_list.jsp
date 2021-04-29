@@ -57,7 +57,7 @@
             "h+" : datetime.getHours(),                   //小时
             "m+" : datetime.getMinutes(),                 //分
             "s+" : datetime.getSeconds(),                 //秒
-            "q+" : Math.floor((datetime.getMonth()+3)/3), //季度
+//            "q+" : Math.floor((datetime.getMonth()+3)/3), //季度
             "S"  : datetime.getMilliseconds()             //毫秒
         };
         if(/(y+)/.test(fmt))

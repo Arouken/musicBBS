@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -88,8 +89,8 @@
                         </div></a>
                     </div>
                     <div class="indexCon_msg_detail_other">
-                        <ul>                        
-                            <li>发帖时间：${mainPostList.mainPostTime}</li>
+                        <ul>                                                  
+                            <li><p>发帖时间： <fmt:formatDate type="both" value="${mainPostList.mainPostTime}"/></p></li>
                             <li>
                             <input type="image" src="${pageContext.request.contextPath}/image/agree.png"  name="img"  style="width:15px;height:15px" />  <!--图片按钮-->
                             ${mainPostList.mainPostGoodCount}</li>
@@ -125,7 +126,8 @@
                     </a>
                     <div class="indexCon_msg_detail_other">
                        <ul>                        
-                            <li>发帖时间：${mainPostList.mainPostTime}</li>
+                            <li><p>发帖时间： <fmt:formatDate type="both" value="${mainPostList.mainPostTime}" /></p></li>
+                            <li></li>
                             <li>
                             <input type="image" src="${pageContext.request.contextPath}/image/agree.png"  name="img"  style="width:15px;height:15px" />  <!--图片按钮-->
                             ${mainPostList.mainPostGoodCount}</li>
@@ -146,13 +148,22 @@
            </c:forEach>                                            
         </div>
         <div class="indexFooter">
-            <div class="indexFooter_con">
-                <a href="javascript:"><</a>
-                <a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" class="on">1</a>
-                <a href="">2</a>
-                <a href="">3</a>
-                <a href="javascript:">></a>
-                
+            <div class="indexFooter_con" style="width:52%;">
+                <a >共</a>
+                <a >${pageInfo.pages}</a> 
+                <a >页</a>
+                <a >${pageInfo.total}</a>
+                <a >条</a>
+                <a><select  onchange="submitPageSize(this)" style="height:100%;border: 0; background: transparent;">
+					<option selected="selected">5</option>
+					<option <c:if test="${pageInfo.pageSize==10}">selected="selected"</c:if>>10</option>
+					<option <c:if test="${pageInfo.pageSize==20}">selected="selected"</c:if>>20</option>
+					</select>					
+				</a>
+           		<a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser?page=1&size=${pageInfo.pageSize}" class="on">首页</a> 
+                <a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser?page=${pageInfo.pageNum-1}&size=${pageInfo.pageSize}">前页</a>               
+                <a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}">后页</a>
+                <a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser?page=${pageInfo.pages}&size=${pageInfo.pageSize}" class="on">尾页</a>             			   			
             </div>
         </div>
     </div>
@@ -238,6 +249,50 @@
             $(".ltHead").removeClass("navTop");
         }
     }; 
+    
+    
+
+    function Format() {
+    	var datetime = mainPostList.mainPostTime;
+    	var fmt = "yyyy-MM-dd hh:mm:ss";
+            if (parseInt(datetime)==datetime) {
+                if (datetime.length==10) {
+                    datetime=parseInt(datetime)*1000;
+                } else if(datetime.length==13) {
+                    datetime=parseInt(datetime);
+                }
+            }
+            datetime=new Date(datetime);
+            var o = {
+                "M+" : datetime.getMonth()+1,                 //月份
+                "d+" : datetime.getDate(),                    //日
+                "h+" : datetime.getHours(),                   //小时
+                "m+" : datetime.getMinutes(),                 //分
+                "s+" : datetime.getSeconds(),                 //秒
+              //  "q+" : Math.floor((datetime.getMonth()+3)/3), //季度
+                "S"  : datetime.getMilliseconds()             //毫秒
+            };
+            if(/(y+)/.test(fmt))
+                fmt=fmt.replace(RegExp.$1, (datetime.getFullYear()+"").substr(4 - RegExp.$1.length));
+            for(var k in o)
+                if(new RegExp("("+ k +")").test(fmt))
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+             var d = document.getElementById('postTime');//获取div的节点
+             d.innerHTML = fmt;//在div节点上显示a的值1
+           // return fmt;
+    };
+    
+    
+	//每页显示条数变化
+	function submitPageSize(option) {
+	    /***
+		 * 提交查询
+         * option.value：获取select的值
+         */
+		location.href='${pageContext.request.contextPath }/MainPost/getMainPostListUser?size='+option.value;
+    };
+
+
     
    
     
