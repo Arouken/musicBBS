@@ -4,21 +4,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.bbs.dao.MainPostDao">
 	
 	<!-- 获取所有帖子信息 -->
-	<select id="getMainPostList"  resultType="com.bbs.pojo.MainPost">
+<!-- 	<select id="getMainPostList"  resultType="com.bbs.pojo.MainPost"> -->
+<!-- 		select * from main_post -->
+<!-- 	</select> -->
+	
+	<select id="getMainPostList"  resultMap="mainPostUser">
 		select * from main_post
+	</select>	
+	<resultMap type="com.bbs.pojo.MainPost" id="mainPostUser">
+		<result property="userID" column="userID"/>
+		<result property="mainPostID" column="mainPostID"/>
+		<result property="mainPostTitle" column="mainPostTitle"/>
+		<result property="mainPostTime" column="mainPostTime"/>
+		<result property="mainPostContent" column="mainPostContent"/>
+		<result property="mainPostGoodCount" column="mainPostGoodCount"/>
+		<result property="mainPostBadCount" column="mainPostBadCount"/>
+		<result property="mainPostIsLOcked" column="mainPostIsLOcked"/>
+		<result property="mainPostImg" column="mainPostImg"/>
+		<association property="user" column="userID" javaType="com.bbs.pojo.User" select="getUser">
+		</association>
+	</resultMap>
+	<!-- 用于展示帖子用户信息	 -->
+	<select id="getUser"  resultType="com.bbs.pojo.User">
+		select * from user where userID = #{userID}
 	</select>
 	
-<!-- 	<select id="getMainPostListUser"  resultType="com.bbs.pojo.MainPost"> -->
-<!-- 		select * from main_post limit #{startIndex},#{pageSize} -->
-<!-- 	</select> -->
 	<!-- 发帖子 -->
 	<insert id="addMainPost" parameterType="com.bbs.pojo.MainPost">
 		insert into main_post(userID,mainPostTitle,mainPostTime,mainPostContent,mainPostImg) 
 		values(#{userID},#{mainPostTitle},#{mainPostTime},#{mainPostContent},#{mainPostImg})
 	</insert>
+	
 	<!-- 获取一个帖子信息 -->
-	<select id="getOneMainPost" parameterType="int" resultType="com.bbs.pojo.MainPost">
+	<select id="getOneMainPost" parameterType="int" resultMap="oneMainPostUser">
 		select * from main_post where mainPostID = #{mainPostID}
-	</select>
+	</select>	
+	<resultMap type="com.bbs.pojo.MainPost" id="oneMainPostUser">
+		<result property="userID" column="userID"/>
+		<result property="mainPostID" column="mainPostID"/>
+		<result property="mainPostTitle" column="mainPostTitle"/>
+		<result property="mainPostTime" column="mainPostTime"/>
+		<result property="mainPostContent" column="mainPostContent"/>
+		<result property="mainPostIsLOcked" column="mainPostIsLOcked"/>
+		<result property="mainPostImg" column="mainPostImg"/>
+		<association property="user" column="userID" javaType="com.bbs.pojo.User" select="getUser">
+		</association>
+	</resultMap>
+	
+	<!-- 获取一个帖子信息 -->
+<!-- 	<select id="getOneMainPost" parameterType="int" resultType="com.bbs.pojo.MainPost"> -->
+<!-- 		select * from main_post where mainPostID = #{mainPostID} -->
+<!-- 	</select> -->
 
 </mapper>

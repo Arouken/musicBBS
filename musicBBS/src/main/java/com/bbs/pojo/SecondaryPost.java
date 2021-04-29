@@ -11,6 +11,7 @@ public class SecondaryPost {
 	private Date secondaryPostTime;
 	private int secondaryPostGoodCount;
 	private int secondaryPostIsLocked;
+	private User user;
 	
 	
 	public int getSecondaryPostID() {
@@ -59,6 +60,12 @@ public class SecondaryPost {
 	}
 	public void setSecondaryPostIsLocked(int secondaryPostIsLocked) {
 		this.secondaryPostIsLocked = secondaryPostIsLocked;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

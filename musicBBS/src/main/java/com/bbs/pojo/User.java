@@ -6,7 +6,7 @@ public class User {
 
 	private String userID;//ID
 	private int competence;//È¨ÏŞ
-	private String userName;//ÃÜÂë
+	private String userName;//êÇ³Æ
 	private String password;
 	private int gender;
 	private String phoneNum;

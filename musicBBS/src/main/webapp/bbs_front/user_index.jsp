@@ -68,14 +68,17 @@
             <c:forEach items="${pageInfo.list}" var="mainPostList">
             <!--有主题图循环开始-->
             <c:if test="${mainPostList.mainPostImg!=null}">
-            <div class="indexCon_msg">
+            <div class="indexCon_msg">          
                 <div class="indexCon_msg_pic">
-                <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a>
+                <c:if test="${mainPostList.user.photo!=null}">
+                <a href=""><img src="/userPhoto/${mainPostList.user.photo}"/></a></c:if>
+                <c:if test="${mainPostList.user.photo==null}">
+                <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a></c:if>
                 </div>
                 <div class="indexCon_msg_detail">
                     <a href="${pageContext.request.contextPath}/MainPost/getMainPostContent?mainPostID=${mainPostList.mainPostID}">
                         <div class="indexCon_msg_detail_tittle">
-                            <span><li>${mainPostList.userID}</li></span>
+                            <span><li>${mainPostList.user.userName}</li></span>
                             <p>${mainPostList.mainPostTitle}</p>
                         </div>
                     </a>
@@ -108,12 +111,15 @@
             <c:if test="${mainPostList.mainPostImg==null}">
             <div class="indexCon_msg">
                 <div class="indexCon_msg_pic">
-                <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a>
+               <c:if test="${mainPostList.user.photo!=null}">
+                <a href=""><img src="/userPhoto/${mainPostList.user.photo}"/></a></c:if>
+                <c:if test="${mainPostList.user.photo==null}">
+                <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a></c:if>
                 </div>
                 <div class="indexCon_msg_detail">
                     <a href="${pageContext.request.contextPath}/MainPost/getMainPostContent?mainPostID=${mainPostList.mainPostID}">
                         <div class="indexCon_msg_detail_tittle">
-                            <span><li>${mainPostList.userID}</li></span>
+                            <span><li>${mainPostList.user.userName}</li></span>
                             <p>${mainPostList.mainPostTitle}</p>
                         </div>
                     </a>

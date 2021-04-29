@@ -4,8 +4,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.bbs.dao.SecondaryPostDao">
 	
 	<!-- 根据主贴ID获取所有回帖信息 -->
-	<select id="getSecondaryPostList"  resultType="com.bbs.pojo.SecondaryPost">
+<!-- 	<select id="getSecondaryPostList"  resultType="com.bbs.pojo.SecondaryPost"> -->
+<!-- 		select * from secondary_post where mainPostID = #{mainPostID} -->
+<!-- 	</select> -->
+	
+	<select id="getSecondaryPostList"  resultMap="secondaryPostUser">
 		select * from secondary_post where mainPostID = #{mainPostID}
+	</select>	
+	<resultMap type="com.bbs.pojo.SecondaryPost" id="secondaryPostUser">
+		<result property="userID" column="userID"/>
+		<result property="mainPostID" column="mainPostID"/>
+		<result property="secondaryPostID" column="secondaryPostID"/>
+		<result property="secondaryPostContent" column="secondaryPostContent"/>
+		<result property="secondaryPostTime" column="secondaryPostTime"/>
+		<result property="secondaryPostGoodCount" column="secondaryPostGoodCount"/>
+		<result property="secondaryPostIsLocked" column="secondaryPostIsLocked"/>
+		<association property="user" column="userID" javaType="com.bbs.pojo.User" select="getUser">
+		</association>
+	</resultMap>
+	<!-- 用于展示回帖子用户信息	 -->
+	<select id="getUser"  resultType="com.bbs.pojo.User">
+		select * from user where userID = #{userID}
 	</select>
 	
 	<!-- 回帖子 -->

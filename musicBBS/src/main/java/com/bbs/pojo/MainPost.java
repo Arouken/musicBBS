@@ -5,6 +5,7 @@ import java.util.Date;
 public class MainPost {
 	private int mainPostID;
 	private String userID;
+	private User user;
 	private String mainPostTitle;
 	private Date mainPostTime;
 	private String mainPostContent;
@@ -68,5 +69,12 @@ public class MainPost {
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 
 }

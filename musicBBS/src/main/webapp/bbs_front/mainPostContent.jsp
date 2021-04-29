@@ -51,11 +51,16 @@
     <div class="indexMain_left">
         <div class="tzCon">
             <div class="tzCon_head">
-                <div class="tzCon_head_left"></div>
+                <div class="tzCon_head_left">
+                <c:if test="${mainpost.user.photo!=null}">
+                <a href=""><img src="/userPhoto/${mainpost.user.photo}"/></a></c:if>
+                <c:if test="${mainpost.user.photo==null}">
+                <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a></c:if>
+                </div>
                 <div class="tzCon_head_right">
-                    <h1>${mainpost.userID}</h1>
+                    <h1>${mainpost.user.userName}</h1>
                     <ul>
-                        <li>${mianpost.userID}</li>
+                        <li>${mianpost.user.userName}</li>
                         <li>1天前</li>
                         <li>21</li>
                     </ul>
@@ -81,11 +86,15 @@
             <c:forEach items="${secondaryPostList.list}" var="secondaryPostList">           
             <div class="newPending_son">
                 <div class="pendPic">
-                <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a>
+                
+                <c:if test="${secondaryPostList.user.photo!=null}">
+                <a href=""><img src="/userPhoto/${secondaryPostList.user.photo}"/></a></c:if>
+                <c:if test="${secondaryPostList.user.photo==null}">
+                <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a></c:if>                           
                 </div>
                 <div class="pendDetail">
-                    <div class="pendDetail_head">
-                        <p>${secondaryPostList.userID} <span>${secondaryPostList.secondaryPostTime}</span></p>
+                    <div class="pendDetail_head">                                                                  	
+                        <p>${secondaryPostList.user.userName} <span>发布于：${secondaryPostList.secondaryPostTime}</span></p>
                         <i>2楼</i>
                     </div>
                     <div class="pendDetail_con">
@@ -160,8 +169,13 @@
         <a href="${pageContext.request.contextPath }/bbs_front/newMainPost.jsp" class="newMsg">发新帖</a>
         <div class="myMsg">
             <div class="myMsg_con">
-                <div class="myMsg_conPic"></div>
-                <p>${mainpost.userID}</p>
+                <div class="myMsg_conPic">
+                <c:if test="${mainpost.user.photo!=null}">
+                <a href=""><img src="/userPhoto/${mainpost.user.photo}"/></a></c:if>
+                <c:if test="${mainpost.user.photo==null}">
+                <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a></c:if>
+                </div>
+                <p>${mainpost.user.userName}</p>
             </div>
             <div  class="myMsg_footer">
                 <ul>
