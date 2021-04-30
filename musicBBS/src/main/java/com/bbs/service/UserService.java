@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.bbs.pojo.User;
 
 

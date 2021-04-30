@@ -1,0 +1,19 @@
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bbs.dao.LikeMainPostDao">
+	
+	<insert id="likePost" parameterType="com.bbs.pojo.LikeMainPost">
+		insert into likeMainPost(userID,mainPostID) values(#{userID},#{mainPostID})
+	</insert>
+	
+	<delete id="dislike" parameterType="String">
+		delete from likeMainPost where userID=#{userID} and mainPostID=#{mainPostID}
+	</delete>
+	
+	<select id="selectLike" parameterType="String">
+		select * from likeMainPost where userID=#{userID} and mainPostID=#{mainPostID}
+	</select>
+
+</mapper>

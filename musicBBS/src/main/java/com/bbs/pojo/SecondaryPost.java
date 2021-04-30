@@ -11,6 +11,7 @@ public class SecondaryPost {
 	private Date secondaryPostTime;
 	private int secondaryPostGoodCount;
 	private int secondaryPostIsLocked;
+	private String replyUserID;//ªÿ∏¥∂‘œÛID
 	private User user;
 	
 	
@@ -67,5 +68,12 @@ public class SecondaryPost {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	public String getReplyUserID() {
+		return replyUserID;
+	}
+	public void setReplyUserID(String replyUserID) {
+		this.replyUserID = replyUserID;
+	}
+	
 
 }

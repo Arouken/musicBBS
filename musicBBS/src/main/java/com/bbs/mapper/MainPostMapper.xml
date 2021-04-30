@@ -23,11 +23,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="mainPostImg" column="mainPostImg"/>
 		<association property="user" column="userID" javaType="com.bbs.pojo.User" select="getUser">
 		</association>
+		
 	</resultMap>
 	<!-- 用于展示帖子用户信息	 -->
 	<select id="getUser"  resultType="com.bbs.pojo.User">
 		select * from user where userID = #{userID}
 	</select>
+	<!--是否已赞 -->
+<!-- 	<select id="getLikePost" parameterType="String" resultType="com.bbs.pojo.LikeMainPost"> -->
+<!-- 		select * from likemainpost where userID = #{myuserID} and mainPostID=#{mainPostID} -->
+<!-- 	</select> -->
 	
 	<!-- 发帖子 -->
 	<insert id="addMainPost" parameterType="com.bbs.pojo.MainPost">
@@ -50,10 +55,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<association property="user" column="userID" javaType="com.bbs.pojo.User" select="getUser">
 		</association>
 	</resultMap>
+	<!-- 点赞加一 -->
+	<update id="addLikeCount" parameterType="int">
+		update main_post set mainPostLikeCount=mainPostLikeCount+1 where mainPostID = #{mainPostID}
+	</update>
 	
-	<!-- 获取一个帖子信息 -->
-<!-- 	<select id="getOneMainPost" parameterType="int" resultType="com.bbs.pojo.MainPost"> -->
-<!-- 		select * from main_post where mainPostID = #{mainPostID} -->
-<!-- 	</select> -->
+	<!-- 不赞减一 -->
+	<update id="deleteLikeCount" parameterType="int">
+		update main_post set mainPostLikeCount=mainPostLikeCount-1 where mainPostID = #{mainPostID}
+	</update>
+	
 
 </mapper>

@@ -81,6 +81,7 @@
                         <div class="indexCon_msg_detail_tittle">
                             <span><li>${mainPostList.user.userName}</li></span>
                             <p>${mainPostList.mainPostTitle}</p>
+                            <p>   测试点赞${mainPostList.likeMainPost.likeMainPostID}</p>
                         </div>
                     </a>
                     <div class="havePic">
@@ -92,10 +93,13 @@
                         <ul>                                                  
                             <li><p>发帖时间： <fmt:formatDate type="both" value="${mainPostList.mainPostTime}"/></p></li>
                             <li>
-                            <input type="image" src="${pageContext.request.contextPath}/image/agree.png"  name="img"  style="width:15px;height:15px" />  <!--图片按钮-->
-                            ${mainPostList.mainPostGoodCount}</li>
+	                            <input type="image" src="${pageContext.request.contextPath}/image/agree.png"
+	                            onclick=""  
+	                            name="img"  style="width:15px;height:15px" />  <!--图片按钮-->
+	                            ${mainPostList.mainPostGoodCount}
+                            </li>
                             <li>
-                            <input type="image" src="${pageContext.request.contextPath}/image/disagree.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
+                            <input type="image" src="${pageContext.request.contextPath}/image/collect.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
                             ${mainPostList.mainPostBadCount}</li>
                             <li>
                             <input type="image" src="${pageContext.request.contextPath}/image/comment.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
@@ -132,7 +136,7 @@
                             <input type="image" src="${pageContext.request.contextPath}/image/agree.png"  name="img"  style="width:15px;height:15px" />  <!--图片按钮-->
                             ${mainPostList.mainPostGoodCount}</li>
                             <li>
-                            <input type="image" src="${pageContext.request.contextPath}/image/disagree.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
+                            <input type="image" src="${pageContext.request.contextPath}/image/collect.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
                             ${mainPostList.mainPostBadCount}</li>
                             <li>
                             <input type="image" src="${pageContext.request.contextPath}/image/comment.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->

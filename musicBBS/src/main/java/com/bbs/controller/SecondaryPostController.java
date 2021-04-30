@@ -43,6 +43,7 @@ public class SecondaryPostController {
 	    return "/bbs_front/mainPostContent";
 	}
 	
+	//回复主贴
 	@RequestMapping("/writeSecondaryPost")
 	public String writeSecondaryPost(HttpSession session,RedirectAttributes attributes,
 			@RequestParam("secondaryPostContent") String secondaryPostContent){
@@ -51,7 +52,40 @@ public class SecondaryPostController {
 		//获取发布对象id
 		User user = (User) session.getAttribute("userSession");
 		String userID = user.getUserID();
+		secondaryPost.setUserID(userID);	
+		//获取主贴ID
+		MainPost mainpost= (MainPost) session.getAttribute("mainpost");
+		int mainPostID = mainpost.getMainPostID();	
+		secondaryPost.setMainPostID(mainPostID);
+		//回复对象，主贴用户ID
+		String replyUserID = mainpost.getUserID();
+		secondaryPost.setReplyUserID(replyUserID);
+		//获取发布时间
+		Date createDate = new Date();
+		Timestamp timestamp = new Timestamp(createDate.getTime()); //2013-01-14 22:45:36.484 
+		secondaryPost.setSecondaryPostTime(timestamp);
+		//执行回帖方法
+		secondaryPostService.addSecondaryPost(secondaryPost);
+		//把mainPostID值传给查询controller
+		attributes.addAttribute("mainPostID", mainPostID);
+		//执行查询回帖
+		return "redirect:/SecondaryPost/getSecondaryPostList";			
+	}
+	
+	//回复主贴下面的回复
+	@RequestMapping("/writeToSecondaryPost")
+	public String writeToSecondaryPost(
+			HttpSession session,RedirectAttributes attributes,
+			@RequestParam("secondaryPostContent") String secondaryPostContent,
+			String replyUserID){
+		SecondaryPost secondaryPost = new SecondaryPost();
+		secondaryPost.setSecondaryPostContent(secondaryPostContent);
+		//获取发布对象id
+		User user = (User) session.getAttribute("userSession");
+		String userID = user.getUserID();
 		secondaryPost.setUserID(userID);
+		//获取回复对象ID
+		secondaryPost.setReplyUserID(replyUserID);
 		//获取主贴ID
 		MainPost mainpost= (MainPost) session.getAttribute("mainpost");
 		int mainPostID = mainpost.getMainPostID();

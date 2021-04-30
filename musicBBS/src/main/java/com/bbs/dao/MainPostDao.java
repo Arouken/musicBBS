@@ -13,6 +13,9 @@ public interface MainPostDao {
 	public void addMainPost(MainPost mainpost);	
 	//查询单个主贴信息
 	public MainPost getOneMainPost(int mainPostID);
-	
+	//点赞数加一
+	public void addLikeCount(int mainPostID);
+	//点赞减一
+	public void deleteLikeCount(int mainPostID);
 	
 }

@@ -50,9 +50,20 @@ public class MainPostServiceImpl implements MainPostService {
 		MainPost mainpost = mainPostDao.getOneMainPost(mainPostID);
 		return mainpost;
 	}
-	
-	
-    
+
+	//点赞加一
+	@Override
+	public void addLikeCount(int mainPostID) {
+		// TODO Auto-generated method stub
+		mainPostDao.addLikeCount(mainPostID);
+	}
+
+	//赞数减一
+	@Override
+	public void deleteLikeCount(int mainPostID) {
+		// TODO Auto-generated method stub
+		mainPostDao.deleteLikeCount(mainPostID);
+	} 
 	
 
 }

@@ -29,8 +29,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 回帖子 -->
 	<insert id="addSecondaryPost" parameterType="com.bbs.pojo.SecondaryPost">
-		insert into secondary_post(mainPostID,userID,secondaryPostContent,secondaryPostTime) 
-		values(#{mainPostID},#{userID},#{secondaryPostContent},#{secondaryPostTime})
+		insert into secondary_post(mainPostID,userID,secondaryPostContent,secondaryPostTime,replyUserID) 
+		values(#{mainPostID},#{userID},#{secondaryPostContent},#{secondaryPostTime},#{replyUserID})
 	</insert>
 	
 

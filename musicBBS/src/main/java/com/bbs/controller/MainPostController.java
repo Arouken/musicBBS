@@ -57,7 +57,7 @@ public class MainPostController {
 	public String getMainPostListUser(Model model,
 			@RequestParam(value = "page",required = false,defaultValue = "1")int page,
 			@RequestParam(value = "size",required = false,defaultValue = "10")int size){
-	    //集合查询
+		//集合查询
 	    PageInfo<MainPost> pageInfo = mainPostService.pageHelperList(page,size);
 	    //将数据存入到Model中
 	    model.addAttribute("pageInfo",pageInfo);
@@ -77,7 +77,7 @@ public class MainPostController {
 		//获取发布对象id
 		User user = (User) session.getAttribute("userSession");
 		String userID = user.getUserID();
-		mainpost.setUserID(userID);
+		mainpost.setUserID(userID);		
 		//获取发布时间
 		Date createDate = new Date();
 		Timestamp timestamp = new Timestamp(createDate.getTime()); //2013-01-14 22:45:36.484 
@@ -94,8 +94,7 @@ public class MainPostController {
 			//改名的图的名字
 			String uploadPhoto = UploadTool.uploadImg(file);
 			mainpost.setMainPostImg(uploadPhoto);	
-		}
-		
+		}		
 		//执行添加
 		mainPostService.addMainPost(mainpost);
 		return "redirect:/MainPost/getMainPostListUser";
@@ -107,12 +106,13 @@ public class MainPostController {
 	public String getMainPostContent(HttpSession session,RedirectAttributes attributes,int mainPostID){
 		
 		System.out.println("测试帖子ID值："+mainPostID);
-		MainPost mainpost = mainPostService.getOneMainPost(mainPostID);
-		//model.addAttribute("mainpost",mainpost);
+		MainPost mainpost = mainPostService.getOneMainPost(mainPostID);		
 		session.setAttribute("mainpost", mainpost);
 	    attributes.addAttribute("mainPostID", mainPostID); 
 	    return "redirect:/SecondaryPost/getSecondaryPostList";
 	}
+	
+
 	
 	
 	

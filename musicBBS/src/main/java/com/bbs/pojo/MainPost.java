@@ -6,11 +6,13 @@ public class MainPost {
 	private int mainPostID;
 	private String userID;
 	private User user;
+	private LikeMainPost likeMainPost;
 	private String mainPostTitle;
 	private Date mainPostTime;
 	private String mainPostContent;
 	private int mainPostGoodCount;
 	private int mainPostBadCount;
+	private int mainPostLikeCount;
 	private int mainPostIsLOcked;
 	private String mainPostImg;
 	
@@ -74,6 +76,18 @@ public class MainPost {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public LikeMainPost getLikeMainPost() {
+		return likeMainPost;
+	}
+	public void setLikeMainPost(LikeMainPost likeMainPost) {
+		this.likeMainPost = likeMainPost;
+	}
+	public int getMainPostLikeCount() {
+		return mainPostLikeCount;
+	}
+	public void setMainPostLikeCount(int mainPostLikeCount) {
+		this.mainPostLikeCount = mainPostLikeCount;
 	}
 	
 

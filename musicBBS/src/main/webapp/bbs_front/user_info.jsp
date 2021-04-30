@@ -41,6 +41,7 @@
             <li><a href="${pageContext.request.contextPath}/bbs_front/user_home.jsp">我的主页</a></li>
             <li  class="on"><a href="${pageContext.request.contextPath}/bbs_front/user_info.jsp">基本设置</a></li>
             <li><a href="${pageContext.request.contextPath}/bbs_front/user_post.jsp">我的贴子</a></li>
+            <li><a href="${pageContext.request.contextPath}/bbs_front/user_info_msg.jsp">我的回复</a></li>
         </ul>
     </div>
     <div class="homeCen_right">

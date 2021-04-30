@@ -109,38 +109,16 @@
                         </ul>
                     </div>
                     <div class="pendDetail_action">
-                        <input type="text" value="回复    ${secondaryPostList.userID} "/>
-                        <button>评论</button>
-                        <button>取消</button>
+                    <form action="${pageContext.request.contextPath}/SecondaryPost/writeToSecondaryPost?replyUserID=${secondaryPostList.user.userID}" 
+            			  method="post" autocomplete="off">
+                        <input type="text" name="secondaryPostContent" value="@${secondaryPostList.user.userName}      "/>
+                        <button type="submit" style="color:red;">评论</button>                      
+                    </form>
+                    <button >取消</button>
                     </div>
                 </div>
                 <div class="clear"></div>
             </div>          
-            <!--回复后的情况-->
-<!--             <div class="newPending_son"> -->
-<!--                 <div class="pendPic"></div> -->
-<!--                 <div class="pendDetail"> -->
-<!--                     <div class="pendDetail_head"> -->
-<!--                         <p>花开花落 <span>1天前</span></p> -->
-<!--                         <i>2楼</i> -->
-<!--                     </div> -->
-<!--                     <div class="pendDetail_con"> -->
-<!--                         <p>测试一下图片,4文档和3文档差别很大测试一下图片,4文档和3文档差别很大</p> -->
-<!--                     </div> -->
-<!--                     <div class="pendDetail_replayCon"> -->
-<!--                         <p>回复桃花朵朵开：确实，正确的。</p> -->
-<!--                     </div> -->
-<!--                     <div class="pendDetail_btn"> -->
-<!--                         <ul> -->
-<!--                             <li>361</li> -->
-<!--                             <li class="delateBtn">删除</li> -->
-<!--                         </ul> -->
-<!--                     </div> -->
-<!--                 </div> -->
-<!--                 <div class="clear"></div> -->
-<!--             </div> -->
-      
-            <!--测试内容结束、十条内容分页-->
         </c:forEach>   
         </div>
         <div class="indexFooter">
@@ -202,12 +180,12 @@
             </div>
             <div class="indexPublic_con">
                 <ul class="weekHot">
-                    <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
-                    <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
-                    <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
-                    <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
-                    <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
-                    <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
+                    <li><a href="">关注音乐方面的资讯</a><span>29</span></li>
+                    <li><a href="">关注音乐方面的资讯</a><span>29</span></li>
+                    <li><a href="">关注音乐方面的资讯</a><span>29</span></li>
+                    <li><a href="">关注音乐方面的资讯</a><span>29</span></li>
+                    <li><a href="">关注音乐方面的资讯</a><span>29</span></li>
+                    <li><a href="">关注音乐方面的资讯</a><span>29</span></li>                
                 </ul>
             </div>
         </div>
@@ -238,6 +216,5 @@
 <script src="${pageContext.request.contextPath}/bbs_front/js/jquery-1.8.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/bbs_front/js/tiezi.js"></script>
 <script>
-
 </script>
 </html>
