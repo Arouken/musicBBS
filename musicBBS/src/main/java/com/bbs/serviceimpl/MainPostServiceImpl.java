@@ -63,7 +63,23 @@ public class MainPostServiceImpl implements MainPostService {
 	public void deleteLikeCount(int mainPostID) {
 		// TODO Auto-generated method stub
 		mainPostDao.deleteLikeCount(mainPostID);
+	}
+	
+	//收藏加一
+	@Override
+	public void addCollectCount(int mainPostID) {
+		// TODO Auto-generated method stub
+		mainPostDao.addCollectCount(mainPostID);
+	}
+
+	//收藏减一
+	@Override
+	public void deleteCollectCount(int mainPostID) {
+		// TODO Auto-generated method stub
+		mainPostDao.deleteCollectCount(mainPostID);
 	} 
+	
+	
 	
 
 }

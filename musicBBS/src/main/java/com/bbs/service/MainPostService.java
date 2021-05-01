@@ -19,6 +19,10 @@ public interface MainPostService {
 	//点赞数加一
 	public void addLikeCount(int mainPostID);
 	//点赞减一
-	public void deleteLikeCount(int mainPostID);	
+	public void deleteLikeCount(int mainPostID);
+	//收藏加一
+	public void addCollectCount(int mainPostID);
+	//收藏减一
+	public void deleteCollectCount(int mainPostID);
 
 }

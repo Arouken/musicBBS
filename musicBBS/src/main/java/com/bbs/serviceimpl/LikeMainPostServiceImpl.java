@@ -22,16 +22,18 @@ public class LikeMainPostServiceImpl implements LikeMainPostService {
 
 	//取消点赞
 	@Override
-	public void dislike(String userID, int mainPostID) {
+	public void dislike(LikeMainPost likeMainPost) {
 		// TODO Auto-generated method stub
+		likeMainPostDao.dislike(likeMainPost);
 
 	}
 
 	//查询已赞
 	@Override
-	public LikeMainPost selectLike(String userID, int mainPostID) {
+	public LikeMainPost selectLike(LikeMainPost likeMainPost) {
 		// TODO Auto-generated method stub
-		return null;
+		return likeMainPostDao.selectLike(likeMainPost);
+		
 	}
 
 }

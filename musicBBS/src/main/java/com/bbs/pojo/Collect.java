@@ -5,6 +5,11 @@ public class Collect {
 	private int collectID;
 	private String userID;
 	private int mainPostID;
+	
+	public Collect() {
+		
+	}
+	
 	public int getCollectID() {
 		return collectID;
 	}

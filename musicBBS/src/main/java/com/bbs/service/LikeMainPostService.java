@@ -6,8 +6,8 @@ public interface LikeMainPostService {
 	
 	public void likePost(LikeMainPost likeMainPost);
 	
-	public void dislike(String userID,int mainPostID);
+	public void dislike(LikeMainPost likeMainPost);
 	
-	public LikeMainPost selectLike(String userID,int mainPostID);
+	public LikeMainPost selectLike(LikeMainPost likeMainPost);
 
 }

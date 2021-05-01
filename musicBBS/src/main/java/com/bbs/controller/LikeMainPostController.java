@@ -1,5 +1,8 @@
 package com.bbs.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,34 +21,35 @@ public class LikeMainPostController {
 	
 	@Autowired
 	private LikeMainPostService likePostService;
+	@Autowired
 	private MainPostService mainPostService;
 	//点赞
 	@RequestMapping("/likePost")
-	public String likePost(HttpSession session){
-		LikeMainPost likeMainPost = new LikeMainPost();		
+	public void likePost(HttpSession session,HttpServletResponse response,
+			int mainPostID) throws IOException{
+		LikeMainPost likeMainPost = new LikeMainPost();	
+		
 		//获取发布对象id
 		User user = (User) session.getAttribute("userSession");
 		String userID = user.getUserID();
+		//获取登陆对象ID
 		likeMainPost.setUserID(userID);		
-		//获取主贴ID
-		MainPost mainpost= (MainPost) session.getAttribute("mainpost");
-		int mainPostID = mainpost.getMainPostID();	
+		//获取点赞帖子ID
 		likeMainPost.setMainPostID(mainPostID);
-		//执行查询方法
-		if(likePostService.selectLike(userID, mainPostID)==null) {
+	
+		if(likePostService.selectLike(likeMainPost)==null) {
 			//执行点赞方法
+			System.out.println("执行赞");
 			mainPostService.addLikeCount(mainPostID);
-			likePostService.likePost(likeMainPost);	
+			likePostService.likePost(likeMainPost);
+			response.getWriter().write("ok");
 		}else{
+			System.out.println("执行不赞");
 			mainPostService.deleteLikeCount(mainPostID);
-			likePostService.dislike(userID, mainPostID);
-		}
-		
-		
-		//把mainPostID值传给查询controller
-		
-		//执行查询回帖
-		return "redirect:/SecondaryPost/getSecondaryPostList";			
+			likePostService.dislike(likeMainPost);
+			response.getWriter().write("no");
+		}	
+				
 	}
 
 }

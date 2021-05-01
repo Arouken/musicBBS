@@ -8,11 +8,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into likeMainPost(userID,mainPostID) values(#{userID},#{mainPostID})
 	</insert>
 	
-	<delete id="dislike" parameterType="String">
+	<delete id="dislike" parameterType="com.bbs.pojo.LikeMainPost">
 		delete from likeMainPost where userID=#{userID} and mainPostID=#{mainPostID}
 	</delete>
 	
-	<select id="selectLike" parameterType="String">
+	<select id="selectLike" parameterType="com.bbs.pojo.LikeMainPost" resultType="com.bbs.pojo.LikeMainPost">
 		select * from likeMainPost where userID=#{userID} and mainPostID=#{mainPostID}
 	</select>
 

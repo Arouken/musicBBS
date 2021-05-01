@@ -82,8 +82,8 @@ layui.use('table', function(){
       ,{field:'mainPostTitle', title:'帖子名', width:100}
       ,{field:'mainPostContent', title:'帖子内容', width:220,height:100}
       ,{field:'mainPostTime', title:'发帖时间', width:160,sort: true,templet:'<div>{{ Format(d.mainPostTime,"yyyy-MM-dd hh:mm:ss")}}</div>'}
-      ,{field:'mainPostGoodCount', title:'点赞数', width:120}
-      ,{field:'mainPostBadCount', title:'点踩数', width:120}
+      ,{field:'mainPostLikeCount', title:'点赞数', width:120}
+     // ,{field:'mainPostBadCount', title:'点踩数', width:120}
       ,{field:'mainPostIsLOcked', title:'是否锁定', width:120,templet: function(d){if(d.gender == 1){return '是'}else{return '否'}}}
       ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150} 
      /* ,{field:'email', title:'邮箱', width:150, edit: 'text', templet: function(res){

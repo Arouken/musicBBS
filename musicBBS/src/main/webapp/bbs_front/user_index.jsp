@@ -81,7 +81,7 @@
                         <div class="indexCon_msg_detail_tittle">
                             <span><li>${mainPostList.user.userName}</li></span>
                             <p>${mainPostList.mainPostTitle}</p>
-                            <p>   测试点赞${mainPostList.likeMainPost.likeMainPostID}</p>
+                   
                         </div>
                     </a>
                     <div class="havePic">
@@ -92,18 +92,17 @@
                     <div class="indexCon_msg_detail_other">
                         <ul>                                                  
                             <li><p>发帖时间： <fmt:formatDate type="both" value="${mainPostList.mainPostTime}"/></p></li>
-                            <li>
-	                            <input type="image" src="${pageContext.request.contextPath}/image/agree.png"
-	                            onclick=""  
-	                            name="img"  style="width:15px;height:15px" />  <!--图片按钮-->
-	                            ${mainPostList.mainPostGoodCount}
+                            <li style="float:right;">
+                            <input type="image" src="${pageContext.request.contextPath}/image/likeBlack.png"
+	                        id="likepost" mainPostID=${mainpost.mainPostID} 
+	                        name="img"  style="width:15px;height:15px" />  <!--图片按钮-->	  
                             </li>
-                            <li>
+                            <li style="float:right;">
                             <input type="image" src="${pageContext.request.contextPath}/image/collect.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
-                            ${mainPostList.mainPostBadCount}</li>
-                            <li>
+                            ${mainPostList.mainPostLikeCount}</li>
+                            <li style="float:right;">
                             <input type="image" src="${pageContext.request.contextPath}/image/comment.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
-                            ${mainPostList.mainPostBadCount}</li>
+                            ${mainPostList.mainPostLikeCount}</li>
                             
                         </ul>
                     </div>
@@ -132,15 +131,15 @@
                        <ul>                        
                             <li><p>发帖时间： <fmt:formatDate type="both" value="${mainPostList.mainPostTime}" /></p></li>
                             <li></li>
-                            <li>
-                            <input type="image" src="${pageContext.request.contextPath}/image/agree.png"  name="img"  style="width:15px;height:15px" />  <!--图片按钮-->
-                            ${mainPostList.mainPostGoodCount}</li>
-                            <li>
+                            <li style="float:right;">
+                            <input type="image" src="${pageContext.request.contextPath}/image/likeBlack.png"  name="img"  style="width:15px;height:15px" />  <!--图片按钮-->
+                            ${mainPostList.mainPostLikeCount}</li>
+                            <li style="float:right;">
                             <input type="image" src="${pageContext.request.contextPath}/image/collect.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
-                            ${mainPostList.mainPostBadCount}</li>
-                            <li>
+                            ${mainPostList.mainPostLikeCount}</li>
+                            <li style="float:right;">
                             <input type="image" src="${pageContext.request.contextPath}/image/comment.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
-                            ${mainPostList.mainPostBadCount}</li>
+                            ${mainPostList.mainPostLikeCount}</li>
                             <li>
                         </ul>
                     </div>
@@ -297,6 +296,29 @@
     };
 
 
+    $("#likepost").click(function(){
+    	var like = $(this);
+    	var mainPostID = like.attr("mainPostID");
+    	var mainPostUserID = like.attr("mainPostUserID");
+		$.ajax({
+			url:"${pageContext.request.contextPath }/LikeMainPost/likePost",
+			type:"post",
+			dataType:"text",
+			async:false,
+			data:"mainPostID="+mainPostID,
+			//data:{mainPostID:mainPostID,mainPostUserID:mainPostUserID},
+			success:function(obj){
+				if(obj=="ok"){									
+					like.src="${pageContext.request.contextPath}/image/agreeRed.png";
+					
+				}else{					
+					like.src="${pageContext.request.contextPath}/image/agree.png";
+					
+				}
+			}			
+		})	
+		//return false;
+	})
     
    
     

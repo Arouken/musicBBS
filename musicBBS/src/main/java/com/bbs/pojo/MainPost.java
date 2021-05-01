@@ -10,8 +10,7 @@ public class MainPost {
 	private String mainPostTitle;
 	private Date mainPostTime;
 	private String mainPostContent;
-	private int mainPostGoodCount;
-	private int mainPostBadCount;
+	private int mainPostCollectCount;
 	private int mainPostLikeCount;
 	private int mainPostIsLOcked;
 	private String mainPostImg;
@@ -47,18 +46,6 @@ public class MainPost {
 	public void setMainPostContent(String mainPostContent) {
 		this.mainPostContent = mainPostContent;
 	}
-	public int getMainPostGoodCount() {
-		return mainPostGoodCount;
-	}
-	public void setMainPostGoodCount(int mainPostGoodCount) {
-		this.mainPostGoodCount = mainPostGoodCount;
-	}
-	public int getMainPostBadCount() {
-		return mainPostBadCount;
-	}
-	public void setMainPostBadCount(int mainPostBadCount) {
-		this.mainPostBadCount = mainPostBadCount;
-	}
 	public int getMainPostIsLOcked() {
 		return mainPostIsLOcked;
 	}
@@ -88,6 +75,12 @@ public class MainPost {
 	}
 	public void setMainPostLikeCount(int mainPostLikeCount) {
 		this.mainPostLikeCount = mainPostLikeCount;
+	}
+	public int getMainPostCollectCount() {
+		return mainPostCollectCount;
+	}
+	public void setMainPostCollectCount(int mainPostCollectCount) {
+		this.mainPostCollectCount = mainPostCollectCount;
 	}
 	
 

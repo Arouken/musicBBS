@@ -55,15 +55,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<association property="user" column="userID" javaType="com.bbs.pojo.User" select="getUser">
 		</association>
 	</resultMap>
-	<!-- 点赞加一 -->
-	<update id="addLikeCount" parameterType="int">
+	<!-- 点赞,赞加一 -->
+	<update id="addLikeCount" parameterType="com.bbs.pojo.MainPost">
 		update main_post set mainPostLikeCount=mainPostLikeCount+1 where mainPostID = #{mainPostID}
 	</update>
 	
-	<!-- 不赞减一 -->
-	<update id="deleteLikeCount" parameterType="int">
+	<!-- 取消点赞，赞减一 -->
+	<update id="deleteLikeCount" parameterType="com.bbs.pojo.MainPost">
 		update main_post set mainPostLikeCount=mainPostLikeCount-1 where mainPostID = #{mainPostID}
 	</update>
+	
+	<!-- 收藏,收藏加一 -->
+	<update id="addCollectCount" parameterType="com.bbs.pojo.MainPost">
+		update main_post set mainPostCollectCount=mainPostCollectCount+1 where mainPostID = #{mainPostID}
+	</update>
+	
+	<!-- 取消收藏，收藏减一 -->
+	<update id="deleteCollectCount" parameterType="com.bbs.pojo.MainPost">
+		update main_post set mainPostCollectCount=mainPostCollectCount-1 where mainPostID = #{mainPostID}
+	</update>
+	
+	
 	
 
 </mapper>

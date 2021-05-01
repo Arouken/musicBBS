@@ -63,7 +63,7 @@
                     <ul>
                         <li>${mainpost.user.userName}</li>
                         <li>${mainpost.mainPostTime}</li>
-                        <li>${mainpost.mainPostGoodCount}</li>
+                        <li>${mainpost.mainPostLikeCount}</li>
                     </ul>
                 </div>
                 <div class="clear">${mainpost.mainPostTitle}</div>
@@ -72,9 +72,26 @@
                ${mainpost.mainPostContent}
             </div>
             <div class="tzCon_foot">
-                <div class="tzCollect">
-                    <div class="tzCollect_left">收藏</div>
-                    <div class="tzCollect_right">131</div>
+                <div class="tzCollect" style="width:18%">                   
+                    <div class="tzCollect_right">
+                           <li>
+	                        <input type="image" src="${pageContext.request.contextPath}/image/likeBlack.png"
+	                        id="mylikepost" mainPostID=${mainpost.mainPostID} 
+	                        name="img"  style="width:15px;height:15px" />  <!--图片按钮-->	                       
+	                       </li>                      									
+                    </div>
+                    <div class="tzCollect_right">
+                    		<li>
+                            <input type="image" src="${pageContext.request.contextPath}/image/collect.png"  
+                            id="collectpost" mainPostID=${mainpost.mainPostID}
+                            name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
+                            </li>                       
+                    </div>
+                    <div class="tzCollect_right">
+                    		<li>
+                            <input type="image" src="${pageContext.request.contextPath}/image/comment.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
+                            </li>
+                    </div>                                                                              
                 </div>
             </div>
         </div>
@@ -216,5 +233,55 @@
 <script src="${pageContext.request.contextPath}/bbs_front/js/jquery-1.8.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/bbs_front/js/tiezi.js"></script>
 <script>
+
+$("#mylikepost").click(function(){
+	var like = $(this);
+	var mainPostID = like.attr("mainPostID");
+	//var mainPostUserID = like.attr("mainPostUserID");
+	$.ajax({
+		url:"${pageContext.request.contextPath}/LikeMainPost/likePost",
+		type:"post",
+		dataType:"text",
+		async:false,
+		data:"mainPostID="+mainPostID,
+		//data:{mainPostID:mainPostID,mainPostUserID:mainPostUserID},
+		success:function(obj){
+			if(obj=="ok"){									
+				//this.src="${pageContext.request.contextPath}/image/agreeRed.png";
+				$("#mylikepost").attr("src", "${pageContext.request.contextPath}/image/likeRed.png");
+			}else{					
+				//this.src="${pageContext.request.contextPath}/image/agree.png";
+				$("#mylikepost").attr("src", "${pageContext.request.contextPath}/image/likeBlack.png");
+			}
+		}			
+	})	
+	//return false;
+})
+
+
+$("#collectpost").click(function(){
+	var collect = $(this);
+	var mainPostID = collect.attr("mainPostID");
+	//var mainPostUserID = like.attr("mainPostUserID");
+	$.ajax({
+		url:"${pageContext.request.contextPath}/Collect/collectPost",
+		type:"post",
+		dataType:"text",
+		async:false,
+		data:"mainPostID="+mainPostID,
+		//data:{mainPostID:mainPostID,mainPostUserID:mainPostUserID},
+		success:function(obj){
+			if(obj=="ok"){									
+				//this.src="${pageContext.request.contextPath}/image/agreeRed.png";
+				$("#collectpost").attr("src", "${pageContext.request.contextPath}/image/collect_red.png");
+			}else{					
+				//this.src="${pageContext.request.contextPath}/image/agree.png";
+				$("#collectpost").attr("src", "${pageContext.request.contextPath}/image/collect_black.png");
+			}
+		}			
+	})	
+	//return false;
+})
+
 </script>
 </html>

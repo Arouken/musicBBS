@@ -5,7 +5,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>我发的贴</title>
+    <title>我收藏的贴</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/reset.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/homeHead.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/homePublic.css"/>
@@ -47,8 +47,8 @@
     <div class="homeCen_right">
         <div class="baseHead">
             <ul>
-                <li><a href="${pageContext.request.contextPath}/bbs_front/user_post.jsp" class="on">我的发帖</a></li>
-                <li><a href="${pageContext.request.contextPath}/bbs_front/user_post_collection.jsp" >我收藏的贴</a></li>
+                <li><a href="${pageContext.request.contextPath}/bbs_front/user_post.jsp" >我的发帖</a></li>
+                <li><a href="${pageContext.request.contextPath}/bbs_front/user_post_collection.jsp" class="on">我收藏的贴</a></li>
             </ul>
         </div>
         <div class="myWrite_con">
