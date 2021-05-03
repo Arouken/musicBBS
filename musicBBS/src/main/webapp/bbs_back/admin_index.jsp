@@ -47,20 +47,29 @@
           <a class="" href="javascript:;">用户管理</a>
           <dl class="layui-nav-child">
             <dd><a href="${pageContext.request.contextPath}/bbs_back/user_list.jsp" target="usermain">用户列表</a></dd>
-            <dd><a href="${pageContext.request.contextPath}/user_login.jsp" target="usermain">登陆测试</a></dd>
-            <dd><a href="${pageContext.request.contextPath}/bbs_back/mainPost_list.jsp" target="usermain">主贴列表</a></dd>
-            <dd><a href="">超链接</a></dd>
+            <dd><a href="${pageContext.request.contextPath}/user_regist.jsp" target="usermain">添加用户</a></dd>
+            <dd><a href="${pageContext.request.contextPath}/bbs_back/mainPost_list.jsp" target="usermain">信息修改</a></dd>
+<!--             <dd><a href="">超链接</a></dd> -->
           </dl>
         </li>
         <li class="layui-nav-item">
-          <a href="javascript:;">解决方案</a>
+          <a href="javascript:;">帖子管理</a>
           <dl class="layui-nav-child">
-            <dd><a href="javascript:;">列表一</a></dd>
-            <dd><a href="javascript:;">列表二</a></dd>
-            <dd><a href="">超链接</a></dd>
+            <dd><a href="${pageContext.request.contextPath}/bbs_back/mainPost_list.jsp">主贴列表</a></dd>
+            <dd><a href="javascript:;">主贴举报</a></dd>
+            <dd><a href="javascript:;">回帖举报</a></dd>
+<!--             <dd><a href="">超链接</a></dd> -->
           </dl>
         </li>
-        <li class="layui-nav-item"><a href="">云市场</a></li>
+         <li class="layui-nav-item">
+          <a href="javascript:;">音乐管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="${pageContext.request.contextPath}/bbs_back/mainPost_list.jsp">音乐列表</a></dd>
+            <dd><a href="${pageContext.request.contextPath}/bbs_back/music_info.jsp">音乐信息</a></dd>
+<!--             <dd><a href="">超链接</a></dd> -->
+          </dl>
+        </li>
+        <li class="layui-nav-item"><a href="">公告信息</a></li>
         <li class="layui-nav-item"><a href="">发布商品</a></li>
       </ul>
     </div>

@@ -1,10 +1,16 @@
 package com.bbs.utils;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.UUID;
 
 import javax.servlet.http.Part;
 
+import org.jaudiotagger.audio.AudioFileIO;
+import org.jaudiotagger.audio.mp3.MP3File;
+import org.jaudiotagger.tag.id3.AbstractID3v2Frame;
+import org.jaudiotagger.tag.id3.AbstractID3v2Tag;
+import org.jaudiotagger.tag.id3.framebody.FrameBodyAPIC;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -48,5 +54,63 @@ public class UploadTool {
 		return photo;
 		
 	}
+	
+	public static byte[] getMP3Image(String path) {
+        byte[] imageData = null;
+    	MP3File mp3File;
+		try {
+			mp3File = (MP3File) AudioFileIO.read(new File(path));
+	        AbstractID3v2Tag tag = mp3File.getID3v2Tag();
+	        AbstractID3v2Frame frame = (AbstractID3v2Frame) tag.getFrame("APIC");
+	        FrameBodyAPIC body = (FrameBodyAPIC) frame.getBody();
+	        imageData = body.getImageData();
+	        
+	        System.out.println("MP3封面二进制文件："+imageData);
+	        
+		} catch (Exception e) {
+			System.out.println("MP3Utils:读取MP3封面失败！");
+			return null;
+		}
+        return imageData;
+    }
 
+	
+	 public static String saveMP3Image(String path) {
+	        //生成mp3图片路径
+		    String uploadDocsImgPath = "F:\\musicBBS\\music\\img";
+	    	//PathKit.getWebRootPath() + music.getMusicUrl() 路径前缀，修改成自己的url前缀
+	    	//File file = new File(path);
+	        //String mp3FileLabel = file.getName();
+	        String musicImgID = UUID.randomUUID().toString();
+	        String mp3ImageFullPath = uploadDocsImgPath + ("\\"+musicImgID+".jpg");
+	        	  	      
+	        //生成mp3存放目录
+	        File saveDirectory = new File(uploadDocsImgPath);
+	        saveDirectory.mkdirs();
+	 
+	        //获取mp3图片
+	        byte imageData[];
+			imageData = getMP3Image(path);
+			if(imageData == null){
+				System.out.println("MP3Utils:读取MP3封面失败！");	          
+				return null;
+			}
+			
+	        //若图片不存在，则直接返回null
+	        if (null == imageData || imageData.length == 0) {
+	            return null;
+	        }
+	        //保存mp3图片文件
+	        FileOutputStream fos = null;
+	        try {
+	            fos = new FileOutputStream(mp3ImageFullPath);
+	            fos.write(imageData);
+	            System.out.println("保存成功！");
+	            fos.close();
+	        } catch(Exception e) {
+	        	System.out.println("MP3Utils:读取MP3封面失败！");
+	        	return null;
+	        }
+	        return mp3ImageFullPath;
+	    }
 }

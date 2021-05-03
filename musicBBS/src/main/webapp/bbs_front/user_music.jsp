@@ -17,8 +17,8 @@
         <a href=""><img src="" alt="" class="headPic1"/></a>
         <ul class="headNav">
             <li><a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" id="indexBBS">首页</a></li>
-            <li><a href="${pageContext.request.contextPath }/bbs_front/user_music.jsp">音乐欣赏</a></li>
-            <li><a href="">心情分享</a></li>
+            <li><a href="">音乐交流</a></li>
+            <li><a href="">帖子热区</a></li>
             <li><a href="">站内公告</a></li>
             <li><a href="">我的关注</a></li>
             <li><a href="">我的收藏</a></li>
@@ -58,14 +58,33 @@
 </header>
 <div class="indexMain">
     <div class="indexMain_left">
-        <div class="indexMain_left_btn" style="display:block;">
+        <div class="indexMain_left_btn" style="height:200px">
             <ul >
                 <li><a href="javascript:">最新</a></li>
                 <li><a href="javascript:" class="on">最热</a></li>
-              
-                              
+                <li><a href="javascript:">最新</a></li>
+                <li><a href="javascript:" >最热</a></li>
+                <li><a href="javascript:">最新</a></li>
+                <li><a href="javascript:" >最热</a></li>
+                <li><a href="javascript:">最新</a></li>
+                <li><a href="javascript:" >最热</a></li>
+                <li><a href="javascript:">最新</a></li>
+                <li><a href="javascript:" >最热</a></li>
+                <li><a href="javascript:">最新</a></li>
+                <li><a href="javascript:" >最热</a></li>
+                <li><a href="javascript:">最新</a></li>
+                <li><a href="javascript:" >最热</a></li>
+                <li><a href="javascript:">最新</a></li>
+                <li><a href="javascript:" >最热</a></li>
+                <li><a href="javascript:">最新</a></li>
+                <li><a href="javascript:" >最热</a></li>
             </ul>
           
+        </div>
+        
+        <div class="indexSearch" >
+                <input type="text" style="width:75%" placeholder="请输入歌曲关键词"/>             
+                <input type="submit" style="float:right;"  value="搜索"/>
         </div>
         <div class="indexMain_left_con">
                        <!--帖子循环开始-->     
@@ -80,7 +99,7 @@
                 <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a></c:if>
                 </div>
                 <div class="indexCon_msg_detail">
-                    <a href="${pageContext.request.contextPath}/MainPost/getMainPostContent?mainPostID=${mainPostList.mainPostID}">
+                    <a href="${pageContext.request.contextPath}/MainPost/getMainPostContent?mainPostID=${mainPostList.mainPostID}" target="_blank">
                         <div class="indexCon_msg_detail_tittle">
                             <span><li>${mainPostList.user.userName}</li></span>
                             <p>${mainPostList.mainPostTitle}</p>
@@ -148,7 +167,6 @@
                     </div>
                 </div>
                 <div class="clear"></div>
-               
             </div>
             </c:if>
             <!--无主题图循环结束-->
@@ -176,14 +194,22 @@
     </div>
     <div class="indexMain_right">
         <div class="indexMain_rightCon">
-            <a href="${pageContext.request.contextPath }/bbs_front/newMainPost.jsp" class="newMsg">发新帖</a>
+        	<div class="indexSearch">
+                <input type="text" placeholder="请输入音乐关键词"/>
+                <input type="submit" value="音乐搜索"/>
+            </div>
+            <div class="indexSearch">
+                <input type="text" placeholder="请输入歌手关键词"/>
+                <input type="submit" value="歌手搜索"/>
+            </div>
+            
             <div class="pwfb">
                 <div class="pwfbHead">音乐播放器</div>
                 <div class="pwfbCon">
 	                <audio controls="controls">
-					  <source src="/music/test.mp3" type="audio/ogg">
-					  <source src="/music/test.mp3" type="audio/mpeg">
-					  <embed height="100" width="100" src="/userPhoto/test.mp3" />
+					  <source src="${pageContext.request.contextPath}/music/song.ogv" type="audio/ogg">
+					  <source src="${pageContext.request.contextPath}/music/song.ogv" type="audio/mpeg">
+					  <embed height="100" width="100" src="${pageContext.request.contextPath}/music/song.ogv" />
 					</audio>
                 </div>
                 <div class="pwfbFooter"></div>
