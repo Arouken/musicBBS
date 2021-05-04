@@ -16,8 +16,8 @@
     <div class="ltHead_cen">
         <a href=""><img src="" alt="" class="headPic1"/></a>
         <ul class="headNav">
-            <li><a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" id="indexBBS">首页</a></li>
-            <li><a href="">音乐交流</a></li>
+            <li><a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" >首页</a></li>
+            <li><a href="${pageContext.request.contextPath }/Music/getMusicList" >音乐欣赏</a></li>
             <li><a href="">帖子热区</a></li>
             <li><a href="">站内公告</a></li>
             <li><a href="">我的关注</a></li>
@@ -58,26 +58,11 @@
 </header>
 <div class="indexMain">
     <div class="indexMain_left">
-        <div class="indexMain_left_btn" style="height:200px">
+        <div class="indexMain_left_btn" >
             <ul >
                 <li><a href="javascript:">最新</a></li>
                 <li><a href="javascript:" class="on">最热</a></li>
-                <li><a href="javascript:">最新</a></li>
-                <li><a href="javascript:" >最热</a></li>
-                <li><a href="javascript:">最新</a></li>
-                <li><a href="javascript:" >最热</a></li>
-                <li><a href="javascript:">最新</a></li>
-                <li><a href="javascript:" >最热</a></li>
-                <li><a href="javascript:">最新</a></li>
-                <li><a href="javascript:" >最热</a></li>
-                <li><a href="javascript:">最新</a></li>
-                <li><a href="javascript:" >最热</a></li>
-                <li><a href="javascript:">最新</a></li>
-                <li><a href="javascript:" >最热</a></li>
-                <li><a href="javascript:">最新</a></li>
-                <li><a href="javascript:" >最热</a></li>
-                <li><a href="javascript:">最新</a></li>
-                <li><a href="javascript:" >最热</a></li>
+               
             </ul>
           
         </div>
@@ -87,108 +72,67 @@
                 <input type="submit" style="float:right;"  value="搜索"/>
         </div>
         <div class="indexMain_left_con">
-                       <!--帖子循环开始-->     
-            <c:forEach items="${pageInfo.list}" var="mainPostList">
-            <!--有主题图循环开始-->
-            <c:if test="${mainPostList.mainPostImg!=null}">
-            <div class="indexCon_msg">          
-                <div class="indexCon_msg_pic">
-                <c:if test="${mainPostList.user.photo!=null}">
-                <a href=""><img src="/userPhoto/${mainPostList.user.photo}"/></a></c:if>
-                <c:if test="${mainPostList.user.photo==null}">
-                <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a></c:if>
-                </div>
-                <div class="indexCon_msg_detail">
-                    <a href="${pageContext.request.contextPath}/MainPost/getMainPostContent?mainPostID=${mainPostList.mainPostID}" target="_blank">
-                        <div class="indexCon_msg_detail_tittle">
-                            <span><li>${mainPostList.user.userName}</li></span>
-                            <p>${mainPostList.mainPostTitle}</p>
-                   
-                        </div>
-                    </a>
-                    <div class="havePic">
-                        <a href=""><div class="havePic_head">
-                        <img src="/userPhoto/${mainPostList.mainPostImg}" alt="" />
-                        </div></a>
-                    </div>
-                    <div class="indexCon_msg_detail_other">
-                        <ul>                                                  
-                            <li><p>发帖时间： <fmt:formatDate type="both" value="${mainPostList.mainPostTime}"/></p></li>
-                            <li style="float:right;">
-                            <input type="image" src="${pageContext.request.contextPath}/image/likeBlack.png"
-	                        id="likepost" mainPostID=${mainpost.mainPostID} 
-	                        name="img"  style="width:15px;height:15px" />  <!--图片按钮-->	  
-                            </li>
-                            <li style="float:right;">
-                            <input type="image" src="${pageContext.request.contextPath}/image/collect.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
-                            ${mainPostList.mainPostLikeCount}</li>
-                            <li style="float:right;">
-                            <input type="image" src="${pageContext.request.contextPath}/image/comment.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
-                            ${mainPostList.mainPostLikeCount}</li>
-                            
-                        </ul>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            </c:if>
-            <!--有主题图循环结束-->
+                       <!--歌曲循环开始-->     
+            <c:forEach items="${musicList.list}" var="musicList">         
             <!--无主题图循环开始-->
-            <c:if test="${mainPostList.mainPostImg==null}">
             <div class="indexCon_msg">
                 <div class="indexCon_msg_pic">
-               <c:if test="${mainPostList.user.photo!=null}">
-                <a href=""><img src="/userPhoto/${mainPostList.user.photo}"/></a></c:if>
-                <c:if test="${mainPostList.user.photo==null}">
-                <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a></c:if>
+               <c:if test="${musicList.musicImgName!=null}">
+                <a href=""><img src="/cover/${musicList.musicImgName}"/></a></c:if>
+                <c:if test="${musicList.musicImgName==null}">
+                <a href=""><img src="${pageContext.request.contextPath}/image/musicCover.png"/></a></c:if>
                 </div>
                 <div class="indexCon_msg_detail">
-                    <a href="${pageContext.request.contextPath}/MainPost/getMainPostContent?mainPostID=${mainPostList.mainPostID}">
+                    <a href="${pageContext.request.contextPath}/Music/getMusicContent?musicID=${musicList.musicID}" target="_blank">
                         <div class="indexCon_msg_detail_tittle">
-                            <span><li>${mainPostList.user.userName}</li></span>
-                            <p>${mainPostList.mainPostTitle}</p>
+                            <span><li>${musicList.singer}</li></span>
+                            <p>${musicList.musicName}</p>
+                           
                         </div>
                     </a>
                     <div class="indexCon_msg_detail_other">
                        <ul>                        
-                            <li><p>发帖时间： <fmt:formatDate type="both" value="${mainPostList.mainPostTime}" /></p></li>
+                            <li><p>专辑 ： ${musicList.album}</p></li>
                             <li></li>
-                            <li style="float:right;">
-                            <input type="image" src="${pageContext.request.contextPath}/image/likeBlack.png"  name="img"  style="width:15px;height:15px" />  <!--图片按钮-->
-                            ${mainPostList.mainPostLikeCount}</li>
-                            <li style="float:right;">
-                            <input type="image" src="${pageContext.request.contextPath}/image/collect.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
-                            ${mainPostList.mainPostLikeCount}</li>
+                           
+                           <li style="float:right;">
+                            <a href="${pageContext.request.contextPath}/Music/getMusicContent?musicID=${musicList.musicID}" target="_blank">
+                            	<input type="image"  src="${pageContext.request.contextPath}/image/collect.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
+                          	</a>
+                          </li>
                             <li style="float:right;">
                             <input type="image" src="${pageContext.request.contextPath}/image/comment.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
-                            ${mainPostList.mainPostLikeCount}</li>
-                            <li>
+                           </li>
+                            <li style="float:right;">
+                            <a href="${pageContext.request.contextPath}/Music/getMusicContent?musicID=${musicList.musicID}" target="_blank">
+                            	<input type="image"  src="${pageContext.request.contextPath}/image/play.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
+                          	</a>
+                            
+                           </li>
                         </ul>
                     </div>
                 </div>
                 <div class="clear"></div>
-            </div>
-            </c:if>
-            <!--无主题图循环结束-->
+            </div>      
            </c:forEach>                                            
         </div>
         <div class="indexFooter">
             <div class="indexFooter_con" style="width:52%;">
                 <a >共</a>
-                <a >${pageInfo.pages}</a> 
+                <a >${musicList.pages}</a> 
                 <a >页</a>
-                <a >${pageInfo.total}</a>
+                <a >${musicList.total}</a>
                 <a >条</a>
                 <a><select  onchange="submitPageSize(this)" style="height:100%;border: 0; background: transparent;">
 					<option selected="selected">5</option>
-					<option <c:if test="${pageInfo.pageSize==10}">selected="selected"</c:if>>10</option>
-					<option <c:if test="${pageInfo.pageSize==20}">selected="selected"</c:if>>20</option>
+					<option <c:if test="${musicList.pageSize==10}">selected="selected"</c:if>>10</option>
+					<option <c:if test="${musicList.pageSize==20}">selected="selected"</c:if>>20</option>
 					</select>					
 				</a>
-           		<a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser?page=1&size=${pageInfo.pageSize}" class="on">首页</a> 
-                <a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser?page=${pageInfo.pageNum-1}&size=${pageInfo.pageSize}">前页</a>               
-                <a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}">后页</a>
-                <a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser?page=${pageInfo.pages}&size=${pageInfo.pageSize}" class="on">尾页</a>             			   			
+           		<a href="${pageContext.request.contextPath }/Music/getMusicList?page=1&size=${musicList.pageSize}" class="on">首页</a> 
+                <a href="${pageContext.request.contextPath }/Music/getMusicList?page=${musicList.pageNum-1}&size=${musicList.pageSize}">前页</a>               
+                <a href="${pageContext.request.contextPath }/Music/getMusicList?page=${musicList.pageNum+1}&size=${musicList.pageSize}">后页</a>
+                <a href="${pageContext.request.contextPath }/Music/getMusicList?page=${musicList.pages}&size=${musicList.pageSize}" class="on">尾页</a>             			   			
             </div>
         </div>
     </div>
@@ -322,7 +266,7 @@
 		 * 提交查询
          * option.value：获取select的值
          */
-		location.href='${pageContext.request.contextPath }/MainPost/getMainPostListUser?size='+option.value;
+		location.href='${pageContext.request.contextPath }/Music/getMusicList?size='+option.value;
     };
 
 

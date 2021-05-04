@@ -17,7 +17,7 @@
         <a href=""><img src="" alt="" class="headPic1"/></a>
         <ul class="headNav">
             <li><a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" id="indexBBS">首页</a></li>
-            <li><a href="${pageContext.request.contextPath }/bbs_front/user_music.jsp">音乐欣赏</a></li>
+            <li><a href="${pageContext.request.contextPath }/Music/getMusicList">音乐欣赏</a></li>
             <li><a href="">心情分享</a></li>
             <li><a href="">站内公告</a></li>
             <li><a href="">我的关注</a></li>

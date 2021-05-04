@@ -83,7 +83,7 @@ public class UploadTool {
 	        //String mp3FileLabel = file.getName();
 	        String musicImgID = UUID.randomUUID().toString();
 	        String mp3ImageFullPath = uploadDocsImgPath + ("\\"+musicImgID+".jpg");
-	        	  	      
+	        String musicImgName = musicImgID+".jpg";  	      
 	        //生成mp3存放目录
 	        File saveDirectory = new File(uploadDocsImgPath);
 	        saveDirectory.mkdirs();
@@ -111,6 +111,6 @@ public class UploadTool {
 	        	System.out.println("MP3Utils:读取MP3封面失败！");
 	        	return null;
 	        }
-	        return mp3ImageFullPath;
+	        return musicImgName;
 	    }
 }

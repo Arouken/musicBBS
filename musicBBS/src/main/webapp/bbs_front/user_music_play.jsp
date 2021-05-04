@@ -6,7 +6,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>帖子</title>
+    <title>音乐播放</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/reset.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/public.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/index.css"/>
@@ -16,8 +16,8 @@
     <div class="ltHead_cen">
         <a href=""><img src="" alt="" class="headPic1"/></a>
         <ul class="headNav">
-            <li><a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" id="indexBBS">首页</a></li>
-            <li><a href="${pageContext.request.contextPath }/Music/getMusicList">音乐欣赏</a></li>
+            <li><a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" target="_blank">首页</a></li>
+            <li><a href="${pageContext.request.contextPath }/Music/getMusicList" target="_blank">音乐欣赏</a></li>
             <li><a href="">心情分享</a></li>
             <li><a href="">站内公告</a></li>
             <li><a href="">我的关注</a></li>
@@ -39,7 +39,7 @@
         <c:if test="${userSession.userName!=null}">
         <div class="lt_login appear">
         <ul>
-        <li><a href="${pageContext.request.contextPath}/bbs_front/user_home.jsp">${userSession.userName}</a></li>
+        <li><a href="${pageContext.request.contextPath}/bbs_front/user_home.jsp" target="_blank">${userSession.userName}</a></li>
         <li><a href="${pageContext.request.contextPath}/user/quite">退出</a></li>
         </ul>
         </div>
@@ -53,23 +53,30 @@
         <div class="tzCon">
             <div class="tzCon_head">
                 <div class="tzCon_head_left">
-                <c:if test="${mainpost.user.photo!=null}">
-                <a href=""><img src="/userPhoto/${mainpost.user.photo}"/></a></c:if>
-                <c:if test="${mainpost.user.photo==null}">
-                <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a></c:if>
+                <c:if test="${music.musicImgName!=null}">
+                <a href=""><img src="/music/img/${music.musicImgName}"/></a></c:if>
+                <c:if test="${music.musicImgName==null}">
+                <a href=""><img src="${pageContext.request.contextPath}/image/musicCover.png"/></a></c:if>
                 </div>
                 <div class="tzCon_head_right">
-                    <h1>${mainpost.user.userName}</h1>
+                    <h1>${music.musicName}</h1>
                     <ul>
-                        <li>${mainpost.user.userName}</li>
-                        <li>${mainpost.mainPostTime}</li>
-                        <li>${mainpost.mainPostLikeCount}</li>
+                        <li>歌手：${music.singer}</li>
+                        
                     </ul>
                 </div>
-                <div class="clear">${mainpost.mainPostTitle}</div>
+                <div class="clear">专辑 ： ${music.album}</div>
             </div>
             <div class="tzCon_con">
-               ${mainpost.mainPostContent}
+              	
+              	<audio controls="controls" style="width:100%">
+					  <source src="/music/${music.musicOtherName}" type="audio/ogg">
+					  <source src="/music/${music.musicOtherName}" type="audio/mpeg">
+					  <embed height="100" width="100" src="/music/${music.musicOtherName}" />
+				</audio>
+				
+				
+				
             </div>
             <div class="tzCon_foot">
                 <div class="tzCollect" style="width:18%">                   

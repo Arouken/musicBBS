@@ -29,7 +29,7 @@
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
         <a href="javascript:;">
-          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">${userSession.userName} </a>
+          <img src="/userPhoto/${userSession.photo}" class="layui-nav-img">${userSession.userName} </a>
         <dl class="layui-nav-child">
           <dd><a href="">基本资料</a></dd>
           <dd><a href="">安全设置</a></dd>
@@ -47,7 +47,7 @@
           <a class="" href="javascript:;">用户管理</a>
           <dl class="layui-nav-child">
             <dd><a href="${pageContext.request.contextPath}/bbs_back/user_list.jsp" target="usermain">用户列表</a></dd>
-            <dd><a href="${pageContext.request.contextPath}/user_regist.jsp" target="usermain">添加用户</a></dd>
+            <dd><a href="${pageContext.request.contextPath}/bbs_back/admin_addUser.jsp" target="usermain">添加用户</a></dd>
             <dd><a href="${pageContext.request.contextPath}/bbs_back/mainPost_list.jsp" target="usermain">信息修改</a></dd>
 <!--             <dd><a href="">超链接</a></dd> -->
           </dl>
