@@ -37,9 +37,6 @@ public class SecondaryPostController {
 	    PageInfo<SecondaryPost> secondaryPostList = secondaryPostService.getSecondaryPostList(page, size, mainPostID);
 	    //将数据存入到Model中
 	    model.addAttribute("secondaryPostList",secondaryPostList);	    
-	    System.out.println("回复帖子controller");
-	    System.out.println("集合值"+secondaryPostList);
-	    System.out.println("集合值条数大小：" + secondaryPostList.getTotal());
 	    return "/bbs_front/mainPostContent";
 	}
 	

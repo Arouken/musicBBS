@@ -4,10 +4,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.bbs.dao.SecondaryPostDao">
 	
 	<!-- 根据主贴ID获取所有回帖信息 -->
-<!-- 	<select id="getSecondaryPostList"  resultType="com.bbs.pojo.SecondaryPost"> -->
-<!-- 		select * from secondary_post where mainPostID = #{mainPostID} -->
-<!-- 	</select> -->
-	
 	<select id="getSecondaryPostList"  resultMap="secondaryPostUser">
 		select * from secondary_post where mainPostID = #{mainPostID}
 	</select>	

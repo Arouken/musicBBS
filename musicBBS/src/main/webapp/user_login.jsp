@@ -78,7 +78,8 @@
         input.invalid::-webkit-input-placeholder {
             color: red;
         }
- 
+        
+       
         </style>
     </head>
     <body>

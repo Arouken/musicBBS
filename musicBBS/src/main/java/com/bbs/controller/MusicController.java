@@ -110,25 +110,19 @@ public class MusicController {
 	}
 	
 	
-	//查询单个帖子信息
-//		@RequestMapping("/getMainPostContent")
-//		public String getMainPostContent(HttpSession session,RedirectAttributes attributes,int mainPostID){
-//			
-//			System.out.println("测试帖子ID值："+mainPostID);
-//			MainPost mainpost = mainPostService.getOneMainPost(mainPostID);		
-//			session.setAttribute("mainpost", mainpost);
-//		    attributes.addAttribute("mainPostID", mainPostID); 
-//		    return "redirect:/SecondaryPost/getSecondaryPostList";
-//		}
 	
 	//点击播放音乐，进入详情页
-		@RequestMapping("/getMusicContent")
-		public String getMusicContent(HttpSession session,RedirectAttributes attributes,
-				Model model,int musicID) {
-			Music music =  musicService.getOneMusic(musicID);
-			model.addAttribute("music", music);
-			return "/bbs_front/user_music_play";
-		}
+	@RequestMapping("/getMusicContent")
+	public String getMusicContent(HttpSession session,RedirectAttributes attributes,
+			Model model,int musicID) {
+		Music music =  musicService.getOneMusic(musicID);
+		//model.addAttribute("music", music);
+		session.setAttribute("music", music);
+		attributes.addAttribute("musicID", musicID); 
+		return "redirect:/MusicPost/getMusicPost";
+	}
+	
+
 	 
 }
 	

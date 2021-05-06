@@ -43,8 +43,6 @@ public class MainPostController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<MainPost> list = mainPostService.getMainPostPage(page, limit);//执行分页查询的方法
 		PageInfo<MainPost> mainPostPageInfo = new PageInfo<MainPost>(list);
-		//System.out.println("list的内容为：" + list.get(2));
-		System.out.println("pageInfo的内容为：" + mainPostPageInfo.getTotal());
 		map.put("code", 0);
 		map.put("msg", "操作成功");
 		map.put("count", mainPostPageInfo.getTotal());
@@ -61,7 +59,6 @@ public class MainPostController {
 	    PageInfo<MainPost> pageInfo = mainPostService.pageHelperList(page,size);
 	    //将数据存入到Model中
 	    model.addAttribute("pageInfo",pageInfo);
-	    System.out.println("前台帖子controller");
 	    return "/bbs_front/user_index";
 	}
 	
@@ -86,9 +83,8 @@ public class MainPostController {
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		MultipartFile file = multipartRequest.getFile("mainPostImg");
 		String picname = file.getOriginalFilename();
-		System.out.println("测试file的值："+picname);
 		if(picname == "") {
-			System.out.println("无图方法");
+			//无图帖子
 			mainpost.setMainPostImg(null);
 		}else {
 			//改名的图的名字
@@ -105,7 +101,6 @@ public class MainPostController {
 	@RequestMapping("/getMainPostContent")
 	public String getMainPostContent(HttpSession session,RedirectAttributes attributes,int mainPostID){
 		
-		System.out.println("测试帖子ID值："+mainPostID);
 		MainPost mainpost = mainPostService.getOneMainPost(mainPostID);		
 		session.setAttribute("mainpost", mainpost);
 	    attributes.addAttribute("mainPostID", mainPostID); 

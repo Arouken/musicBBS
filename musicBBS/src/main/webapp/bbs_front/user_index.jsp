@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/reset.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/public.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/index.css"/>
+    <style type="text/css">
+	
+	</style>
 </head>
 <body>
 <header class="ltHead">
@@ -18,7 +21,7 @@
         <ul class="headNav">
             <li><a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" id="indexBBS">首页</a></li>
             <li><a href="${pageContext.request.contextPath }/Music/getMusicList">音乐欣赏</a></li>
-            <li><a href="">心情分享</a></li>
+            <li><a href="">帖子热区</a></li>
             <li><a href="">站内公告</a></li>
             <li><a href="">我的关注</a></li>
             <li><a href="">我的收藏</a></li>
@@ -73,7 +76,7 @@
             <!--有主题图循环开始-->
             <c:if test="${mainPostList.mainPostImg!=null}">
             <div class="indexCon_msg">          
-                <div class="indexCon_msg_pic">
+                <div class="indexCon_msg_pic" style="border-radius:30px;">
                 <c:if test="${mainPostList.user.photo!=null}">
                 <a href=""><img src="/userPhoto/${mainPostList.user.photo}"/></a></c:if>
                 <c:if test="${mainPostList.user.photo==null}">
@@ -117,7 +120,7 @@
             <!--无主题图循环开始-->
             <c:if test="${mainPostList.mainPostImg==null}">
             <div class="indexCon_msg">
-                <div class="indexCon_msg_pic">
+                <div class="indexCon_msg_pic" style="border-radius:30px">
                <c:if test="${mainPostList.user.photo!=null}">
                 <a href=""><img src="/userPhoto/${mainPostList.user.photo}"/></a></c:if>
                 <c:if test="${mainPostList.user.photo==null}">

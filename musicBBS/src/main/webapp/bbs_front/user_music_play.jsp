@@ -6,7 +6,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>音乐播放</title>
+    <title>${music.musicName} 正在播放</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/reset.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/public.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/index.css"/>
@@ -69,7 +69,7 @@
             </div>
             <div class="tzCon_con">
               	
-              	<audio controls="controls" style="width:100%">
+              	<audio controls="controls" autoplay="autoplay" style="width:100%">
 					  <source src="/music/${music.musicOtherName}" type="audio/ogg">
 					  <source src="/music/${music.musicOtherName}" type="audio/mpeg">
 					  <embed height="100" width="100" src="/music/${music.musicOtherName}" />
@@ -108,34 +108,34 @@
                 <div class="newPending_head_tittle">最新评论</div>
             </div>
             <!--楼主可以删除评论、自己可以删除自己的评论删除按钮酌情出现-->
-            <c:forEach items="${secondaryPostList.list}" var="secondaryPostList">           
+            <c:forEach items="${oneMusicPost.list}" var="oneMusicPost">           
             <div class="newPending_son">
                 <div class="pendPic">
                 
-                <c:if test="${secondaryPostList.user.photo!=null}">
-                <a href=""><img src="/userPhoto/${secondaryPostList.user.photo}"/></a></c:if>
-                <c:if test="${secondaryPostList.user.photo==null}">
+                <c:if test="${oneMusicPost.user.photo!=null}">
+                <a href=""><img src="/userPhoto/${oneMusicPost.user.photo}"/></a></c:if>
+                <c:if test="${oneMusicPost.user.photo==null}">
                 <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a></c:if>                           
                 </div>
                 <div class="pendDetail">
                     <div class="pendDetail_head">                                                                  	
-                        <p>${secondaryPostList.user.userName} <span>发布于：<fmt:formatDate type="both" value="${secondaryPostList.secondaryPostTime}"/></span></p>
+                        <p>${oneMusicPost.user.userName} <span>发布于：<fmt:formatDate type="both" value="${oneMusicPost.musicPostTime}"/></span></p>
                         <i>2楼</i>
                     </div>
                     <div class="pendDetail_con">
-                        <p>${secondaryPostList.secondaryPostContent}</p>
+                        <p>${oneMusicPost.musicPostContent}</p>
                     </div>
                     <div class="pendDetail_btn">
                         <ul>
-                            <li>${secondaryPostList.secondaryPostGoodCount}</li>
-                            <li class="replayBtn">${secondaryPostList.secondaryPostGoodCount}</li>
+                            <li>点赞</li>
+                            <li class="replayBtn">评论</li>
 <!--                             <li class="delateBtn">删除</li> -->
                         </ul>
                     </div>
                     <div class="pendDetail_action">
-                    <form action="${pageContext.request.contextPath}/SecondaryPost/writeToSecondaryPost?replyUserID=${secondaryPostList.user.userID}" 
+                    <form action="${pageContext.request.contextPath}/MusicPost/addReMusicPost?replyUserID=${oneMusicPost.user.userID}" 
             			  method="post" autocomplete="off">
-                        <input type="text" name="secondaryPostContent" value="@${secondaryPostList.user.userName}      "/>
+                        <input type="text" name="musicPostContent" value="@${oneMusicPost.user.userName}      "/>
                         <button type="submit" style="color:red;">评论</button>                      
                     </form>
                     <button >取消</button>
@@ -147,8 +147,8 @@
         </div>
         <div class="indexFooter">
             <div class="indexFooter_con">
-                <a href="${pageContext.request.contextPath}/SecondaryPost/getSecondaryPostList?page=${secondaryPostList.pageNum-1}&size=${secondaryPostList.pageSize}&mainPostID=${mainpost.mainPostID}"><</a>
-                <a href="${pageContext.request.contextPath}/SecondaryPost/getSecondaryPostList?page=${secondaryPostList.pageNum+1}&size=${secondaryPostList.pageSize}&mainPostID=${mainpost.mainPostID}">></a>
+                <a href="${pageContext.request.contextPath}/MusicPost/getMusicPost?page=${oneMusicPost.pageNum-1}&size=${oneMusicPost.pageSize}&musicID=${music.musicID}"><</a>
+                <a href="${pageContext.request.contextPath}/MusicPost/getMusicPost?page=${oneMusicPost.pageNum+1}&size=${oneMusicPost.pageSize}&musicID=${music.musicID}">></a>
             </div>
         </div>
         <div class="writePending">
@@ -156,10 +156,10 @@
                 <div class="tzHeng"></div>
                 <div class="newPending_head_tittle">评论</div>
             </div>
-            <form action="${pageContext.request.contextPath}/SecondaryPost/writeSecondaryPost" 
+            <form action="${pageContext.request.contextPath}/MusicPost/addMusicPost" 
             method="post" autocomplete="off">
             <div class="writePending_con">
-                <input type="text" placeholder="写下你的评论..." name="secondaryPostContent" id="secondaryPostContent"/>
+                <input type="text" placeholder="写下你的评论..." name="musicPostContent" id="musicPostContent"/>
                 <input type="submit" value="评论"/>
             </div>
             </form>
@@ -168,6 +168,7 @@
     <div class="indexMain_right">
         <a href="${pageContext.request.contextPath }/bbs_front/newMainPost.jsp" class="newMsg">发新帖</a>
         <div class="myMsg">
+        	
             <div class="myMsg_con">
                 <div class="myMsg_conPic">
                 <c:if test="${mainpost.user.photo!=null}">

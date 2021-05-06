@@ -1,0 +1,35 @@
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.dao.MusicPostDao">
+<!-- 添加歌曲评论 -->
+	<insert id="addMusicPost" parameterType="com.bbs.pojo.MusicPost">
+		insert into musicpost(musicID,userID,replyUserID,musicPostContent,musicPostTime) 
+		values(#{musicID},#{userID},#{replyUserID},#{musicPostContent},#{musicPostTime})
+	</insert>
+	
+<!-- 查询单个歌曲的所有回复	 -->
+	<select id="getOneMusicPostList" parameterType="int" resultMap="oneMusicPost">
+		select * from musicpost where musicID = #{musicID}
+	</select>
+	<resultMap type="com.bbs.pojo.MusicPost" id="oneMusicPost">
+		<result property="userID" column="userID"/>
+		<result property="musicPostID" column="musicPostID"/>
+		<result property="musicID" column="musicID"/>
+		<result property="replyUserID" column="replyUserID"/>
+		<result property="musicPostContent" column="musicPostContent"/>
+		<result property="musicPostTime" column="musicPostTime"/>
+		<association property="user" column="userID" javaType="com.bbs.pojo.User" select="getUser">
+		</association>	
+	</resultMap>
+	<!-- 用于查询评论用户信息	 -->
+	<select id="getUser"  resultType="com.bbs.pojo.User">
+		select * from user where userID = #{userID}
+	</select>
+
+<!-- 查询单个曲子信息 -->
+<!-- 	<select id="getOneMusic" parameterType="int" resultType="com.bbs.pojo.MusicPost"> -->
+<!-- 		select * from music where musicID = #{musicID} -->
+<!-- 	</select> -->
+	
+</mapper>
