@@ -52,10 +52,13 @@
     </div>
     <form action="${pageContext.request.contextPath}/MainPost/writeMainPost" method="post" id="" enctype="multipart/form-data">
     <div class="writeCon_cen">
-        <div class="writePic">
-            <input type="file" accept=".jpeg, .jpg, .png" 
-            class="upload_file" id="mainPostImg" name="mainPostImg" 
-            onkeyup="picIsNull()"/>
+        <div class="writePic" style="width:46%">
+            <input  type="file" accept=".jpeg, .jpg, .png" 
+            class="upload_file" id="mainPostImg" name="mainPostImg"/>
+<!--             <div class="writePic"><img id="imgLook" src="" alt="" /></div> -->
+        </div>
+         <div  style="width:28%;height:180px;position:absolute;left:780px;top:160px;">          
+			<img id="imgLook" style="width:240px;height:180px;" src="" alt="" />
         </div>
         <div class="writeMsg">
             <input type="text" name="mainPostTitle" placeholder="请输入标题"/>
@@ -82,7 +85,7 @@
 <!--         style="height:300px;" -->
         <div class="writeDown" id="writePost" >
         <textarea style="OVERFLOW:hidden;width:100%;height:100%;font-size:20px;border-style:none;" 
-        id="write" name="mainPostContent"  ></textarea>
+        id="write" name="mainPostContent" autocomplete="off"></textarea>
         
         </div>
         <input type="submit" class="reform" value="发布"/>
@@ -127,7 +130,27 @@
 		 }			
 	}
     
-    
+  //预览上传图片
+	$(document).ready(function() {
+	    //alert("nihao1");
+	    $("#mainPostImg").change(function() {
+	        var current_pic=this.files[0];
+	        preview_picture(current_pic);
+	    });
+	    
+	});
+	 
+	function preview_picture(pic) {
+	    //alert("你好！");
+	    var r=new FileReader();
+	    r.readAsDataURL(pic);
+	    r.onload=function (){
+	        //alert("你好123！");
+	        $("#imgLook").attr("src",this.result).show();
+	        //alert("你好321！");
+	    };
+	    
+	}
     
 </script>
 

@@ -67,7 +67,7 @@
                          
                 <!--  虚拟挂载 -->
                 <div class="mypic" style="padding-top:80px;">
-                    <img src="/userPhoto/${userSession.photo}" alt="" />
+                    <img id="userPhoto" src="/userPhoto/${userSession.photo}" alt="" />
                 </div> 
                 <div class="Imgbtn">上传头像
                     <input  class="uploadPic" name="" type="submit"/>
@@ -78,4 +78,30 @@
     </div>
 </div>
 </body>
+<script src="${pageContext.request.contextPath}/bbs_front/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+ 
+$(document).ready(function() {
+    //alert("nihao1");
+    $("#photo").change(function() {
+        var current_pic=this.files[0];
+        preview_picture(current_pic);
+    });
+    
+});
+ 
+function preview_picture(pic) {
+    //alert("你好！");
+    var r=new FileReader();
+    r.readAsDataURL(pic);
+    r.onload=function (){
+        //alert("你好123！");
+        $("#userPhoto").attr("src",this.result).show();
+        //alert("你好321！");
+    };
+    
+}
+ 
+</script>
+
 </html>

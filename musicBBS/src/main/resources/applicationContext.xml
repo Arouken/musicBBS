@@ -62,7 +62,8 @@
          <!--设定文件上传的最大值为20MB，20*1024*1024 -->
 	    <property name="maxUploadSize" value="20971520"></property>
     </bean>
-    
+     
+     
 	<!-- 启用基于注解的声明式事务管理配置 -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	

@@ -18,7 +18,7 @@
         <ul class="headNav">
             <li><a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" target="_blank">首页</a></li>
             <li><a href="${pageContext.request.contextPath }/Music/getMusicList" target="_blank">音乐欣赏</a></li>
-            <li><a href="">心情分享</a></li>
+            <li><a href="${pageContext.request.contextPath }/Category/getCategoryList">帖子热区</a></li>
             <li><a href="">站内公告</a></li>
             <li><a href="">我的关注</a></li>
             <li><a href="">我的收藏</a></li>

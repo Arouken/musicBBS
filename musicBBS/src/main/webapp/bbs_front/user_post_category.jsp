@@ -6,18 +6,21 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>论坛首页</title>
+    <title>帖子热区</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/reset.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/public.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/index.css"/>
+    <style type="text/css">
+	
+	</style>
 </head>
 <body>
 <header class="ltHead">
     <div class="ltHead_cen">
         <a href=""><img src="" alt="" class="headPic1"/></a>
         <ul class="headNav">
-            <li><a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" >首页</a></li>
-            <li><a href="${pageContext.request.contextPath }/Music/getMusicList" >音乐欣赏</a></li>
+            <li><a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" id="indexBBS">首页</a></li>
+            <li><a href="${pageContext.request.contextPath }/Music/getMusicList">音乐欣赏</a></li>
             <li><a href="${pageContext.request.contextPath }/Category/getCategoryList">帖子热区</a></li>
             <li><a href="">站内公告</a></li>
             <li><a href="">我的关注</a></li>
@@ -58,102 +61,86 @@
 </header>
 <div class="indexMain">
     <div class="indexMain_left">
-        <div class="indexMain_left_btn" >
-            <ul >
-                <li><a href="javascript:">最新</a></li>
-                <li><a href="javascript:" class="on">最热</a></li>
-               
-            </ul>
-          
-        </div>
-        
+
         <div class="indexSearch" >
-                <input type="text" style="width:75%" placeholder="请输入歌曲关键词"/>             
+                <input type="text" style="width:75%" placeholder="请输入音乐区关键词"/>             
                 <input type="submit" style="float:right;"  value="搜索"/>
         </div>
         <div class="indexMain_left_con">
-                       <!--歌曲循环开始-->     
-            <c:forEach items="${musicList.list}" var="musicList">         
-            <!--无主题图循环开始-->
-            <div class="indexCon_msg">
-                <div class="indexCon_msg_pic">
-               <c:if test="${musicList.musicImgName!=null}">
-                <a href=""><img src="/cover/${musicList.musicImgName}"/></a></c:if>
-                <c:if test="${musicList.musicImgName==null}">
-                <a href=""><img src="${pageContext.request.contextPath}/image/musicCover.png"/></a></c:if>
+                       <!--帖子循环开始-->     
+            <c:forEach items="${categoryList.list}" var="categoryList">
+         
+            <div class="indexCon_msg">          
+                <div class="indexCon_msg_pic" style="border-radius:5px;">
+                <c:if test="${categoryList.categoryImg!=null}">
+                <a href=""><img src="/userPhoto/${categoryList.categoryImg}"/></a></c:if>
+                <c:if test="${categoryList.categoryImg==null}">
+                <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a></c:if>
                 </div>
                 <div class="indexCon_msg_detail">
-                    <a href="${pageContext.request.contextPath}/Music/getMusicContent?musicID=${musicList.musicID}" target="_blank">
+                    <a href="">
                         <div class="indexCon_msg_detail_tittle">
-                            <span><li>${musicList.singer}</li></span>
-                            <p>${musicList.musicName}</p>
+                            <span><li>${categoryList.categoryName}</li></span>
+                          
                            
+                   
                         </div>
                     </a>
+                  
                     <div class="indexCon_msg_detail_other">
-                       <ul>                        
-                            <li><p>专辑 ： ${musicList.album}</p></li>
-                            <li></li>
-                           
-                           <li style="float:right;">
-                            <a href="${pageContext.request.contextPath}/Music/getMusicContent?musicID=${musicList.musicID}" target="_blank">
-                            	<input type="image"  src="${pageContext.request.contextPath}/image/collect.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
-                          	</a>
-                          </li>
+                        <ul>                                                  
+                            <li><p>创建时间： <fmt:formatDate type="date" value="${categoryList.categoryCreatDay}"/></p></li>
+                             <p>${categoryList.categoryTxt}</p>
+                            <li style="float:right;">
+                            <input type="image" src="${pageContext.request.contextPath}/image/likeBlack.png"
+	                        id="likepost" mainPostID=${mainpost.mainPostID} 
+	                        name="img"  style="width:15px;height:15px" />  <!--图片按钮-->	  
+                            </li>
+                            <li style="float:right;">
+                            <input type="image" src="${pageContext.request.contextPath}/image/collect.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
+                            ${mainPostList.mainPostLikeCount}</li>
                             <li style="float:right;">
                             <input type="image" src="${pageContext.request.contextPath}/image/comment.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
-                           </li>
-                            <li style="float:right;">
-                            <a href="${pageContext.request.contextPath}/Music/getMusicContent?musicID=${musicList.musicID}" target="_blank">
-                            	<input type="image"  src="${pageContext.request.contextPath}/image/play.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
-                          	</a>
+                            ${mainPostList.mainPostLikeCount}</li>
                             
-                           </li>
                         </ul>
                     </div>
                 </div>
                 <div class="clear"></div>
-            </div>      
+            </div>
+        
            </c:forEach>                                            
         </div>
         <div class="indexFooter">
             <div class="indexFooter_con" style="width:52%;">
                 <a >共</a>
-                <a >${musicList.pages}</a> 
+                <a >${categoryList.pages}</a> 
                 <a >页</a>
-                <a >${musicList.total}</a>
+                <a >${categoryList.total}</a>
                 <a >条</a>
                 <a><select  onchange="submitPageSize(this)" style="height:100%;border: 0; background: transparent;">
 					<option selected="selected">5</option>
-					<option <c:if test="${musicList.pageSize==10}">selected="selected"</c:if>>10</option>
-					<option <c:if test="${musicList.pageSize==20}">selected="selected"</c:if>>20</option>
+					<option <c:if test="${categoryList.pageSize==10}">selected="selected"</c:if>>10</option>
+					<option <c:if test="${categoryList.pageSize==20}">selected="selected"</c:if>>20</option>
 					</select>					
 				</a>
-           		<a href="${pageContext.request.contextPath }/Music/getMusicList?page=1&size=${musicList.pageSize}" class="on">首页</a> 
-                <a href="${pageContext.request.contextPath }/Music/getMusicList?page=${musicList.pageNum-1}&size=${musicList.pageSize}">前页</a>               
-                <a href="${pageContext.request.contextPath }/Music/getMusicList?page=${musicList.pageNum+1}&size=${musicList.pageSize}">后页</a>
-                <a href="${pageContext.request.contextPath }/Music/getMusicList?page=${musicList.pages}&size=${musicList.pageSize}" class="on">尾页</a>             			   			
+           		<a href="${pageContext.request.contextPath }/Category/getCategoryList?page=1&size=${categoryList.pageSize}" class="on">首页</a> 
+                <a href="${pageContext.request.contextPath }/Category/getCategoryList?page=${categoryList.pageNum-1}&size=${categoryList.pageSize}">前页</a>               
+                <a href="${pageContext.request.contextPath }/Category/getCategoryList?page=${categoryList.pageNum+1}&size=${categoryList.pageSize}">后页</a>
+                <a href="${pageContext.request.contextPath }/Category/getCategoryList?page=${categoryList.pages}&size=${categoryList.pageSize}" class="on">尾页</a>             			   			
             </div>
         </div>
     </div>
     <div class="indexMain_right">
         <div class="indexMain_rightCon">
-        	<div class="indexSearch">
-                <input type="text" placeholder="请输入音乐关键词"/>
-                <input type="submit" value="音乐搜索"/>
-            </div>
-            <div class="indexSearch">
-                <input type="text" placeholder="请输入歌手关键词"/>
-                <input type="submit" value="歌手搜索"/>
-            </div>
-            
+            <a href="${pageContext.request.contextPath }/bbs_front/newMainPost.jsp" class="newMsg">发新帖</a>
             <div class="pwfb">
                 <div class="pwfbHead">音乐播放器</div>
                 <div class="pwfbCon">
 	                <audio controls="controls">
-					  <source src="${pageContext.request.contextPath}/music/song.ogv" type="audio/ogg">
-					  <source src="${pageContext.request.contextPath}/music/song.ogv" type="audio/mpeg">
-					  <embed height="100" width="100" src="${pageContext.request.contextPath}/music/song.ogv" />
+					  <source src="/music/test.mp3" type="audio/ogg">
+					  <source src="/music/test.mp3" type="audio/mpeg">
+					  <embed height="100" width="100" src="/userPhoto/test.mp3" />
 					</audio>
                 </div>
                 <div class="pwfbFooter"></div>
@@ -266,7 +253,7 @@
 		 * 提交查询
          * option.value：获取select的值
          */
-		location.href='${pageContext.request.contextPath }/Music/getMusicList?size='+option.value;
+		location.href='${pageContext.request.contextPath }/Category/getCategoryList?size='+option.value;
     };
 
 
