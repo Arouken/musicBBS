@@ -22,5 +22,7 @@ public interface UserDao {
     public void updateUserName(@Param("userID")String userID,@Param("photo")String userName);
     //修改用户密码
     public void updateUserPassword(@Param("userID")String userID,@Param("password")String password);
+	//查询绑定的手机号是否存在
+    public User findUserByPhone(String phone);
 
 }

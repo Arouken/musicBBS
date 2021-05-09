@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.bbs.dao.UserDao;
 import com.bbs.pojo.User;
 import com.bbs.service.UserService;
+import com.bbs.utils.SendSms;
 import com.github.pagehelper.PageHelper;
 
 
@@ -88,6 +89,30 @@ public class UserServiceImpl implements UserService {
 	public User checkOldPassword(String userID, String password) {
 		// TODO Auto-generated method stub
 		return userDao.findUserInfoByCond(userID, password);		
+	}
+
+	//向用户发送验证码
+	@Override
+	public String sendPhoneCode(String phone) {
+		// TODO Auto-generated method stub
+		int code = SendSms.sendCode(phone);
+		if(code>0) {
+			String oldCode=phone+"#"+code;
+			return oldCode;
+		}else {
+			return null;
+		}
+		
+	}
+
+	//检测手机号是否绑定
+	@Override
+	public User checkPhoneIsExit(String phone) {
+		
+		
+		return userDao.findUserByPhone(phone);
+		// TODO Auto-generated method stub
+		
 	}	
 
 }

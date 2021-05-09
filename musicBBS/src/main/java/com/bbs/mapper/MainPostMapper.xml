@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 	</select> -->
 	
 	<select id="getMainPostList"  resultMap="mainPostUser">
-		select * from main_post
+		select * from main_post order by mainPostTime desc
 	</select>	
 	<resultMap type="com.bbs.pojo.MainPost" id="mainPostUser">
 		<result property="userID" column="userID"/>

@@ -30,6 +30,12 @@ public class CategoryServiceImpl implements CategoryService {
 		
 		
 	}
+
+	@Override
+	public void addCategory(Category category) {
+		// TODO Auto-generated method stub
+		categoryDao.addCategory(category);
+	}
 	
    
   

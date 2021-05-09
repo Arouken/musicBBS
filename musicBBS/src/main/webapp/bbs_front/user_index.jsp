@@ -63,8 +63,8 @@
     <div class="indexMain_left">
         <div class="indexMain_left_btn" style="display:block;">
             <ul >
-                <li><a href="javascript:">最新</a></li>
-                <li><a href="javascript:" class="on">最热</a></li>
+                <li><a href="javascript:" class="on">最新</a></li>
+                <li><a href="javascript:" >最热</a></li>
               
                               
             </ul>

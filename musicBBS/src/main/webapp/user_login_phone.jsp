@@ -5,6 +5,7 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/layui-v2.6.1/layui/css/layui.css">
+        
         <style type="text/css">
       		.container{
       			width: 420px;
@@ -81,62 +82,82 @@
         
        
         </style>
+        
+        <script type="text/javascript">
+//读秒的方法
+var iTime = 59;
+var Account;
+function RemainTime(){
+	document.getElementById('getPhoneCode').disabled = true;
+	var iSecond,sSecond="",sTime="";
+	if (iTime >= 0){
+		iSecond = parseInt(iTime%60);
+		iMinute = parseInt(iTime/60)
+		if (iSecond >= 0){
+			if(iMinute>0){
+				sSecond = iMinute + "分" + iSecond + "秒";
+			}else{
+				sSecond = iSecond + "秒";
+			}
+		}
+		sTime=sSecond;
+		if(iTime==0){
+			clearTimeout(Account);
+			sTime='获取手机验证码';
+			iTime = 59;
+			document.getElementById('getPhoneCode').disabled = false;
+		}else{
+			Account = setTimeout("RemainTime()",1000);
+			iTime=iTime-1;
+		}
+	}else{
+		sTime='没有倒计时';
+	}
+	document.getElementById('getPhoneCode').value = sTime;
+}
+</script>
+        
     </head>
     <body>
-    	<form class="layui-form" action="${pageContext.request.contextPath}/user/login" method="post" id="userLoginFrom" >
-    		<div class="container" style>
+    	<form class="layui-form" action="${pageContext.request.contextPath}/user/phoneLogin" method="post" id="userPhoneLoginFrom" >
+    		<div class="container" >
     			
     			<div class="layui-form-mid layui-word-aux">
     							
     			</div>
 			  <div class="layui-form-item">
-			    <label class="layui-form-label">用户ID</label>
+			    <label class="layui-form-label">手机号</label>
 			    <div class="layui-input-block">
-			      <input type="text" name="userID" id="userID" required  onkeyup="idIsExist()"
-			      lay-verify="required" placeholder="请输入用户ID" autocomplete="off" class="layui-input">
-			      <span id="userID_mess"></span> 
+			      <input type="text" name="phone" id="phone" 
+			       placeholder="请输入手机号" autocomplete="off" onkeyup="clealMess()" class="layui-input">
+			    
+			      <span id="msg" style="color: red;font-size: 12px;margin-left: 20px;"></span> 
 			    </div>
-			  </div>
-			  <div class="layui-form-item">
-			    <label class="layui-form-label">密 &nbsp;&nbsp;码</label>
-			    <div class="layui-input-block">
-			      <input type="password" name="password" id="password" required lay-verify="required" 
-			      placeholder="请输入密码" autocomplete="off" class="layui-input" onkeyup="passIsNull()">
-			      <span id="password_mess"></span> 
-			    </div>
-<!-- 			    <div class="layui-form-mid layui-word-aux">辅助文字</div> -->
 			  </div>
 			   <div class="layui-form-item">
 			    <label class="layui-form-label">验证码</label>
 			    <div class="layui-input-inline">
-			      <input type="text" name="imgCode" id="imgCode" required  lay-verify="required" 
-			      placeholder="请输入验证码" autocomplete="off" class="layui-input verity">	
+			      <input type="text" placeholder="请输入验证码" onkeyup="clealCodeMess()" name="phoneCode" id="phoneCode" autocomplete="off" class="layui-input verity">	
 			      <span id="imgCode_mess"></span> 		      
 			    </div>
 			    
-			    <div class="layui-form-mid layui-word-aux"style="padding-left:4px;">
-			      <!-- 图形验证码图片, src属性直接访问后台的servlet映射路径即可   -->
-                <img id="loginImg" src="${pageContext.request.contextPath }/authImage/imgCode" style="width:100%;">
-			    </div> 			      
+			  	<div class="layui-form-inline">
+			      <input type="button" class="layui-btn layui-btn-normal" id="getPhoneCode"  style="width:34%" value=" 获取手机验证码 ">	     
+			    </div>		      
 			  </div>
 			  
-<!-- 			  <div class="layui-form-item">
-				    <label class="layui-form-label">记住密码</label>
-				    <div class="layui-input-block">
-				      <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
-				    </div>
-			  </div> -->
- 
+
 			  <div class="layui-form-item">
 			   <div class="layui-input-block">
 			      <span id="msg" style="color: red;font-size: 12px;margin-left: 20px;"></span>
 			    </div>
+			 
 			    <div class="layui-input-block">
 			      <button class="layui-btn layui-btn-normal" id="login">登陆</button>	     
 			    </div>
 			  </div>
 			   <a href="" class="font-set">忘记密码?</a>
-			   <a href="user_login_phone.jsp" class="font-set">手机登陆</a>  
+			   <a href="user_login.jsp" class="font-set">密码登陆</a>  
 			   <a href="user_regist.jsp" class="font-set">立即注册</a>
 			</div>
 		</form>
@@ -194,84 +215,84 @@
 			 	  
 			});
 			
-			//1.点击图片改变验证码
-			$("#loginImg").click(function(){
-				//再次访问图片的servlet映射路径即可：也就是改变图片的src属性值
-				//为了让后台服务器认为每次都是一个新的请求，需要设置一个参数在请求中
-				this.src="${pageContext.request.contextPath }/authImage/imgCode?date="+new Date();
-			})
-			
-			//2.账号验证
-			function idIsExist(){
-				//清空错误提示
-				$("#userID_mess").html("");
-				//手机号码非空
-				var userID=$("#userID").val();//账号
-			    if($.trim(userID).length==0){
-					$("#userID_mess").html("账号不能为空！").css("color","red");
-					return;
-				}
+			//清除错误提示
+			function clealMess(){
+				
+				$("#msg").html("");
+			}
+			//清除错误提示
+			function clealCodeMess(){
+				
+				$("#imgCode_mess").html("");
+			}
 
-				//验证账号是否被注册过
-				//超链接  表单  提交数据最终都需要刷新整个页面。
-				//但是我们验证账号的时候需要的是局部刷新技术:ajax
+			
+			$("#getPhoneCode").click(function(){
+				$("#msg").html("");
+				//获取输入的手机号
+				var phone=$("#phone").val();
+				//手机号不能为空
+				if($.trim(phone).length==0){
+					$("#msg").html("手机号码不能为空！");
+					return false;
+				}
+				//手机号码格式正确
+				var reg=/^1[0-9]{10}$/;
+				if(!reg.test(phone)){
+					$("#msg").html("请输入正确的手机号！");
+					return false;
+				}
+				
+				//验证手机是否已经注册过：ajax
 				$.ajax({
-					url:"${pageContext.request.contextPath }/user/idIsExist",  //请求的目标地址路径：目标servlet的映射路径以及对应的增删改查的方法
-					type:"post",  //请求后台的方式：get/post
-					dataType:"text",//服务器响应给客户端的数据类型：html  xml  json  text
-					data:"userID="+userID,//请求中携带的参数：账号
-					success:function(obj){//根据服务器响应的参数进行处理：成功的回调函数
-						//obj是ok或者是no
-						console.log(obj);
-						if(obj=="ok"){
-							//提示可以注册
-							$("#userID_mess").html("该账号不存在,可选择注册").css("color","red");
-							 document.getElementById("login").disabled = true; 
-						}else{
-							//已经注册
-							$("#userID_mess").html("");
-							document.getElementById("login").disabled = false; 
+					url:"${pageContext.request.contextPath}/user/phoneIsExit",
+					type:"post",
+					dataType:"text",
+					data:"phone="+phone,
+					success:function(obj){
+						if(obj=="no"){//手机号码没有注册
+							$("#msg").html("该手机号码没有绑定！");
+							return false;
+						}else{//手机号已经注册
+							//开启倒计时
+							RemainTime();
+							//发送验证码到手机上：ajax请求访问后台
+							sendCode(phone);
 						}
 					}
-				})			
+				})
+				
+			})
+			
+			//封装发送验证码js方法
+			function sendCode(phone){
+				//ajax请求后台发送验证码
+				$.ajax({
+					url:"${pageContext.request.contextPath}/user/getPhoneCode",
+					type:"post",
+					dataType:"text",
+					data:"phone="+phone,
+					success:function(obj){
+						console.log(obj);
+					}
+				})
 			}
-			
-			
-			function passIsNull(){
-				var pw=$("#password").val();
-			    $("#password_mess").html("");
-			    if($.trim(pw).length==0)
-			    {
-		           $("#password_mess").html("密码不能为空").css("color","red");		          
-		        }
-			    
-			}
-			
-			
-			
-			$("#imgCode").blur(function(){
-				$("#imgCode_mess").html("");			
-				var imgcode=$("#imgCode").val();
-			        if($.trim(imgcode).length==0){
-			        	$("#imgCode_mess").html("验证码不能为空").css("color","red");			        	
-			        	}
-			    	});
-			
-		
-		    //2.点击登录
+
+			//2.点击登录
 			$("#login").click(function(){	
-				var code=$("#imgCode").val();	
+				var phone=$("#phone").val();
+				var phoneCode=$("#phoneCode").val();	
 				//验证码是否正确：ajax		
 				$.ajax({
-					url:"${pageContext.request.contextPath }/user/checkImgCode",
+					url:"${pageContext.request.contextPath }/user/checkPhoneCode",
 					type:"post",
 					dataType:"text",
 					async:false,
-					data:"code="+code,
+					data:{'phone':phone,'phoneCode':phoneCode},
 					success:function(obj){
 						if(obj=="ok"){
 							//验证码正确，提交表单根据账号密码验证登录
-							$("#userLoginFrom").submit();		
+							$("#userPhoneLoginFrom").submit();		
 						}else{
 							//验证码错误
 							$("#imgCode_mess").html("验证码错误").css("color","red");
@@ -281,6 +302,9 @@
 				})	
 				return false;
 			})
+		
+		
+		
 			</script>
     </body>
 </html>

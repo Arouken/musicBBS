@@ -25,5 +25,9 @@ public interface UserService {
 	public void updateUserPassword(String userID,String password);	
 	//检查旧密码
     public User checkOldPassword(String userID, String password);
+	//发送验证码
+    public String sendPhoneCode(String phone);
+    //检测该手机号是否绑定
+	public User checkPhoneIsExit(String phone);
 
 }

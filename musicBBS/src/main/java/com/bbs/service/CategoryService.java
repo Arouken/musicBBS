@@ -7,4 +7,6 @@ public interface CategoryService {
 	//查询分区表
 	PageInfo<Category> categoryList(Integer page, Integer size);
 
+	//添加分区
+	public void addCategory(Category category);
 }

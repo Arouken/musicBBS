@@ -64,6 +64,79 @@ public class UserController {
 		}
 	}
 	
+	//用户使用手机号登陆
+	@RequestMapping("/phoneLogin")
+	public String phoneLogin(HttpSession session) {
+		
+		User user = (User) session.getAttribute("loginSession");
+		session.setAttribute("userSession", user);
+		session.removeAttribute("loginSession");
+		if (user != null && user.getUserID() != null) {
+			//保存登陆对象
+			session.setAttribute("userSession", user);
+			if(user.getCompetence()==1) {				
+				System.out.println("管理员登陆成功");
+				System.out.println(user.getCompetence());
+				return "/bbs_back/admin_index";				
+			}
+			else {
+				System.out.println("用户登陆成功");
+				return "redirect:/MainPost/getMainPostListUser";
+			}			
+		} 
+		else {
+			System.out.println("登陆失败");
+			return "redirect:/user_login.jsp";
+		}
+	
+	}
+	
+	//用户获取验证码
+	@RequestMapping("/getPhoneCode")
+	public void getPhoneCode(HttpServletResponse response,HttpSession session,
+			@RequestParam("phone")String phone) throws IOException {
+		
+		String oldCode = userService.sendPhoneCode(phone);
+		session.setAttribute("oldCode", oldCode);
+		response.getWriter().write("验证码已发送");
+		
+	}
+	
+	//检查手机验证码是否正确
+	@RequestMapping("/checkPhoneCode")
+	public void checkPhoneCode(String phone,HttpServletResponse response,
+			String phoneCode,HttpSession session) throws IOException {
+		String oldCode = (String) session.getAttribute("oldCode");
+		String newCode = phone+"#"+phoneCode;
+		if (oldCode.equals(newCode)) {
+			//验证码正确
+			response.getWriter().write("ok");
+		}else {
+			//错误
+			response.getWriter().write("no");
+		}
+	}
+	
+	
+	
+	//验证用户手机号是否绑定
+	@RequestMapping("/phoneIsExit")
+	public void phoneIsExit(HttpSession session,HttpServletResponse response,
+			@RequestParam("phone")String phone) throws IOException {
+		
+		User user = userService.checkPhoneIsExit(phone);
+		
+		if (user == null) {
+			//不存在
+			response.getWriter().write("no");
+		}else {
+			//存在
+			session.setAttribute("loginSession", user);
+			response.getWriter().write("ok");
+		}
+		
+	}
+	
 	//判断用户是否存在，用于检测注册时ID是否重复
 	@RequestMapping("/idIsExist")
 	public void idIsExist(HttpServletRequest request,HttpServletResponse response,Model model) throws IOException{		
@@ -183,6 +256,16 @@ public class UserController {
 		}			
 	}
 	
-	
+	//判断用户是否登录
+	@RequestMapping("/checkIsLogin")
+	public void checkIsLogin(HttpServletResponse response,
+			HttpSession session)throws Exception{				
+	    if ( session.getAttribute("userSession")!= null) {
+	    	response.getWriter().write("ok");			
+		} 
+		else {
+			response.getWriter().write("no");			
+		}			
+	}
 	
 }

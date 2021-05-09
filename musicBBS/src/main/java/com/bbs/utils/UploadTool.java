@@ -55,6 +55,7 @@ public class UploadTool {
 		
 	}
 	
+	//获取二进制MP3文件
 	public static byte[] getMP3Image(String path) {
         byte[] imageData = null;
     	MP3File mp3File;
@@ -74,7 +75,7 @@ public class UploadTool {
         return imageData;
     }
 
-	
+	//保存MP3文件并改名
 	 public static String saveMP3Image(String path) {
 	        //生成mp3图片路径
 		    String uploadDocsImgPath = "F:\\musicBBS\\music\\img";
@@ -113,4 +114,38 @@ public class UploadTool {
 	        }
 	        return musicImgName;
 	    }
+	 
+	 
+	 public static String addCategoryImg(MultipartFile multipartFile) {
+			//定义一个文件名称
+			String photo="";
+					/**
+					 * 文件上传：
+					 * 1、获取表单中上传的文件：part对象（封装了上传的文件信息）
+					 * 2、获取上传的文件名称：保存文件名称到数据库表
+					 * 3、保存上传的文件到目标地址：F:\\musicBBS\\userPhoto\\
+					 * 
+					 */
+					try {
+						//获取上传的文件名称
+						String submittedFileName = multipartFile.getOriginalFilename();
+						//避免同名文件覆盖：自定义字符+随机数（日期 random  math）
+						//UUID生成随机数:生成32随机字符
+						String uuid = UUID.randomUUID().toString();
+						//获取文件后缀
+						String type=submittedFileName.substring(submittedFileName.lastIndexOf("."), submittedFileName.length());
+						//重命名文件：uuid+文件后缀
+						photo=uuid+type;	
+						//将文件保存到目标目录:目录地址+文件名称
+						String path="F:\\musicBBS\\categoryImg\\";
+						File desFile = new File(path+photo);
+						multipartFile.transferTo(desFile);//保存文件
+						//part.write(path);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+			
+			return photo;
+			
+		}
 }

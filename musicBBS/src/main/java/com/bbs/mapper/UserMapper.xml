@@ -7,6 +7,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findUserInfoByCond"  resultType="com.bbs.pojo.User">
 		select * from user where userID = #{userID} and password = #{password}
 	</select>
+<!-- 	根据用户手机号获取用户信息 -->
+	<select id="findUserByPhone" parameterType="String"  resultType="com.bbs.pojo.User">
+		select * from user where phoneNum = #{phone}
+	</select>
 <!-- 	添加用户 -->
 	<insert id="addUser" parameterType="com.bbs.pojo.User">
 		insert into user(userID,password,createDate,userName) values(#{userID},#{password},#{createDate},#{userName})

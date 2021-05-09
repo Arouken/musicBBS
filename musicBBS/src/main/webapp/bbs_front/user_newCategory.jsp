@@ -5,10 +5,10 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>发表帖子</title>
-    <link rel="stylesheet" href="css/reset.css"/>
-    <link rel="stylesheet" href="css/public.css"/>
-    <link rel="stylesheet" href="css/write.css"/>
+    <title>添加分区</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/reset.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/public.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/bbs_front/css/write.css"/>
 </head>
 <body>
 <header class="ltHead">
@@ -48,31 +48,32 @@
 <div class="writeCon">
 
     <div class="writeCon_head">
-        <p>发新帖</p>
+        <p>创建新区</p>
     </div>
-    <form action="${pageContext.request.contextPath}/MainPost/writeMainPost" method="post" id="" enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/Category/addCategory" method="post" id="addCategory" enctype="multipart/form-data">
     <div class="writeCon_cen">
+     
         <div class="writePic" style="width:46%">
             <input  type="file" accept=".jpeg, .jpg, .png" 
-            class="upload_file" id="mainPostImg" name="mainPostImg"/>
-<!--             <div class="writePic"><img id="imgLook" src="" alt="" /></div> -->
+            class="upload_file" id="categoryImg" name="categoryImg"/>
         </div>
-         <div  style="width:22%;height:180px;position:absolute;left:780px;top:160px;">          
+        
+        
+        <div  style="width:22%;height:180px;position:absolute;left:780px;top:160px;">          
 			<img id="imgLook" style="width:100%;height:100%;" src="" alt="" />
         </div>
         <div class="writeMsg">
-            <input type="text" name="mainPostTitle" placeholder="请输入标题"/>
+            <input type="text" name="categoryName" id="categoryName" autocomplete="off" placeholder="  请输入分区名"/>
         </div>
-         <div style="width:28%;height:160px;">
+        <div style="width:28%;height:60px;">
            
         </div>
-<!--         style="height:300px;" -->
-        <div class="writeDown" id="writePost" >
+        <div class="writeDown" id="writePost"  style="width:45%;">
         <textarea style="OVERFLOW:hidden;width:100%;height:100%;font-size:20px;border-style:none;" 
-        id="write" name="mainPostContent" autocomplete="off"></textarea>
+        id="categoryTxt" name="categoryTxt" autocomplete="off" placeholder="     请输入分区简介" ></textarea>
         
         </div>
-        <input type="submit" class="reform" value="发布"/>
+        <input type="submit" class="reform" style="float:left;" id="addC" value="添加分区"/>
     </div>
     </form>
    </div>
@@ -104,7 +105,7 @@
         $('[name="nice-select"] ul').hide();
     });
     
-  //判断两次密码是否一致
+  //判断图片非空
 	function picIsNull(){
 		var mainPostImg = document.getElementById("mainPostImg").value;	    		
 		if(mainPostImg == null) {			
@@ -117,7 +118,7 @@
   //预览上传图片
 	$(document).ready(function() {
 	    //alert("nihao1");
-	    $("#mainPostImg").change(function() {
+	    $("#categoryImg").change(function() {
 	        var current_pic=this.files[0];
 	        preview_picture(current_pic);
 	    });
@@ -125,16 +126,66 @@
 	});
 	 
 	function preview_picture(pic) {
-	    //alert("你好！");
+	   
 	    var r=new FileReader();
 	    r.readAsDataURL(pic);
 	    r.onload=function (){
-	        //alert("你好123！");
 	        $("#imgLook").attr("src",this.result).show();
-	        //alert("你好321！");
+	       
 	    };
 	    
 	}
+	
+	
+	//判断是否登录，非空验证
+	$("#addC").click(function(){
+		
+		var uname=$("#categoryImg").val();
+		if($.trim(uname).length==0){//去掉字符串的前后空格之后的长度是否为0
+			//提示不能为空
+			alert("图片不能为空！");
+			//跳出方法
+			return false;
+		}
+		
+		var uname=$("#categoryName").val();
+		if($.trim(uname).length==0){//去掉字符串的前后空格之后的长度是否为0
+			//提示不能为空
+			alert("音乐区名不能为空！");
+			//跳出方法
+			return false;
+		}
+		
+		var uname=$("#categoryTxt").val();
+		if($.trim(uname).length==0){//去掉字符串的前后空格之后的长度是否为0
+			//提示不能为空
+			alert("简介不能为空！");
+			//跳出方法
+			return false;
+		}
+		
+		
+		
+	
+		$.ajax({
+			url:"${pageContext.request.contextPath }/user/checkIsLogin",  //请求的目标地址路径：目标servlet的映射路径以及对应的增删改查的方法
+			type:"post",  //请求后台的方式：get/post
+			success:function(obj){//根据服务器响应的参数进行处理：成功的回调函数
+				//obj是ok或者是no
+				console.log(obj);
+				if(obj=="ok"){
+					$("#addCategory").submit();	
+				}else{
+					//没有登录
+					alert("请登录后再进行操作！");
+					return;
+				}
+			}			
+				
+		})
+		return false;
+	})
+	
     
 </script>
 

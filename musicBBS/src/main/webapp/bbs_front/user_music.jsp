@@ -85,7 +85,7 @@
                 <div class="indexCon_msg_detail">
                     <a href="${pageContext.request.contextPath}/Music/getMusicContent?musicID=${musicList.musicID}" target="_blank">
                         <div class="indexCon_msg_detail_tittle">
-                            <span><li>${musicList.singer}</li></span>
+                            
                             <p>${musicList.musicName}</p>
                            
                         </div>
