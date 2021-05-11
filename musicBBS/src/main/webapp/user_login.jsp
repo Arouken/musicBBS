@@ -259,7 +259,31 @@
 			
 		
 		    //2.点击登录
-			$("#login").click(function(){	
+			$("#login").click(function(){
+				
+				
+				var userID=$("#userID").val();//账号
+			    if($.trim(userID).length==0){
+					$("#userID_mess").html("账号不能为空！").css("color","red");
+					return false;
+				}
+				
+			    var pw=$("#password").val();
+			    $("#password_mess").html("");
+			    if($.trim(pw).length==0)
+			    {
+		           $("#password_mess").html("密码不能为空").css("color","red");	
+		           return false;
+		        }
+				
+			    var imgcode=$("#imgCode").val();
+		        if($.trim(imgcode).length==0){
+		        	$("#imgCode_mess").html("验证码不能为空").css("color","red");
+		        	return false;
+		        	}
+		    
+				
+				
 				var code=$("#imgCode").val();	
 				//验证码是否正确：ajax		
 				$.ajax({

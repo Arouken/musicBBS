@@ -23,6 +23,9 @@ public class LikeMainPostController {
 	private LikeMainPostService likePostService;
 	@Autowired
 	private MainPostService mainPostService;
+	
+	//@ResponseBody注解就能返回JSON的数据了
+	
 	//点赞
 	@RequestMapping("/likePost")
 	public void likePost(HttpSession session,HttpServletResponse response,
@@ -51,5 +54,25 @@ public class LikeMainPostController {
 		}	
 				
 	}
+	
+	//查询是否点过赞初始化数据
+	@RequestMapping("/likeInt")
+	public void likeInt(HttpSession session,int mainPostID,
+			HttpServletResponse response) throws IOException {		
+		LikeMainPost likeMainPost = new LikeMainPost();
+		//获取发布对象id
+		User user = (User) session.getAttribute("userSession");
+		String userID = user.getUserID();
+		//获取登陆对象ID
+		likeMainPost.setUserID(userID);		
+		//获取点赞帖子ID
+		likeMainPost.setMainPostID(mainPostID);
+		if(likePostService.selectLike(likeMainPost)==null) {			
+			response.getWriter().write("ok");
+		}else{
+			response.getWriter().write("no");
+		}			
+	}
+	
 
 }

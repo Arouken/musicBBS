@@ -59,7 +59,7 @@ public class SecondaryPostController {
 		secondaryPost.setReplyUserID(replyUserID);
 		//获取发布时间
 		Date createDate = new Date();
-		Timestamp timestamp = new Timestamp(createDate.getTime()); //2013-01-14 22:45:36.484 
+		Timestamp timestamp = new Timestamp(createDate.getTime()); 
 		secondaryPost.setSecondaryPostTime(timestamp);
 		//执行回帖方法
 		secondaryPostService.addSecondaryPost(secondaryPost);
@@ -89,7 +89,7 @@ public class SecondaryPostController {
 		secondaryPost.setMainPostID(mainPostID);
 		//获取发布时间
 		Date createDate = new Date();
-		Timestamp timestamp = new Timestamp(createDate.getTime()); //2013-01-14 22:45:36.484 
+		Timestamp timestamp = new Timestamp(createDate.getTime());
 		secondaryPost.setSecondaryPostTime(timestamp);
 		//执行回帖方法
 		secondaryPostService.addSecondaryPost(secondaryPost);

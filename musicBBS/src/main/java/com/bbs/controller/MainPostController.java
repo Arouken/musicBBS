@@ -77,7 +77,7 @@ public class MainPostController {
 		mainpost.setUserID(userID);		
 		//获取发布时间
 		Date createDate = new Date();
-		Timestamp timestamp = new Timestamp(createDate.getTime()); //2013-01-14 22:45:36.484 
+		Timestamp timestamp = new Timestamp(createDate.getTime()); 
 		mainpost.setMainPostTime(timestamp);
 		//获取帖子图片
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;

@@ -89,7 +89,7 @@
                     </div>
                     <div class="tzCollect_right">
                     		<li>
-                            <input type="image" src="${pageContext.request.contextPath}/image/comment.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
+                            <input type="image" src="${pageContext.request.contextPath}/image/Report.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
                             </li>
                     </div>                                                                              
                 </div>
@@ -234,53 +234,75 @@
 <script src="${pageContext.request.contextPath}/bbs_front/js/tiezi.js"></script>
 <script>
 
+//点赞方法
 $("#mylikepost").click(function(){
 	var like = $(this);
 	var mainPostID = like.attr("mainPostID");
-	//var mainPostUserID = like.attr("mainPostUserID");
 	$.ajax({
 		url:"${pageContext.request.contextPath}/LikeMainPost/likePost",
 		type:"post",
 		dataType:"text",
 		async:false,
 		data:"mainPostID="+mainPostID,
-		//data:{mainPostID:mainPostID,mainPostUserID:mainPostUserID},
 		success:function(obj){
-			if(obj=="ok"){									
-				//this.src="${pageContext.request.contextPath}/image/agreeRed.png";
+			if(obj=="ok"){													
 				$("#mylikepost").attr("src", "${pageContext.request.contextPath}/image/likeRed.png");
-			}else{					
-				//this.src="${pageContext.request.contextPath}/image/agree.png";
+			}else{									
 				$("#mylikepost").attr("src", "${pageContext.request.contextPath}/image/likeBlack.png");
 			}
 		}			
 	})	
-	//return false;
 })
 
 
+
+
+//初始化查询是否点赞
+$("#mylikepost").load( function () {
+	
+	var like = $(this);
+	var mainPostID = like.attr("mainPostID");
+	
+	$.ajax({
+		url:"${pageContext.request.contextPath}/LikeMainPost/likeInt",
+		type:"post",
+		dataType:"text",
+		//async:True,
+		data:"mainPostID="+mainPostID,
+		success:function(obj){
+			if(obj=="ok"){									
+				$("#mylikepost").attr("src", "${pageContext.request.contextPath}/image/likeBlack.png");
+			}else{					
+				$("#mylikepost").attr("src", "${pageContext.request.contextPath}/image/likeRed.png");
+			}
+		}			
+	})	
+	
+	
+	
+})
+
+
+
+
+//收藏方法
 $("#collectpost").click(function(){
 	var collect = $(this);
 	var mainPostID = collect.attr("mainPostID");
-	//var mainPostUserID = like.attr("mainPostUserID");
 	$.ajax({
 		url:"${pageContext.request.contextPath}/Collect/collectPost",
 		type:"post",
 		dataType:"text",
 		async:false,
-		data:"mainPostID="+mainPostID,
-		//data:{mainPostID:mainPostID,mainPostUserID:mainPostUserID},
+		data:"mainPostID="+mainPostID,		
 		success:function(obj){
-			if(obj=="ok"){									
-				//this.src="${pageContext.request.contextPath}/image/agreeRed.png";
+			if(obj=="ok"){													
 				$("#collectpost").attr("src", "${pageContext.request.contextPath}/image/collect_red.png");
-			}else{					
-				//this.src="${pageContext.request.contextPath}/image/agree.png";
+			}else{									
 				$("#collectpost").attr("src", "${pageContext.request.contextPath}/image/collect_black.png");
 			}
 		}			
 	})	
-	//return false;
 })
 
 </script>

@@ -91,11 +91,7 @@
                         <ul>                                                  
                             <li><p>创建时间： <fmt:formatDate type="date" value="${categoryList.categoryCreatDay}"/></p></li>
                              <p>${categoryList.categoryTxt}</p>
-                            <li style="float:right;">
-                            <input type="image" src="${pageContext.request.contextPath}/image/likeBlack.png"
-	                        id="likepost" mainPostID=${mainpost.mainPostID} 
-	                        name="img"  style="width:15px;height:15px" />  <!--图片按钮-->	  
-                            </li>
+                         
                             <li style="float:right;">
                             <input type="image" src="${pageContext.request.contextPath}/image/collect.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
                             ${mainPostList.mainPostLikeCount}</li>
