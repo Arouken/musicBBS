@@ -77,6 +77,19 @@ public class MainPostServiceImpl implements MainPostService {
 	public void deleteCollectCount(int mainPostID) {
 		// TODO Auto-generated method stub
 		mainPostDao.deleteCollectCount(mainPostID);
+	}
+
+	//查询专区帖子
+	@Override
+	public PageInfo<MainPost> getCategoryPostList(Integer page, Integer size, String categoryName) {
+		// TODO Auto-generated method stub
+		//1）静态分页
+	    PageHelper.startPage(page,size);
+	    //2）集合查询
+	    List<MainPost> mainPostList = mainPostDao.getCategoryPostList(categoryName);
+	    //3）返回PageInfo:包含数据结果集+分页信息
+	    return new PageInfo<MainPost>(mainPostList);
+		
 	} 
 	
 	

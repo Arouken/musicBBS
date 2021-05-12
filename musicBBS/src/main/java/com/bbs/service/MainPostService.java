@@ -24,5 +24,6 @@ public interface MainPostService {
 	public void addCollectCount(int mainPostID);
 	//收藏减一
 	public void deleteCollectCount(int mainPostID);
-
+	//查询专区帖子
+	public PageInfo<MainPost> getCategoryPostList(Integer page, Integer size,String categoryName);
 }

@@ -3,6 +3,7 @@ package com.bbs.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.bbs.pojo.Category;
 import com.bbs.pojo.MainPost;
 
 public interface MainPostDao {
@@ -21,5 +22,6 @@ public interface MainPostDao {
 	public void addCollectCount(int mainPostID);
 	//收藏减一
 	public void deleteCollectCount(int mainPostID);
-	
+	//查询专区帖子
+	public List<MainPost> getCategoryPostList(String categoryName);
 }

@@ -61,13 +61,27 @@
 </header>
 <div class="indexMain">
     <div class="indexMain_left">
-        <div class="indexMain_left_btn" style="display:block;height:160px;">
-            <ul >
-                <li><a href="javascript:">本区最新</a></li>
-                <li><a href="javascript:">本区最热</a></li>
-              
-                              
-            </ul>
+        <div class="indexMain_left_btn" style="display:block;height:180px;">
+            <div class="tzCon_head" style="padding-top: 40px;padding-left: 60px;">
+                <div class="tzCon_head_left" style="height:80px;width:80px;">
+<%--                 <c:if test="${mainpost.user.photo!=null}"> --%>
+<%--                 <a href=""><img src="/userPhoto/${mainpost.user.photo}"/></a></c:if> --%>
+<%--                 <c:if test="${mainpost.user.photo==null}"> </c:if>--%>
+                <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png" style="height:80px;width:80px;"/></a>
+                </div>
+                <div class="tzCon_head_right">                 
+                    	<h1>${categoryNameSession}区</h1>
+	                    <ul>
+	                        <li>fffff</li>
+	                        <li>ceshi</li>
+	                        <li>ceshi</li>
+	                        <li>ceshi</li>
+	                        <li>cesdi</li>
+	                    </ul>                          
+                </div>
+            
+                <div class="clear" style="padding-top: 4px;padding-left:15%;">简介</div>
+            </div>
           
         </div>
         <div class="indexMain_left_con">
@@ -87,6 +101,7 @@
                         <div class="indexCon_msg_detail_tittle">
                             <span><li>${mainPostList.user.userName}</li></span>
                             <p>${mainPostList.mainPostTitle}</p>
+                           
                    
                         </div>
                     </a>
@@ -131,6 +146,7 @@
                         <div class="indexCon_msg_detail_tittle">
                             <span><li>${mainPostList.user.userName}</li></span>
                             <p>${mainPostList.mainPostTitle}</p>
+                         
                         </div>
                     </a>
                     <div class="indexCon_msg_detail_other">
@@ -170,27 +186,43 @@
 					<option <c:if test="${pageInfo.pageSize==20}">selected="selected"</c:if>>20</option>
 					</select>					
 				</a>
-           		<a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser?page=1&size=${pageInfo.pageSize}" class="on">首页</a> 
-                <a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser?page=${pageInfo.pageNum-1}&size=${pageInfo.pageSize}">前页</a>               
-                <a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}">后页</a>
-                <a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser?page=${pageInfo.pages}&size=${pageInfo.pageSize}" class="on">尾页</a>             			   			
+           		<a href="${pageContext.request.contextPath }/MainPost/getCategoryPostList?page=1&size=${pageInfo.pageSize}&categoryName=${categoryNameSession}" class="on">首页</a> 
+                <a href="${pageContext.request.contextPath }/MainPost/getCategoryPostList?page=${pageInfo.pageNum-1}&size=${pageInfo.pageSize}&categoryName=${categoryNameSession}">前页</a>               
+                <a href="${pageContext.request.contextPath }/MainPost/getCategoryPostList?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}&categoryName=${categoryNameSession}">后页</a>
+                <a href="${pageContext.request.contextPath }/MainPost/getCategoryPostList?page=${pageInfo.pages}&size=${pageInfo.pageSize}&categoryName=${categoryNameSession}" class="on">尾页</a>             			   			
             </div>
         </div>
     </div>
     <div class="indexMain_right">
         <div class="indexMain_rightCon">
             <a href="${pageContext.request.contextPath }/bbs_front/newMainPost.jsp" class="newMsg">发新帖</a>
-            <div class="pwfb">
-                <div class="pwfbHead">音乐播放器</div>
-                <div class="pwfbCon">
-	                <audio controls="controls">
-					  <source src="/music/test.mp3" type="audio/ogg">
-					  <source src="/music/test.mp3" type="audio/mpeg">
-					  <embed height="100" width="100" src="/userPhoto/test.mp3" />
-					</audio>
+             <div class="myMsg">
+            <div class="myMsg_con">
+                <div class="myMsg_conPic">
+                <c:if test="${mainpost.user.photo!=null}">
+                <a href=""><img src="/userPhoto/${mainpost.user.photo}"/></a></c:if>
+                <c:if test="${mainpost.user.photo==null}">
+                <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a></c:if>
                 </div>
-                <div class="pwfbFooter"></div>
+                <p>${mainpost.user.userName}</p>
             </div>
+            <div  class="myMsg_footer">
+                <ul>
+                    <li><a href="">
+                        <p>主题数</p>
+                        <p>23</p>
+                    </a></li>
+                    <li><a href="">
+                        <p>精华数</p>
+                        <p>23</p>
+                    </a></li>
+                    <li><a href="">
+                        <p>注册排名</p>
+                        <p>23</p>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
             <div class="indexSearch">
                 <input type="text" placeholder="请输入关键词"/>
                 <input type="submit" value="搜索"/>
@@ -299,7 +331,7 @@
 		 * 提交查询
          * option.value：获取select的值
          */
-		location.href='${pageContext.request.contextPath }/MainPost/getMainPostListUser?size='+option.value;
+		location.href='${pageContext.request.contextPath }/MainPost/getCategoryPostList?categoryName=${categoryNameSession}&size='+option.value;
     };
 
 

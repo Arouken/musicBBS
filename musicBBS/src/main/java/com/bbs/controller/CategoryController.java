@@ -72,6 +72,7 @@ public class CategoryController {
 		return "/bbs_front/user_newCategory";
 	}
 	
+	//
 	
 	
 	//ÐÞ¸Ä·ÖÇø

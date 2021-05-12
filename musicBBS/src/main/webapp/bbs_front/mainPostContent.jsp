@@ -18,7 +18,7 @@
         <ul class="headNav">
             <li><a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" id="indexBBS">首页</a></li>
             <li><a href="${pageContext.request.contextPath }/Music/getMusicList">音乐欣赏</a></li>
-            <li><a href="">心情分享</a></li>
+            <li><a href="">贴子专区</a></li>
             <li><a href="">站内公告</a></li>
             <li><a href="">我的关注</a></li>
             <li><a href="">我的收藏</a></li>
@@ -113,7 +113,7 @@
                 <div class="pendDetail">
                     <div class="pendDetail_head">                                                                  	
                         <p>${secondaryPostList.user.userName} <span>发布于：<fmt:formatDate type="both" value="${secondaryPostList.secondaryPostTime}"/></span></p>
-                        <i>2楼</i>
+                        <i></i>
                     </div>
                     <div class="pendDetail_con">
                         <p>${secondaryPostList.secondaryPostContent}</p>
@@ -126,10 +126,10 @@
                         </ul>
                     </div>
                     <div class="pendDetail_action">
-                    <form action="${pageContext.request.contextPath}/SecondaryPost/writeToSecondaryPost?replyUserID=${secondaryPostList.user.userID}" 
-            			  method="post" autocomplete="off">
-                        <input type="text" name="secondaryPostContent" value="@${secondaryPostList.user.userName}      "/>
-                        <button type="submit" style="color:red;">评论</button>                      
+                    <form action="${pageContext.request.contextPath}/SecondaryPost/writeToSecondaryPost?replyUserID=${secondaryPostList.user.userID}&replyUserName=${secondaryPostList.user.userName}" 
+            			  method="post" id="writeReSecondaryPost" autocomplete="off">
+                        <input type="text" id="secondaryRePostContent" name="secondaryPostContent" placeholder="回复@用户：${secondaryPostList.user.userName}"/>
+                        <button type="submit" id="addRePost" style="color:red;">评论</button>                      
                     </form>
                     <button >取消</button>
                     </div>
@@ -150,10 +150,10 @@
                 <div class="newPending_head_tittle">评论</div>
             </div>
             <form action="${pageContext.request.contextPath}/SecondaryPost/writeSecondaryPost" 
-            method="post" autocomplete="off">
+            method="post" id="writeSecondaryPost" autocomplete="off">
             <div class="writePending_con">
                 <input type="text" placeholder="写下你的评论..." name="secondaryPostContent" id="secondaryPostContent"/>
-                <input type="submit" value="评论"/>
+                <input type="submit" id="addPost" value="评论"/>
             </div>
             </form>
         </div>
@@ -304,6 +304,68 @@ $("#collectpost").click(function(){
 		}			
 	})	
 })
+
+//判断是否登录，非空验证
+	$("#addPost").click(function(){
+		
+		var secondaryPostContent=$("#secondaryPostContent").val();
+		if($.trim(secondaryPostContent).length==0){//去掉字符串的前后空格之后的长度是否为0
+			//提示不能为空
+			alert("回复内容不能为空！");
+			//跳出方法
+			return false;
+		}
+	
+		
+		$.ajax({
+			url:"${pageContext.request.contextPath }/user/checkIsLogin",  //请求的目标地址路径：目标servlet的映射路径以及对应的增删改查的方法
+			type:"post",  //请求后台的方式：get/post
+			success:function(obj){//根据服务器响应的参数进行处理：成功的回调函数
+				//obj是ok或者是no
+				console.log(obj);
+				if(obj=="ok"){
+					$("#writeSecondaryPost").submit();	
+				}else{
+					//没有登录
+					alert("请登录后再进行操作！");
+					return false;
+				}
+			}			
+				
+		})
+		return false;
+	})
+	
+//判断是否登录，非空验证
+	$("#addRePost").click(function(){
+		
+		var secondaryRePostContent=$("#secondaryRePostContent").val();
+		if($.trim(secondaryRePostContent).length==0){//去掉字符串的前后空格之后的长度是否为0
+			//提示不能为空
+			alert("回复内容不能为空！");
+			//跳出方法
+			return false;
+		}
+	
+		
+		$.ajax({
+			url:"${pageContext.request.contextPath }/user/checkIsLogin",  //请求的目标地址路径：目标servlet的映射路径以及对应的增删改查的方法
+			type:"post",  //请求后台的方式：get/post
+			success:function(obj){//根据服务器响应的参数进行处理：成功的回调函数
+				//obj是ok或者是no
+				console.log(obj);
+				if(obj=="ok"){
+					$("#writeReSecondaryPost").submit();	
+				}else{
+					//没有登录
+					alert("请登录后再进行操作！");
+					return false;
+				}
+			}			
+				
+		})
+		return false;
+	})
 
 </script>
 </html>

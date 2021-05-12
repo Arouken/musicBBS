@@ -1,0 +1,18 @@
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.dao.ReportMainDao">
+
+	<insert id="addReportMain" parameterType="com.bbs.pojo.ReportMain">
+		insert into report_mp(userID,mainPostID) values(#{userID},#{mainPostID})
+	</insert>
+	
+<!-- 	<delete id="disCollectPost" parameterType="com.bbs.pojo.Collect"> -->
+<!-- 		delete from collect where userID=#{userID} and mainPostID=#{mainPostID} -->
+<!-- 	</delete> -->
+	
+<!-- 	<select id="selectCollectPost" parameterType="com.bbs.pojo.Collect" resultType="com.bbs.pojo.Collect"> -->
+<!-- 		select * from collect where userID=#{userID} and mainPostID=#{mainPostID} -->
+<!-- 	</select> -->
+	
+</mapper>

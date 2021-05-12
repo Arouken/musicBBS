@@ -78,7 +78,7 @@
                 <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a></c:if>
                 </div>
                 <div class="indexCon_msg_detail">
-                    <a href="${pageContext.request.contextPath}/bbs_front/user_category_info.jsp">
+                    <a href="${pageContext.request.contextPath}/MainPost/getCategoryPostList?categoryName=${categoryList.categoryName}">
                         <div class="indexCon_msg_detail_tittle">
                             <span><li>${categoryList.categoryName}</li></span>
                           

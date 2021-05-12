@@ -14,6 +14,7 @@ public class MainPost {
 	private int mainPostLikeCount;
 	private int mainPostIsLOcked;
 	private String mainPostImg;
+	private String categoryName;
 	
 	public String getMainPostImg() {
 		return mainPostImg;
@@ -81,6 +82,12 @@ public class MainPost {
 	}
 	public void setMainPostCollectCount(int mainPostCollectCount) {
 		this.mainPostCollectCount = mainPostCollectCount;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 	
 

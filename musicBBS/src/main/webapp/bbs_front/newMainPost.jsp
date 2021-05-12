@@ -50,7 +50,7 @@
     <div class="writeCon_head">
         <p>发新帖</p>
     </div>
-    <form action="${pageContext.request.contextPath}/MainPost/writeMainPost" method="post" id="" enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/MainPost/writeMainPost" method="post" id="writeMainPost" enctype="multipart/form-data">
     <div class="writeCon_cen">
         <div class="writePic" style="width:46%">
             <input  type="file" accept=".jpeg, .jpg, .png" 
@@ -61,7 +61,7 @@
 			<img id="imgLook" style="width:100%;height:100%;" src="" alt="" />
         </div>
         <div class="writeMsg">
-            <input type="text" name="mainPostTitle" placeholder="请输入标题"/>
+            <input type="text" name="mainPostTitle" id="mainPostTitle" placeholder="请输入标题"/>
         </div>
          <div style="width:28%;height:160px;">
            
@@ -69,10 +69,10 @@
 <!--         style="height:300px;" -->
         <div class="writeDown" id="writePost" >
         <textarea style="OVERFLOW:hidden;width:100%;height:100%;font-size:20px;border-style:none;" 
-        id="write" name="mainPostContent" autocomplete="off"></textarea>
+        id="mainPostContent" name="mainPostContent" autocomplete="off"></textarea>
         
         </div>
-        <input type="submit" class="reform" value="发布"/>
+        <input type="submit" class="reform" id="addPost" value="发布"/>
     </div>
     </form>
    </div>
@@ -104,16 +104,7 @@
         $('[name="nice-select"] ul').hide();
     });
     
-  //判断两次密码是否一致
-	function picIsNull(){
-		var mainPostImg = document.getElementById("mainPostImg").value;	    		
-		if(mainPostImg == null) {			
-			 document.getElementById("mainPostImg").disabled = false;			
-		 }else {			 
-    		 document.getElementById("mainPostImg").disabled = true; 
-		 }			
-	}
-    
+
   //预览上传图片
 	$(document).ready(function() {
 	    //alert("nihao1");
@@ -131,10 +122,52 @@
 	    r.onload=function (){
 	        //alert("你好123！");
 	        $("#imgLook").attr("src",this.result).show();
-	        //alert("你好321！");
 	    };
 	    
 	}
+	
+	//判断是否登录，非空验证
+	$("#addPost").click(function(){
+		
+		var mainPostTitle=$("#mainPostTitle").val();
+		if($.trim(mainPostTitle).length==0){//去掉字符串的前后空格之后的长度是否为0
+			//提示不能为空
+			alert("标题不能为空！");
+			//跳出方法
+			return false;
+		}
+		
+		var mainPostContent=$("#mainPostContent").val();
+		if($.trim(mainPostContent).length==0){//去掉字符串的前后空格之后的长度是否为0
+			//提示不能为空
+			alert("内容不能为空！");
+			//跳出方法
+			return false;
+		}
+		
+		
+		
+	
+		$.ajax({
+			url:"${pageContext.request.contextPath }/user/checkIsLogin",  //请求的目标地址路径：目标servlet的映射路径以及对应的增删改查的方法
+			type:"post",  //请求后台的方式：get/post
+			success:function(obj){//根据服务器响应的参数进行处理：成功的回调函数
+				//obj是ok或者是no
+				console.log(obj);
+				if(obj=="ok"){
+					$("#writeMainPost").submit();	
+				}else{
+					//没有登录
+					alert("请登录后再进行操作！");
+					return false;
+				}
+			}			
+				
+		})
+		return false;
+	})
+	
+	
     
 </script>
 

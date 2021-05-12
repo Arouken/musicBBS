@@ -54,6 +54,7 @@ public class SecondaryPostController {
 		MainPost mainpost= (MainPost) session.getAttribute("mainpost");
 		int mainPostID = mainpost.getMainPostID();	
 		secondaryPost.setMainPostID(mainPostID);
+	
 		//回复对象，主贴用户ID
 		String replyUserID = mainpost.getUserID();
 		secondaryPost.setReplyUserID(replyUserID);
@@ -74,9 +75,10 @@ public class SecondaryPostController {
 	public String writeToSecondaryPost(
 			HttpSession session,RedirectAttributes attributes,
 			@RequestParam("secondaryPostContent") String secondaryPostContent,
-			String replyUserID){
+			String replyUserID,String replyUserName){
 		SecondaryPost secondaryPost = new SecondaryPost();
-		secondaryPost.setSecondaryPostContent(secondaryPostContent);
+		//获取回复内容
+		secondaryPost.setSecondaryPostContent("@"+replyUserName+":"+secondaryPostContent);
 		//获取发布对象id
 		User user = (User) session.getAttribute("userSession");
 		String userID = user.getUserID();

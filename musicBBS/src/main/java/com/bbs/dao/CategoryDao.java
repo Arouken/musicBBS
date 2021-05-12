@@ -11,4 +11,6 @@ public interface CategoryDao {
 
 	//Ìí¼Ó·ÖÇø
 	public void addCategory(Category category);
+	
+
 }

@@ -21,7 +21,7 @@
         <ul class="headNav">
             <li><a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser" id="indexBBS">首页</a></li>
             <li><a href="${pageContext.request.contextPath }/Music/getMusicList">音乐欣赏</a></li>
-            <li><a href="${pageContext.request.contextPath }/Category/getCategoryList">帖子热区</a></li>
+            <li><a href="${pageContext.request.contextPath }/Category/getCategoryList">帖子专区</a></li>
             <li><a href="">站内公告</a></li>
             <li><a href="">我的关注</a></li>
             <li><a href="">我的收藏</a></li>
@@ -83,13 +83,16 @@
                 <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a></c:if>
                 </div>
                 <div class="indexCon_msg_detail">
-                    <a href="${pageContext.request.contextPath}/MainPost/getMainPostContent?mainPostID=${mainPostList.mainPostID}">
-                        <div class="indexCon_msg_detail_tittle">
-                            <span><li>${mainPostList.user.userName}</li></span>
-                            <p>${mainPostList.mainPostTitle}</p>
                    
+                        <div class="indexCon_msg_detail_tittle">
+                            <a href="${pageContext.request.contextPath}/MainPost/getCategoryPostList?categoryName=${mainPostList.categoryName}">                  
+                           <span><li>${mainPostList.categoryName}区</li></span>
+                           </a>
+                            <a href="${pageContext.request.contextPath}/MainPost/getMainPostContent?mainPostID=${mainPostList.mainPostID}">
+                            	<p>${mainPostList.mainPostTitle}</p>
+                   			</a>
                         </div>
-                    </a>
+                    
                     <div class="havePic">
                         <a href=""><div class="havePic_head">
                         <img src="/userPhoto/${mainPostList.mainPostImg}" alt="" />
@@ -98,6 +101,7 @@
                     <div class="indexCon_msg_detail_other">
                         <ul>                                                  
                             <li><p>发帖时间： <fmt:formatDate type="both" value="${mainPostList.mainPostTime}"/></p></li>
+                            <li>用户： ${mainPostList.user.userName}</li>
                             <li style="float:right;">
                             <input type="image" src="${pageContext.request.contextPath}/image/likeBlack.png"
 	                        id="likepost" mainPostID=${mainpost.mainPostID} 
@@ -127,16 +131,19 @@
                 <a href=""><img src="${pageContext.request.contextPath}/image/defaultPhoto.png"/></a></c:if>
                 </div>
                 <div class="indexCon_msg_detail">
-                    <a href="${pageContext.request.contextPath}/MainPost/getMainPostContent?mainPostID=${mainPostList.mainPostID}">
                         <div class="indexCon_msg_detail_tittle">
-                            <span><li>${mainPostList.user.userName}</li></span>
-                            <p>${mainPostList.mainPostTitle}</p>
+                            <a href="${pageContext.request.contextPath}/MainPost/getCategoryPostList?categoryName=${mainPostList.categoryName}">                  
+                           <span><li>${mainPostList.categoryName}区</li></span>
+                           </a>
+                            <a href="${pageContext.request.contextPath}/MainPost/getMainPostContent?mainPostID=${mainPostList.mainPostID}">
+                            	<p>${mainPostList.mainPostTitle}</p>
+                   			</a>
                         </div>
-                    </a>
+                    
                     <div class="indexCon_msg_detail_other">
                        <ul>                        
                             <li><p>发帖时间： <fmt:formatDate type="both" value="${mainPostList.mainPostTime}" /></p></li>
-                            <li></li>
+                            <li>用户：${mainPostList.user.userName}</li>
                             <li style="float:right;">
                             <input type="image" src="${pageContext.request.contextPath}/image/likeBlack.png"  name="img"  style="width:15px;height:15px" />  <!--图片按钮-->
                             ${mainPostList.mainPostLikeCount}</li>
@@ -179,7 +186,7 @@
     </div>
     <div class="indexMain_right">
         <div class="indexMain_rightCon">
-            <a href="${pageContext.request.contextPath }/bbs_front/newMainPost.jsp" class="newMsg">发新帖</a>
+            <a href="${pageContext.request.contextPath }/bbs_front/newMainPost.jsp" class="newMsg">个人中心</a>
             <div class="pwfb">
                 <div class="pwfbHead">音乐播放器</div>
                 <div class="pwfbCon">

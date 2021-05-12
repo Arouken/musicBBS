@@ -71,6 +71,9 @@ public class MainPostController {
 		//获取帖子名字，内容
 		mainpost.setMainPostTitle(mainPostTitle);
 		mainpost.setMainPostContent(mainPostContent);
+		//获取帖子专区名
+		String categoryName = (String) session.getAttribute("categoryNameSession");
+		mainpost.setCategoryName(categoryName);
 		//获取发布对象id
 		User user = (User) session.getAttribute("userSession");
 		String userID = user.getUserID();
@@ -107,6 +110,21 @@ public class MainPostController {
 	    return "redirect:/SecondaryPost/getSecondaryPostList";
 	}
 	
+	
+
+	//专区帖子列表
+	@RequestMapping("/getCategoryPostList")
+	public String getCategoryPostList(Model model,HttpSession session,
+			@RequestParam(value = "page",required = false,defaultValue = "1")int page,
+			@RequestParam(value = "size",required = false,defaultValue = "10")int size,
+			String categoryName) {
+		session.setAttribute("categoryNameSession", categoryName);
+		//集合查询
+	    PageInfo<MainPost> pageInfo = mainPostService.getCategoryPostList(page, size, categoryName);
+	    model.addAttribute("pageInfo",pageInfo);
+	    return "/bbs_front/user_category_info";
+										
+	}
 
 	
 	
