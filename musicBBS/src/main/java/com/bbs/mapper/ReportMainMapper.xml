@@ -4,8 +4,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.bbs.dao.ReportMainDao">
 
 	<insert id="addReportMain" parameterType="com.bbs.pojo.ReportMain">
-		insert into report_mp(userID,mainPostID) values(#{userID},#{mainPostID})
+		insert into report_mp(userID,mainPostID,reportReason,reportMainTime) 
+		values(#{userID},#{mainPostID},#{reportReason},#{reportMainTime})
 	</insert>
+	
+		
+	<select id="getReportMainList">
+		SELECT * FROM main_post 
+		WHERE mainPostID IN(
+			SELECT mainPostID FROM report_mp 
+			WHERE reportIsDeal = 0) 
+	</select>
+
+
 	
 <!-- 	<delete id="disCollectPost" parameterType="com.bbs.pojo.Collect"> -->
 <!-- 		delete from collect where userID=#{userID} and mainPostID=#{mainPostID} -->

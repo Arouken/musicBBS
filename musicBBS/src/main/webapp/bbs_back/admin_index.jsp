@@ -14,9 +14,9 @@
     <div class="layui-logo">音乐论坛</div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
-      <li class="layui-nav-item"><a href="">用户管理</a></li>
-      <li class="layui-nav-item"><a href="">帖子管理</a></li>
-      <li class="layui-nav-item"><a href="">音乐管理</a></li>
+      <li class="layui-nav-item"><a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser">前台首页</a></li>
+      <li class="layui-nav-item"><a href="">个人信息</a></li>
+      <li class="layui-nav-item"><a href="">网站公告</a></li>
       <li class="layui-nav-item">
         <a href="javascript:;">其它系统</a>
         <dl class="layui-nav-child">
@@ -30,10 +30,10 @@
       <li class="layui-nav-item">
         <a href="javascript:;">
           <img src="/userPhoto/${userSession.photo}" class="layui-nav-img">${userSession.userName} </a>
-        <dl class="layui-nav-child">
-          <dd><a href="">基本资料</a></dd>
-          <dd><a href="">安全设置</a></dd>
-        </dl>
+<!--         <dl class="layui-nav-child"> -->
+<!--           <dd><a href="">基本资料</a></dd> -->
+<!--           <dd><a href="">安全设置</a></dd> -->
+<!--         </dl> -->
       </li>
       <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/user/quite">退出</a></li>
     </ul>
@@ -65,12 +65,12 @@
           <a href="javascript:;">音乐管理</a>
           <dl class="layui-nav-child">
             <dd><a href="${pageContext.request.contextPath}/bbs_back/mainPost_list.jsp">音乐列表</a></dd>
+            <dd><a href="${pageContext.request.contextPath}/bbs_back/music_info.jsp">添加音乐</a></dd>
             <dd><a href="${pageContext.request.contextPath}/bbs_back/music_info.jsp">音乐信息</a></dd>
 <!--             <dd><a href="">超链接</a></dd> -->
           </dl>
         </li>
         <li class="layui-nav-item"><a href="">公告信息</a></li>
-        <li class="layui-nav-item"><a href="">发布商品</a></li>
       </ul>
     </div>
   </div>

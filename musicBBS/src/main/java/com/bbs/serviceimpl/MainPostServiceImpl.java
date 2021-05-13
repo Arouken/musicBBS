@@ -90,6 +90,31 @@ public class MainPostServiceImpl implements MainPostService {
 	    //3）返回PageInfo:包含数据结果集+分页信息
 	    return new PageInfo<MainPost>(mainPostList);
 		
+	}
+
+	//举报量+1
+	@Override
+	public void addReportCount(int mainPostID) {
+		// TODO Auto-generated method stub
+		mainPostDao.addReportCount(mainPostID);
+	}
+	//举报量-1
+	@Override
+	public void deleteReportCount(int mainPostID) {
+		// TODO Auto-generated method stub
+		mainPostDao.deleteReportCount(mainPostID);
+	}
+	//回复量
+	@Override
+	public void addReplyCount(int mainPostID) {
+		// TODO Auto-generated method stub
+		mainPostDao.addReplyCount(mainPostID);
+	}
+	//回复量
+	@Override
+	public void deleteReplyCount(int mainPostID) {
+		// TODO Auto-generated method stub
+		mainPostDao.deleteReplyCount(mainPostID);
 	} 
 	
 	

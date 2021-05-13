@@ -88,9 +88,11 @@
                             </li>                       
                     </div>
                     <div class="tzCollect_right">
+                    	  <a href="${pageContext.request.contextPath}/bbs_front/user_report_main.jsp">
                     		<li>
-                            <input type="image" src="${pageContext.request.contextPath}/image/Report.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
+                            	<input type="image" src="${pageContext.request.contextPath}/image/Report.png"  name="img" style="width:15px;height:15px"/>  <!--图片按钮-->
                             </li>
+                         </a>
                     </div>                                                                              
                 </div>
             </div>

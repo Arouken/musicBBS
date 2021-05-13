@@ -85,7 +85,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update main_post set mainPostCollectCount=mainPostCollectCount-1 where mainPostID = #{mainPostID}
 	</update>
 	
+	<!-- 举报加一 -->
+	<update id="addReportCount" parameterType="com.bbs.pojo.MainPost">
+		update main_post set mainReportCount=mainReportCount+1 where mainPostID = #{mainPostID}
+	</update>
 	
+	<!-- 举报减一 -->
+	<update id="deleteReportCount" parameterType="com.bbs.pojo.MainPost">
+		update main_post set mainReportCount=mainReportCount-1 where mainPostID = #{mainPostID}
+	</update>
+	
+	<!-- 回复加一 -->
+	<update id="addReplyCount" parameterType="com.bbs.pojo.MainPost">
+		update main_post set mainPostReplyCount=mainPostReplyCount+1 where mainPostID = #{mainPostID}
+	</update>
+	
+	<!-- 回复减一 -->
+	<update id="deleteReplyCount" parameterType="com.bbs.pojo.MainPost">
+		update main_post set mainPostReplyCount=mainPostReplyCount-1 where mainPostID = #{mainPostID}
+	</update>
 	
 
 </mapper>

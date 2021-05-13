@@ -26,7 +26,8 @@ public class SecondaryPostController {
 	
 	@Autowired
 	private SecondaryPostService secondaryPostService;
-	
+	@Autowired
+	private MainPostService mainPostService;
 	
 	//根据主贴表ID查询回帖表
 	@RequestMapping("/getSecondaryPostList")	
@@ -66,6 +67,8 @@ public class SecondaryPostController {
 		secondaryPostService.addSecondaryPost(secondaryPost);
 		//把mainPostID值传给查询controller
 		attributes.addAttribute("mainPostID", mainPostID);
+		//回复+1
+		mainPostService.addReplyCount(mainPostID);
 		//执行查询回帖
 		return "redirect:/SecondaryPost/getSecondaryPostList";			
 	}
@@ -89,6 +92,8 @@ public class SecondaryPostController {
 		MainPost mainpost= (MainPost) session.getAttribute("mainpost");
 		int mainPostID = mainpost.getMainPostID();
 		secondaryPost.setMainPostID(mainPostID);
+		//回复+1
+		mainPostService.addReplyCount(mainPostID);
 		//获取发布时间
 		Date createDate = new Date();
 		Timestamp timestamp = new Timestamp(createDate.getTime());

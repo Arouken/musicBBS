@@ -54,7 +54,7 @@
             <!--未登入开始-->
             <!--<a href="" class="navLogin">退出</a>-->
             <!--未登入结束-->
-            <a href="${pageContext.request.contextPath }/bbs_front/newMainPost.jsp" class="navWrite">发帖</a>
+            <a href="" class="navWrite">发帖</a>
         </div>
         </c:if>
     </div>
@@ -186,7 +186,7 @@
     </div>
     <div class="indexMain_right">
         <div class="indexMain_rightCon">
-            <a href="${pageContext.request.contextPath }/bbs_front/newMainPost.jsp" class="newMsg">个人中心</a>
+            <a href="" class="newMsg">个人中心</a>
             <div class="pwfb">
                 <div class="pwfbHead">音乐播放器</div>
                 <div class="pwfbCon">
