@@ -56,7 +56,7 @@
           <a href="javascript:;">帖子管理</a>
           <dl class="layui-nav-child">
             <dd><a href="${pageContext.request.contextPath}/bbs_back/mainPost_list.jsp">主贴列表</a></dd>
-            <dd><a href="javascript:;">主贴举报</a></dd>
+            <dd><a href="${pageContext.request.contextPath}/bbs_back/admin_report_main.jsp"">主贴举报</a></dd>
             <dd><a href="javascript:;">回帖举报</a></dd>
 <!--             <dd><a href="">超链接</a></dd> -->
           </dl>

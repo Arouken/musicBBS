@@ -26,7 +26,8 @@ public interface MainPostService {
 	public void deleteCollectCount(int mainPostID);
 	//查询专区帖子
 	public PageInfo<MainPost> getCategoryPostList(Integer page, Integer size,String categoryName);
-	
+	//后台查询举报帖子列表，按举报量排序
+	public List<MainPost> getReportMainList(Integer page, Integer limit);		
 	
 	//举报加一
 	public void addReportCount(int mainPostID);

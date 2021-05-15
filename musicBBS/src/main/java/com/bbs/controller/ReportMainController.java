@@ -27,7 +27,7 @@ public class ReportMainController {
 	
 	//添加举报
 	@RequestMapping("/addReport")
-	public void addReport(HttpSession session,
+	public String addReport(HttpSession session,
 			@RequestParam("reportTxt")String reportReason) {
 		
 		ReportMain reportMain = new ReportMain();
@@ -49,9 +49,11 @@ public class ReportMainController {
 		mainPostService.addReportCount(mainPostID);
 		//执行添加方法
 		reportMainService.addReportMain(reportMain);
-		
+		return "/bbs_front/user_report_main";
 			
 	}
+	
+	//后台显示举报帖子表
 	
 	
 	

@@ -30,10 +30,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getUser"  resultType="com.bbs.pojo.User">
 		select * from user where userID = #{userID}
 	</select>
-	<!--是否已赞 -->
-<!-- 	<select id="getLikePost" parameterType="String" resultType="com.bbs.pojo.LikeMainPost"> -->
-<!-- 		select * from likemainpost where userID = #{myuserID} and mainPostID=#{mainPostID} -->
-<!-- 	</select> -->
+
+	<select id="getReportMainList" resultType="com.bbs.pojo.MainPost">
+		SELECT * FROM main_post 
+		WHERE mainPostID IN(
+			SELECT mainPostID FROM report_mp 
+			WHERE reportIsDeal = 0) 
+		order by mainReportCount desc
+	</select>
+	
 	
 	<!-- 发帖子 -->
 	<insert id="addMainPost" parameterType="com.bbs.pojo.MainPost">

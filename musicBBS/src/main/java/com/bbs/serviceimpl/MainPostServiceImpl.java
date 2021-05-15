@@ -25,6 +25,15 @@ public class MainPostServiceImpl implements MainPostService {
 		List<MainPost> mainPostList = mainPostDao.getMainPostList();//PageHelper.startPage()后面必须紧接查询数据的方法
 		return mainPostList;		
 	}
+	
+	//查询举报贴
+	@Override
+	public List<MainPost> getReportMainList(Integer page, Integer limit) {
+		// TODO Auto-generated method stub
+		PageHelper.startPage(page, limit);//page为申请查询的页码，limit为一页显示多少条数据
+		List<MainPost> mainPeportList = mainPostDao.getReportMainList();
+		return mainPeportList;
+	} 
 
     //前台展示帖子
 	@Override
@@ -96,6 +105,7 @@ public class MainPostServiceImpl implements MainPostService {
 	@Override
 	public void addReportCount(int mainPostID) {
 		// TODO Auto-generated method stub
+		System.out.println("举报+1");
 		mainPostDao.addReportCount(mainPostID);
 	}
 	//举报量-1
@@ -108,14 +118,18 @@ public class MainPostServiceImpl implements MainPostService {
 	@Override
 	public void addReplyCount(int mainPostID) {
 		// TODO Auto-generated method stub
+		System.out.println("回复+1");
 		mainPostDao.addReplyCount(mainPostID);
 	}
 	//回复量
 	@Override
 	public void deleteReplyCount(int mainPostID) {
 		// TODO Auto-generated method stub
+		System.out.println("回复");
 		mainPostDao.deleteReplyCount(mainPostID);
-	} 
+	}
+
+
 	
 	
 	

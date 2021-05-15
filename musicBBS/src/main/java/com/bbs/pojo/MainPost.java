@@ -15,7 +15,22 @@ public class MainPost {
 	private int mainPostIsLOcked;
 	private String mainPostImg;
 	private String categoryName;
+	private int mainPostReplyCount;
+	private int mainReportCount;
 	
+	
+	public int getMainPostReplyCount() {
+		return mainPostReplyCount;
+	}
+	public void setMainPostReplyCount(int mainPostReplyCount) {
+		this.mainPostReplyCount = mainPostReplyCount;
+	}
+	public int getMainReportCount() {
+		return mainReportCount;
+	}
+	public void setMainReportCount(int mainReportCount) {
+		this.mainReportCount = mainReportCount;
+	}
 	public String getMainPostImg() {
 		return mainPostImg;
 	}

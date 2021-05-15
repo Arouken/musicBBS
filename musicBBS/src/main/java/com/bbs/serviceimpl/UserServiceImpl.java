@@ -113,6 +113,29 @@ public class UserServiceImpl implements UserService {
 		return userDao.findUserByPhone(phone);
 		// TODO Auto-generated method stub
 		
+	}
+
+	//删除用户
+	@Override
+	public void deleteUser(String userID) {
+		// TODO Auto-generated method stub
+		userDao.deleteUser(userID);
+	}
+
+	//管理员修改用户
+	@Override
+	public void updateUserById(String oid, String userID, String userName, String password, String phoneNum, int gender,
+			int competence) {
+		// TODO Auto-generated method stub
+		userDao.updateUserById(oid,userID,userName,password,phoneNum,gender,competence);
+	}
+
+	//条件查询
+	@Override
+	public List<User> findUserBySelect(String userKey, String value, Integer page, Integer limit) {
+		PageHelper.startPage(page, limit);//page为申请查询的页码，limit为一页显示多少条数据
+		List<User> user = userDao.findUserBySelect(userKey,value);//PageHelper.startPage()后面必须紧接查询数据的方法
+		return user;	
 	}	
 
 }

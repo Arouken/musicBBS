@@ -4,7 +4,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>主贴列表</title>
+  <title>后台主贴举报</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -20,12 +20,12 @@
     <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
     <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
     <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
-    <button class="layui-btn layui-btn-sm layui-btn-danger  " lay-event="deleteAll">删除全选</button>
+    <button class="layui-btn layui-btn-sm layui-btn-danger  " lay-event="deleteAll">封禁全选</button>
   </div>
 </script>
  
 <script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-xs" lay-event="edit">锁定</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit">封禁</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
@@ -67,7 +67,7 @@ layui.use('table', function(){
   var table = layui.table;
   table.render({
     elem: '#mainPostList'
-    ,url:'/musicBBS/MainPost/getMainPostList'
+    ,url:'/musicBBS/MainPost/getMainReportList'
     ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
     ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
       title: '提示'
@@ -82,7 +82,7 @@ layui.use('table', function(){
       ,{field:'mainPostTitle', title:'帖子名', width:100}
       ,{field:'mainPostContent', title:'帖子内容', width:220,height:100}
       ,{field:'mainPostTime', title:'发帖时间', width:160,sort: true,templet:'<div>{{ Format(d.mainPostTime,"yyyy-MM-dd hh:mm:ss")}}</div>'}
-      ,{field:'mainPostLikeCount', title:'点赞数', width:120}
+      ,{field:'mainReportCount', title:'举报数', width:60}
      // ,{field:'mainPostBadCount', title:'点踩数', width:120}
       ,{field:'mainPostIsLOcked', title:'是否锁定', width:120,templet: function(d){if(d.gender == 1){return '是'}else{return '否'}}}
       ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150} 

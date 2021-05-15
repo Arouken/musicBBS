@@ -3,6 +3,8 @@ package com.bbs.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.bbs.pojo.User;
 
 
@@ -24,5 +26,15 @@ public interface UserDao {
     public void updateUserPassword(@Param("userID")String userID,@Param("password")String password);
 	//查询绑定的手机号是否存在
     public User findUserByPhone(String phone);
+    //删除用户
+	public void deleteUser(String userID);
+	//管理员修改用户
+	public void updateUserById(@Param("oid")String oid, @Param("userID")String userID, @Param("userName")String userName, 
+			@Param("password")String password, @Param("phoneNum")String phoneNum,
+			@Param("gender")int gender,@Param("competence")int competence);
+	//条件查询dom为key
+	public List<User> findUserBySelect(@Param("userKey")String userKey, 
+			@Param("userValue")String userValue);
+
 
 }

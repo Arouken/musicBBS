@@ -11,6 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findUserByPhone" parameterType="String"  resultType="com.bbs.pojo.User">
 		select * from user where phoneNum = #{phone}
 	</select>
+	
+<!-- 	条件查询 -->
+	<select id="findUserBySelect" parameterType="String"  resultType="com.bbs.pojo.User">
+		select * from user where ${userKey}  like CONCAT('%',#{userValue},'%')
+	</select>
 <!-- 	添加用户 -->
 	<insert id="addUser" parameterType="com.bbs.pojo.User">
 		insert into user(userID,password,createDate,userName) values(#{userID},#{password},#{createDate},#{userName})
@@ -38,6 +43,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 	修改用户密码 -->
 	<update  id="updateUserPassword" parameterType="String">
 	    update  user set password = #{password} where userID=#{userID}		
+	</update>
+<!-- 	删除用户 -->
+	<delete  id="deleteUser" parameterType="String">
+	    delete from user where userID=#{userID}		
+	</delete>
+<!-- 	管理员修改用户信息 -->
+	<update  id="updateUserById">
+	    update user set userID=#{userID},userName=#{userName}, password=#{password}, 
+	    phoneNum=#{phoneNum}, gender=#{gender}, competence=#{competence}
+        where userID = #{oid}		
 	</update>
 
 </mapper>

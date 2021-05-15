@@ -30,10 +30,6 @@ import com.bbs.service.UserService;
 import com.github.pagehelper.PageInfo;
 import com.bbs.utils.UploadTool;
 
-
-
-//支持上传的注解:servlet3.0版本提供的
-
 @Controller
 @RequestMapping("/user")
 public class UserController {

@@ -29,5 +29,12 @@ public interface UserService {
     public String sendPhoneCode(String phone);
     //检测该手机号是否绑定
 	public User checkPhoneIsExit(String phone);
+	//删除用户
+	public void deleteUser(String userID);
+	//管理员修改用户
+	public void updateUserById(String oid, String userID, String userName, String password, String phoneNum, int gender,
+			int competence);
+	//条件查询
+	public List<User> findUserBySelect(String userKey, String value, Integer page, Integer limit);
 
 }

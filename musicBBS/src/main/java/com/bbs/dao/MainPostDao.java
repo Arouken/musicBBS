@@ -10,6 +10,8 @@ public interface MainPostDao {
 
 	//后台查询主贴列表
 	public List<MainPost> getMainPostList();
+	//后台查询举报帖子列表，按举报量排序
+	public List<MainPost> getReportMainList();		
 	//发布主贴
 	public void addMainPost(MainPost mainpost);	
 	//查询单个主贴信息

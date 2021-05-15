@@ -115,6 +115,7 @@
 		$.ajax({
 			url:"${pageContext.request.contextPath }/user/checkIsLogin",  //请求的目标地址路径：目标servlet的映射路径以及对应的增删改查的方法
 			type:"post",  //请求后台的方式：get/post
+			async:false,
 			success:function(obj){//根据服务器响应的参数进行处理：成功的回调函数
 				//obj是ok或者是no
 				console.log(obj);

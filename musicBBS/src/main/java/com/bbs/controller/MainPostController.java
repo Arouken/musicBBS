@@ -50,6 +50,21 @@ public class MainPostController {
 		return map;
 	}	
 	
+	//后台查询举报帖子列表
+	@ResponseBody //自动返回json格式的数据
+	@RequestMapping("/getMainReportList")
+	public Map<String, Object> getMainReportList(@RequestParam("page")Integer page,@RequestParam("limit")Integer limit){
+		//page、limit参数都是layui的table组件默认自动传递的，我们只需接收即可
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<MainPost> list = mainPostService.getReportMainList(page, limit);//执行分页查询的方法
+		PageInfo<MainPost> mainPostPageInfo = new PageInfo<MainPost>(list);
+		map.put("code", 0);
+		map.put("msg", "操作成功");
+		map.put("count", mainPostPageInfo.getTotal());
+		map.put("data", mainPostPageInfo.getList());//layui的table会自动获取并显示该数据集
+		return map;
+	}	
+	
 	//前台主贴显示
 	@RequestMapping("/getMainPostListUser")
 	public String getMainPostListUser(Model model,
