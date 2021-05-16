@@ -19,6 +19,13 @@ public class ReportMainServiceImpl implements ReportMainService {
 		// TODO Auto-generated method stub
 		reportMainDao.addReportMain(reportMain);
 	}
+
+	//·â½û½â·âÌû×Ó
+	@Override
+	public void lockMainPost(int mainPostID, int mainPostIsLocked) {
+		
+		reportMainDao.lockMainPost(mainPostID,mainPostIsLocked);
+	}
 	
 	
 

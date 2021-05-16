@@ -10,6 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/layui-v2.6.1/layui/css/layui.css"  charset="utf-8" media="all">
   <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+
 </head>
 <body>
  
@@ -25,8 +26,13 @@
 </script>
  
 <script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-xs" lay-event="edit">锁定</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script type="text/html" id="checkboxTpl">
+  <!-- 这里的 checked 的状态只是演示 -->
+  <input type="checkbox" name="mainPostIsLocked" value="{{d.mainPostIsLocked}}" title="封禁" lay-filter="lockDemo" {{ d.mainPostIsLocked == 1 ? 'checked' : '' }}>
 </script>
 
  <!--table日期转换格式-->
@@ -84,7 +90,7 @@ layui.use('table', function(){
       ,{field:'mainPostTime', title:'发帖时间', width:160,sort: true,templet:'<div>{{ Format(d.mainPostTime,"yyyy-MM-dd hh:mm:ss")}}</div>'}
       ,{field:'mainPostLikeCount', title:'点赞数', width:120}
      // ,{field:'mainPostBadCount', title:'点踩数', width:120}
-      ,{field:'mainPostIsLOcked', title:'是否锁定', width:120,templet: function(d){if(d.gender == 1){return '是'}else{return '否'}}}
+      ,{field:'mainPostIsLocked', title:'是否锁定', width:110, templet: '#checkboxTpl', unresize:true}
       ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150} 
      /* ,{field:'email', title:'邮箱', width:150, edit: 'text', templet: function(res){
         return '<em>'+ res.email +'</em>'

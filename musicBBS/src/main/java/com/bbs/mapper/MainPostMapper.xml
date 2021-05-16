@@ -19,8 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="mainPostTime" column="mainPostTime"/>
 		<result property="mainPostContent" column="mainPostContent"/>
 		<result property="mainPostGoodCount" column="mainPostGoodCount"/>
-		<result property="mainPostBadCount" column="mainPostBadCount"/>
-		<result property="mainPostIsLOcked" column="mainPostIsLOcked"/>
+		<result property="mainPostIsLocked" column="mainPostIsLocked"/>
 		<result property="mainPostImg" column="mainPostImg"/>
 		<result property="categoryName" column="categoryName"/>
 		<association property="user" column="userID" javaType="com.bbs.pojo.User" select="getUser">
@@ -56,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="mainPostTitle" column="mainPostTitle"/>
 		<result property="mainPostTime" column="mainPostTime"/>
 		<result property="mainPostContent" column="mainPostContent"/>
-		<result property="mainPostIsLOcked" column="mainPostIsLOcked"/>
+		<result property="mainPostIsLocked" column="mainPostIsLocked"/>
 		<result property="mainPostImg" column="mainPostImg"/>
 		<result property="categoryName" column="categoryName"/>
 		<association property="user" column="userID" javaType="com.bbs.pojo.User" select="getUser">

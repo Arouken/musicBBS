@@ -2,12 +2,15 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bbs.dao.ReportMainDao">
-
+<!-- 举报 -->
 	<insert id="addReportMain" parameterType="com.bbs.pojo.ReportMain">
 		insert into report_mp(userID,mainPostID,reportReason,reportMainTime) 
 		values(#{userID},#{mainPostID},#{reportReason},#{reportMainTime})
 	</insert>
-	
+<!-- 	封禁解封帖子 -->
+	<update  id="lockMainPost">
+	    update  main_post set mainPostIsLocked = #{mainPostIsLocked} where mainPostID=#{mainPostID}		
+	</update>
 
 	
 <!-- 	<delete id="disCollectPost" parameterType="com.bbs.pojo.Collect"> -->

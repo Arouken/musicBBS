@@ -12,11 +12,11 @@ public class MainPost {
 	private String mainPostContent;
 	private int mainPostCollectCount;
 	private int mainPostLikeCount;
-	private int mainPostIsLOcked;
 	private String mainPostImg;
 	private String categoryName;
 	private int mainPostReplyCount;
 	private int mainReportCount;
+	private int mainPostIsLocked;
 	
 	
 	public int getMainPostReplyCount() {
@@ -62,12 +62,7 @@ public class MainPost {
 	public void setMainPostContent(String mainPostContent) {
 		this.mainPostContent = mainPostContent;
 	}
-	public int getMainPostIsLOcked() {
-		return mainPostIsLOcked;
-	}
-	public void setMainPostIsLOcked(int mainPostIsLOcked) {
-		this.mainPostIsLOcked = mainPostIsLOcked;
-	}
+
 	public String getUserID() {
 		return userID;
 	}
@@ -103,6 +98,12 @@ public class MainPost {
 	}
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+	public int getMainPostIsLocked() {
+		return mainPostIsLocked;
+	}
+	public void setMainPostIsLocked(int mainPostIsLocked) {
+		this.mainPostIsLocked = mainPostIsLocked;
 	}
 	
 

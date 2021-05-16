@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bbs.pojo.MainPost;
 import com.bbs.pojo.ReportMain;
 import com.bbs.pojo.User;
@@ -53,7 +55,32 @@ public class ReportMainController {
 			
 	}
 	
-	//后台显示举报帖子表
+	//封禁或解封帖子
+	@RequestMapping("/lockMainPost")
+	@ResponseBody
+	public String lockMainPost(int mainPostID,int mainPostIsLocked) {				
+		JSONObject jsonObject = new JSONObject();
+		int lock;
+		jsonObject.put("msg", "1");	
+		try {
+			
+			if(mainPostIsLocked==0) {
+				lock = 1;
+				jsonObject.put("result", "1");
+			}else {
+				lock = 0;
+				jsonObject.put("result", "2");
+			}					
+			reportMainService.lockMainPost(mainPostID, lock);
+			System.out.println("封禁帖子ID:"+mainPostID+"封禁状态"+lock);
+			
+		} catch (Exception e) {
+			jsonObject.put("result", "0");
+			e.printStackTrace();
+		}
+		return jsonObject.toString();		
+	}
+	
 	
 	
 	

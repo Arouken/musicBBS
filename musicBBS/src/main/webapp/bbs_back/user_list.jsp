@@ -14,7 +14,8 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/layui-v2.6.1/layui/css/layui.css"
 	charset="utf-8" media="all">
-<!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+
+
 </head>
 <body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/layui-v2.6.1/layui/jquery-3.3.1.js"></script>
@@ -56,6 +57,7 @@
 				</div>
 			</div>
 		</div>
+		
 	</form>
 	<table class="layui-hide" id="userList" lay-filter="test"></table>
 <script type="text/html" id="toolbarDemo">
@@ -120,7 +122,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/layui-v2.6.1/layui/jquery-3.3.1.js"></script>
 	<script>								
 						layui.use('table',function() {
-							var table = layui.table;							
+							var table = layui.table	
+							 ,form = layui.form;
 									table.render({
 										elem : '#userList',
 										url : '/musicBBS/user/getUserList',
@@ -200,7 +203,7 @@
 													templet : '<div>{{ Format(d.createDate,"yyyy-MM-dd")}}</div>'
 												}
 
-												//    ,{field:'lock', title:'是否锁定', width:110, templet: '#checkboxTpl', unresize: true}
+												,{field:'lock', title:'账号锁定', width:110, templet: '#checkboxTpl', unresize: true}
 												,
 												{
 													field : 'photo',
@@ -250,6 +253,10 @@
 										case 'isAll':
 											layer.msg(checkStatus.isAll ? '全选'
 													: '未全选');
+											break;
+										case 'deleteAll':
+											layer.msg(checkStatus.isAll ? '全选'
+													: '删除全选');
 											break;
 
 										//自定义头工具栏右侧图标 - 提示
@@ -340,10 +347,10 @@
 							//       }
 							//   });
 
-							// //监听锁定操作
-							//   form.on('checkbox(lockDemo)', function(obj){
-							//     layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
-							//   });
+							//监听锁定操作
+							 form.on('checkbox(lockDemo)',function(obj){
+							    layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+							  });
 
 							// //监听性别操作
 							//   form.on('switch(sexDemo)', function(obj){

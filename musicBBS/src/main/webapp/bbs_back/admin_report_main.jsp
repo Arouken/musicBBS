@@ -12,6 +12,8 @@
   <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
 <body>
+<script type="text/javascript" src="${pageContext.request.contextPath}/layui-v2.6.1/layui/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/layui-v2.6.1/layui/layui.js"></script>
  
 <table class="layui-hide" id="mainPostList" lay-filter="test"></table>
  
@@ -25,8 +27,13 @@
 </script>
  
 <script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-xs" lay-event="edit">封禁</a>
+  
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script type="text/html" id="checkboxTpl">
+  <!-- 这里的 checked 的状态只是演示 -->
+  <input type="checkbox" lay-event="lockPost" id="PostIsLocked" name="PostIsLocked" value="{{d.mainPostID}}" title="封禁" lay-filter="lockDemo" {{ d.mainPostIsLocked == 1 ? 'checked' : '' }}>
 </script>
 
  <!--table日期转换格式-->
@@ -58,13 +65,12 @@
     }
 </script>
   
-          
-<script src="${pageContext.request.contextPath}/layui-v2.6.1/layui/layui.js" charset="utf-8"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 --> 
- 
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/layui-v2.6.1/layui/layui.js"></script>	
 <script>
 layui.use('table', function(){
-  var table = layui.table;
+  var table = layui.table
+  ,form = layui.form;
   table.render({
     elem: '#mainPostList'
     ,url:'/musicBBS/MainPost/getMainReportList'
@@ -82,9 +88,9 @@ layui.use('table', function(){
       ,{field:'mainPostTitle', title:'帖子名', width:100}
       ,{field:'mainPostContent', title:'帖子内容', width:220,height:100}
       ,{field:'mainPostTime', title:'发帖时间', width:160,sort: true,templet:'<div>{{ Format(d.mainPostTime,"yyyy-MM-dd hh:mm:ss")}}</div>'}
-      ,{field:'mainReportCount', title:'举报数', width:60}
+      ,{field:'mainReportCount', title:'举报数', width:80}
+      ,{field:'mainPostIsLocked', title:'是否锁定', width:110, templet: '#checkboxTpl', unresize:true,event:'lockPost'}
      // ,{field:'mainPostBadCount', title:'点踩数', width:120}
-      ,{field:'mainPostIsLOcked', title:'是否锁定', width:120,templet: function(d){if(d.gender == 1){return '是'}else{return '否'}}}
       ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150} 
      /* ,{field:'email', title:'邮箱', width:150, edit: 'text', templet: function(res){
         return '<em>'+ res.email +'</em>'
@@ -144,6 +150,37 @@ layui.use('table', function(){
       });
     }
   });
+  
+	//监听锁定操作
+	form.on('checkbox(lockDemo)',function(obj){
+		var mainPostIsLocked;
+		 
+	    if( obj.elem.checked == true){mainPostIsLocked = 0;}
+        else if(obj.elem.checked == false){mainPostIsLocked = 1;}
+	    
+	    $.ajax({
+            url: "/musicBBS/ReportMain/lockMainPost",
+            type: "post",
+            dataType: "json",
+            data:{'mainPostID':this.value,'mainPostIsLocked':mainPostIsLocked},
+            success: function (res) {            
+                if (res.result == "1") {
+                    layer.msg("封禁帖子成功！",{icon: 6});             
+                }else if(res.result == "2"){
+                	layer.msg("解封帖子成功！",{icon: 6}); 
+                }
+                
+                else {
+                    layer.msg("封禁帖子失败！",{icon: 5});//失败的表情
+                }
+            }
+        });
+	    
+	});
+	
+	
+	
+	
   
   
   
