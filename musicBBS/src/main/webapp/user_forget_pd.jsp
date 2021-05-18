@@ -9,9 +9,9 @@
         <style type="text/css">
       		.container{
       			width: 420px;
-      			height: 320px;
-		 		 min-height: 320px;  
-		 		 max-height: 320px;  
+      			height: 420px;
+		 		 min-height: 380px;  
+		 		 max-height: 380px;  
 		 		 position: absolute;   
 		 		 top: 0;  
 		 		 left: 0;  
@@ -119,23 +119,23 @@ function RemainTime(){
         
     </head>
     <body>
-    	<form class="layui-form" action="${pageContext.request.contextPath}/user/phoneLogin" method="post" id="userPhoneLoginFrom" >
+    	<form class="layui-form" action="${pageContext.request.contextPath}/user/updatePasswordByPhone" method="post" id="userForgetPd" >
     		<div class="container" >
     			
     			<div class="layui-form-mid layui-word-aux">
     							
     			</div>
 			  <div class="layui-form-item">
-			    <label class="layui-form-label">手机号</label>
+			    <label class="layui-form-label">手  机  号</label>
 			    <div class="layui-input-block">
 			      <input type="text" name="phone" id="phone" 
-			       placeholder="请输入手机号" autocomplete="off" onkeyup="clealMess()" class="layui-input">
-			    
+			       placeholder="请输入手机号" autocomplete="off" onkeyup="clealMess()" class="layui-input">			    
 			      <span id="msg" style="color: red;font-size: 12px;margin-left: 20px;"></span> 
 			    </div>
 			  </div>
+			  
 			   <div class="layui-form-item">
-			    <label class="layui-form-label">验证码</label>
+			    <label class="layui-form-label">验  证  码</label>
 			    <div class="layui-input-inline">
 			      <input type="text" placeholder="请输入验证码" onkeyup="clealCodeMess()" name="phoneCode" id="phoneCode" autocomplete="off" class="layui-input verity">	
 			      <span id="imgCode_mess"></span> 		      
@@ -146,15 +146,29 @@ function RemainTime(){
 			    </div>		      
 			  </div>
 			  
-			
-
 			  <div class="layui-form-item">
-			   <div class="layui-input-block">
-			      <span id="msg" style="color: red;font-size: 12px;margin-left: 20px;"></span>
-			    </div>
-			 
+			    <label class="layui-form-label">新  密  码</label>
 			    <div class="layui-input-block">
-			      <button class="layui-btn layui-btn-normal" id="login">登陆</button>	     
+			      <input type="text" name="newPassword" id="newPassword" 
+			       placeholder="请输入新密码" autocomplete="off" onkeyup="clealMess()" class="layui-input">
+			    
+			      <span id="newPassword_msg" style="color: red;font-size: 12px;margin-left: 20px;"></span> 
+			    </div>
+			  </div>
+			  
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">再次输入</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="newPasswordSe" id="newPasswordSe" 
+			       placeholder="请再次输入新密码" autocomplete="off" onkeyup="passwordSame()" class="layui-input">			    
+			      <span id="newSePassword_mess" style="color: red;font-size: 12px;margin-left: 20px;"></span> 
+			    </div>		    
+			  </div>
+
+			  <div class="layui-form-item">			 
+<!-- 			      <span id="msg" style="color: red;font-size: 12px;margin-left: 20px;"></span>		  -->
+			    <div class="layui-input-block">
+			      <button class="layui-btn layui-btn-normal" id="updatePassword">提交修改</button>	     
 			    </div>
 			  </div>
 			   <a href="user_forget_pd.jsp" class="font-set">忘记密码?</a>
@@ -278,9 +292,39 @@ function RemainTime(){
 					}
 				})
 			}
+			
+			//判断两次密码是否一致
+			function passwordSame() {
+				var password = document.getElementById("newPassword").value;
+				var repassword = document.getElementById("newPasswordSe").value;
+				if (password == repassword) {
+					$("#newSePassword_mess").html("").css("color", "green");
+					document.getElementById("updatePassword").disabled = false;
 
-			//2.点击登录
-			$("#login").click(function(){	
+				} else {
+					$("#newSePassword_mess").html("两次输入的密码不一致").css("color", "red");
+					document.getElementById("updatePassword").disabled = true;
+				}
+			}
+
+			//2.点击修改密码
+			$("#updatePassword").click(function(){
+				//获取输入的密码
+				var newPassword=$("#newPassword").val();
+				//密码不能为空
+				if($.trim(newPassword).length==0){
+					$("#newPassword_msg").html("密码不能为空！");
+					return false;
+				}
+				
+				//获取输入确认密码
+				var newPassword=$("#newPasswordSe").val();
+				//确认密码不能为空
+				if($.trim(newPassword).length==0){
+					$("#newSePassword_mess").html("确认密码不能为空！");
+					return false;
+				}
+				
 				var phone=$("#phone").val();
 				var phoneCode=$("#phoneCode").val();	
 				//验证码是否正确：ajax		
@@ -293,7 +337,8 @@ function RemainTime(){
 					success:function(obj){
 						if(obj=="ok"){
 							//验证码正确，提交表单根据账号密码验证登录
-							$("#userPhoneLoginFrom").submit();		
+							$("#userForgetPd").submit();
+							alert("修改成功!请点击确认，返回登录界面");
 						}else{
 							//验证码错误
 							$("#imgCode_mess").html("验证码错误").css("color","red");

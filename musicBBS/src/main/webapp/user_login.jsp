@@ -135,7 +135,7 @@
 			      <button class="layui-btn layui-btn-normal" id="login">登陆</button>	     
 			    </div>
 			  </div>
-			   <a href="" class="font-set">忘记密码?</a>
+			   <a href="user_forget_pd.jsp" class="font-set">忘记密码?</a>
 			   <a href="user_login_phone.jsp" class="font-set">手机登陆</a>  
 			   <a href="user_regist.jsp" class="font-set">立即注册</a>
 			</div>

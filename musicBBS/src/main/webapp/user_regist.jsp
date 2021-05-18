@@ -121,7 +121,9 @@
 			      <button class="layui-btn" lay-submit lay-filter="formDemo" type="submit" id="regist">注册</button>	     
 			    </div>
 			  </div>
-			   <a href="" class="font-set">忘记密码?</a>  <a href="user_login.jsp" class="font-set">立即登陆</a>
+			   <a href="user_forget_pd.jsp" class="font-set">忘记密码?</a>
+			   <a href="user_login.jsp" class="font-set">密码登陆</a>
+			   
 			</div>
 		</form>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/layui-v2.6.1/layui/layui.js"></script>

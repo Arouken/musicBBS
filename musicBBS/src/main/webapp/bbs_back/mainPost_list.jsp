@@ -90,7 +90,7 @@ layui.use('table', function(){
       ,{field:'mainPostTime', title:'发帖时间', width:160,sort: true,templet:'<div>{{ Format(d.mainPostTime,"yyyy-MM-dd hh:mm:ss")}}</div>'}
       ,{field:'mainPostLikeCount', title:'点赞数', width:120}
      // ,{field:'mainPostBadCount', title:'点踩数', width:120}
-      ,{field:'mainPostIsLocked', title:'是否锁定', width:110, templet: '#checkboxTpl', unresize:true}
+      ,{field:'mainPostIsLocked', title:'主贴锁定', width:110, templet: '#checkboxTpl', unresize:true}
       ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150} 
      /* ,{field:'email', title:'邮箱', width:150, edit: 'text', templet: function(res){
         return '<em>'+ res.email +'</em>'
@@ -151,6 +151,32 @@ layui.use('table', function(){
     }
   });
   
+//监听锁定操作
+	form.on('checkbox(lockDemo)',function(obj){
+		var mainPostIsLocked;
+		 
+	    if( obj.elem.checked == true){mainPostIsLocked = 0;}
+      else if(obj.elem.checked == false){mainPostIsLocked = 1;}
+	    
+	    $.ajax({
+          url: "/musicBBS/ReportMain/lockMainPost",
+          type: "post",
+          dataType: "json",
+          data:{'mainPostID':this.value,'mainPostIsLocked':mainPostIsLocked},
+          success: function (res) {            
+              if (res.result == "1") {
+                  layer.msg("封禁帖子成功！",{icon: 6});             
+              }else if(res.result == "2"){
+              	layer.msg("解封帖子成功！",{icon: 6}); 
+              }
+              
+              else {
+                  layer.msg("封禁帖子失败！",{icon: 5});//失败的表情
+              }
+          }
+      });
+	    
+	});
   
   
 });
