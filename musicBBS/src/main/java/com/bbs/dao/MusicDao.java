@@ -12,5 +12,8 @@ public interface MusicDao {
 	public List<Music> getMusicList();
 	//查询单个歌曲信息
 	public Music getOneMusic(int musicID);
+	//删除音乐
+	public void deleteMusic(int musicID);
+	
 
 }

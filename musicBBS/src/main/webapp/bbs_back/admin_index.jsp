@@ -17,14 +17,14 @@
       <li class="layui-nav-item"><a href="${pageContext.request.contextPath }/MainPost/getMainPostListUser">前台首页</a></li>
       <li class="layui-nav-item"><a href="">个人信息</a></li>
       <li class="layui-nav-item"><a href="">网站公告</a></li>
-      <li class="layui-nav-item">
-        <a href="javascript:;">其它系统</a>
-        <dl class="layui-nav-child">
-          <dd><a href="${pageContext.request.contextPath}/testtable.jsp">邮件管理</a></dd>
-          <dd><a href="">消息管理</a></dd>
-          <dd><a href="">授权管理</a></dd>
-        </dl>
-      </li>
+<!--       <li class="layui-nav-item"> -->
+<!--         <a href="javascript:;">其它系统</a> -->
+<!--         <dl class="layui-nav-child"> -->
+<%--           <dd><a href="${pageContext.request.contextPath}/testtable.jsp">邮件管理</a></dd> --%>
+<!--           <dd><a href="">消息管理</a></dd> -->
+<!--           <dd><a href="">授权管理</a></dd> -->
+<!--         </dl> -->
+<!--       </li> -->
     </ul>
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
@@ -48,7 +48,7 @@
           <dl class="layui-nav-child">
             <dd><a href="${pageContext.request.contextPath}/bbs_back/user_list.jsp" target="usermain">用户列表</a></dd>
             <dd><a href="${pageContext.request.contextPath}/bbs_back/admin_addUser.jsp" target="usermain">添加用户</a></dd>
-            <dd><a href="${pageContext.request.contextPath}/bbs_back/mainPost_list.jsp" target="usermain">信息修改</a></dd>
+<%--             <dd><a href="${pageContext.request.contextPath}/bbs_back/mainPost_list.jsp" target="usermain">信息修改</a></dd> --%>
 <!--             <dd><a href="">超链接</a></dd> -->
           </dl>
         </li>
@@ -56,17 +56,18 @@
           <a href="javascript:;">帖子管理</a>
           <dl class="layui-nav-child">
             <dd><a href="${pageContext.request.contextPath}/bbs_back/mainPost_list.jsp">主贴列表</a></dd>
-            <dd><a href="${pageContext.request.contextPath}/bbs_back/admin_report_main.jsp"">主贴举报</a></dd>
-            <dd><a href="javascript:;">回帖举报</a></dd>
+            <dd><a href="${pageContext.request.contextPath}/bbs_back/admin_report_main.jsp">主贴举报</a></dd>
+            <dd><a href="javascript:;">回帖列表</a></dd>
+            <dd><a href="${pageContext.request.contextPath}/bbs_back/category_list.jsp">分区列表</a></dd>
 <!--             <dd><a href="">超链接</a></dd> -->
           </dl>
         </li>
          <li class="layui-nav-item">
           <a href="javascript:;">音乐管理</a>
           <dl class="layui-nav-child">
-            <dd><a href="${pageContext.request.contextPath}/bbs_back/mainPost_list.jsp">音乐列表</a></dd>
-            <dd><a href="${pageContext.request.contextPath}/bbs_back/music_info.jsp">添加音乐</a></dd>
-            <dd><a href="${pageContext.request.contextPath}/bbs_back/music_info.jsp">音乐信息</a></dd>
+            <dd><a href="${pageContext.request.contextPath}/bbs_back/music_list.jsp">音乐列表</a></dd>
+            <dd><a href="${pageContext.request.contextPath}/bbs_back/music_add.jsp">添加音乐</a></dd>
+<%--             <dd><a href="${pageContext.request.contextPath}/bbs_back/music_info.jsp">音乐信息</a></dd> --%>
 <!--             <dd><a href="">超链接</a></dd> -->
           </dl>
         </li>

@@ -14,7 +14,45 @@
 <body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/layui-v2.6.1/layui/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/layui-v2.6.1/layui/layui.js"></script>
- 
+ <form class="layui-form" action="">
+		<div class="layui-row">
+			<div class="layui-col-xs3">
+				<div class="grid-demo grid-demo-bg1">
+					<div class="layui-form-item">
+						<label class="layui-form-label">查询字段</label>
+						<div class="layui-input-block">
+							<select id="userKey" name="userKey" lay-filter="dept">
+								<option value="0" selected="true">帖子ID</option>
+								<option value="1">用户ID</option>
+								<option value="2">帖子标题</option>
+								<option value="2">帖子内容</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="layui-col-xs6">
+				<div class="grid-demo grid-demo-bg1">
+					<div class="layui-form-item">
+						<label class="layui-form-label"></label>
+						<div class="layui-input-block">
+							<input id="userValue" type="text" name="userValue"
+								lay-verify="title" autocomplete="off" placeholder="要查找的内容"
+								class="layui-input">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="layui-col-xs3">
+				<div class="grid-demo grid-demo-bg1">
+					<div class="layui-form-item">
+						<button class="layui-btn" data-type="reload" type="button">搜索</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</form>
 <table class="layui-hide" id="mainPostList" lay-filter="test"></table>
  
 <script type="text/html" id="toolbarDemo">
@@ -22,10 +60,10 @@
     <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
     <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
     <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
-    <button class="layui-btn layui-btn-sm layui-btn-danger  " lay-event="deleteAll">封禁全选</button>
+  
   </div>
 </script>
- 
+<!--    <button class="layui-btn layui-btn-sm layui-btn-danger  " lay-event="deleteAll">封禁全选</button> -->
 <script type="text/html" id="barDemo">
   
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>

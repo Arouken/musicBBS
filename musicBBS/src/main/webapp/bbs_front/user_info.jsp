@@ -82,7 +82,7 @@
                 <p><input type="radio" name="sex" checked/><label>男</label></p>
                 <p><input type="radio" name="sex"/><label>女</label></p>
             </div>
-            <input type="button" value="发送验证码" class="upload_sure"/>
+<!--             <input type="button" value="发送验证码" class="upload_sure"/> -->
             <input type="submit" value="确认修改" class="upload_sure"/>
         </div>
        </form>

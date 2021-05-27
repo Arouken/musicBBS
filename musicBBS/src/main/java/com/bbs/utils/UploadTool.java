@@ -79,9 +79,6 @@ public class UploadTool {
 	 public static String saveMP3Image(String path) {
 	        //生成mp3图片路径
 		    String uploadDocsImgPath = "F:\\musicBBS\\music\\img";
-	    	//PathKit.getWebRootPath() + music.getMusicUrl() 路径前缀，修改成自己的url前缀
-	    	//File file = new File(path);
-	        //String mp3FileLabel = file.getName();
 	        String musicImgID = UUID.randomUUID().toString();
 	        String mp3ImageFullPath = uploadDocsImgPath + ("\\"+musicImgID+".jpg");
 	        String musicImgName = musicImgID+".jpg";  	      
@@ -115,7 +112,7 @@ public class UploadTool {
 	        return musicImgName;
 	    }
 	 
-	 
+	 //添加分区图片
 	 public static String addCategoryImg(MultipartFile multipartFile) {
 			//定义一个文件名称
 			String photo="";

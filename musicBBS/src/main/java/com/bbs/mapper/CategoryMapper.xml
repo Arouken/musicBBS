@@ -7,11 +7,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectCategoryList"  resultType="com.bbs.pojo.Category">
 		select * from category
 	</select>
+<!-- 	条件查询 -->
+	<select id="findCategoryBySelect" parameterType="String"  resultType="com.bbs.pojo.Category">
+		select * from category where ${categoryKey}  like CONCAT('%',#{categoryValue},'%')
+	</select>
 	
 <!-- 	添加分区 -->
 	<insert id="addCategory" parameterType="com.bbs.pojo.Category">
 	    insert into category (userID,categoryName,categoryTxt,categoryCreatDay,categoryImg) 
 	    values(#{userID},#{categoryName},#{categoryTxt},#{categoryCreatDay},#{categoryImg})
 	</insert>
+<!-- 	删除分区 -->
+	<delete  id="deleteCategory" parameterType="int">
+	    delete from category where categoryID=#{categoryID}		
+	</delete>
+<!-- 	封禁解封分区 -->
+	<update  id="lockCategory">
+	    update  category set categoryIsLocked = #{categoryIsLocked} where categoryID=#{categoryID}		
+	</update>
 	
 </mapper>

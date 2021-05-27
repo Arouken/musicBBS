@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.bbs.dao.MusicDao;
 import com.bbs.pojo.MainPost;
 import com.bbs.pojo.Music;
+import com.bbs.pojo.User;
 import com.bbs.service.MusicService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -51,6 +52,21 @@ public class MusicServiceImpl implements MusicService {
 		// TODO Auto-generated method stub
 		
 		return musicDao.getOneMusic(musicID);
+	}
+
+	//后台查询音乐列表
+	@Override
+	public List<Music> getMuiscPage(Integer page, Integer limit) {
+		PageHelper.startPage(page, limit);//page为申请查询的页码，limit为一页显示多少条数据
+		List<Music> music = musicDao.getMusicList();//PageHelper.startPage()后面必须紧接查询数据的方法
+		return music;		
+	}
+
+	//删除音乐
+	@Override
+	public void deleteMusic(int musicID) {
+		// TODO Auto-generated method stub
+		musicDao.deleteMusic(musicID);
 	}
 
 }

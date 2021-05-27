@@ -140,6 +140,12 @@ public class MainPostController {
 	    return "/bbs_front/user_category_info";
 										
 	}
+	
+	//条件查询贴子
+	
+	
+	
+	//删除贴子
 
 	
 	

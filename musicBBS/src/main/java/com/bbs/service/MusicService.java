@@ -15,5 +15,9 @@ public interface MusicService {
 	PageInfo<Music> getFrontMusicList(Integer page, Integer size);
 	//查询单个歌曲信息
 	public Music getOneMusic(int musicID);
+	//后台查询音乐列表
+	public List<Music> getMuiscPage(Integer page, Integer limit);
+	//删除音乐
+	public void deleteMusic(int musicID);
 
 }

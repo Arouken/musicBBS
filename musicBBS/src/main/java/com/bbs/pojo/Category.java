@@ -5,6 +5,7 @@ import java.util.Date;
 public class Category {
 	
 	private int categoryID;
+	private int categoryIsLocked;
 	private String categoryName;
 	private String userID;
 	private String categoryTxt;
@@ -49,6 +50,12 @@ public class Category {
 	}
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+	public int getCategoryIsLocked() {
+		return categoryIsLocked;
+	}
+	public void setCategoryIsLocked(int categoryIsLocked) {
+		this.categoryIsLocked = categoryIsLocked;
 	}
 
 }

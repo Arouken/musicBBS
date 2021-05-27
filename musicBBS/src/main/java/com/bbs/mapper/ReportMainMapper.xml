@@ -11,14 +11,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update  id="lockMainPost">
 	    update  main_post set mainPostIsLocked = #{mainPostIsLocked} where mainPostID=#{mainPostID}		
 	</update>
-
-	
-<!-- 	<delete id="disCollectPost" parameterType="com.bbs.pojo.Collect"> -->
-<!-- 		delete from collect where userID=#{userID} and mainPostID=#{mainPostID} -->
-<!-- 	</delete> -->
-	
-<!-- 	<select id="selectCollectPost" parameterType="com.bbs.pojo.Collect" resultType="com.bbs.pojo.Collect"> -->
-<!-- 		select * from collect where userID=#{userID} and mainPostID=#{mainPostID} -->
-<!-- 	</select> -->
 	
 </mapper>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>音乐列表</title>
+<title>分区列表</title>
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport"
@@ -29,10 +29,9 @@
 						<label class="layui-form-label">查询字段</label>
 						<div class="layui-input-block">
 							<select id="userKey" name="userKey" lay-filter="dept">
-								<option value="0" selected="true">音乐ID</option>
-								<option value="1">音乐名</option>
-								<option value="2">歌手名</option>
-								<option value="3">专辑名</option>
+								<option value="0" selected="true">分区ID</option>
+								<option value="1">分区名</option>
+								<option value="2">分区简介</option>
 							</select>
 						</div>
 					</div>
@@ -60,7 +59,7 @@
 		</div>
 		
 	</form>
-	<table class="layui-hide" id="musicList" lay-filter="test"></table>
+	<table class="layui-hide" id="categoryList" lay-filter="test"></table>
 <script type="text/html" id="toolbarDemo">
   <div class="layui-btn-container">
     <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
@@ -72,11 +71,13 @@
 <!-- <button class="layui-btn layui-btn-sm layui-btn-danger  " lay-event="deleteAll">删除全选</button> -->
 	<script type="text/html" id="barDemo">
   <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
-
+<script type="text/html" id="checkboxTpl">
+  <!-- 这里的 checked 的状态只是演示 -->
+  <input type="checkbox" name="lock" value="{{d.id}}" title="锁定" lay-filter="lockDemo" {{ d.id == 10006 ? 'checked' : '' }}>
+</script>
 
 
 	<!--table日期转换格式-->
@@ -118,8 +119,8 @@
 							var table = layui.table	
 							 ,form = layui.form;
 									table.render({
-										elem : '#musicList',
-										url : '/musicBBS/Music/getBackMusicList',
+										elem : '#categoryList',
+										url : '/musicBBS/Category/getBackCategoryList',
 										toolbar : '#toolbarDemo',//开启头部工具栏，并为其绑定左侧模板
 
 										defaultToolbar : [ 'filter', 'exports',
@@ -128,46 +129,54 @@
 													layEvent : 'LAYTABLE_TIPS',
 													icon : 'layui-icon-tips'
 												} ],
-										title : '用户数据表',
+										title : '分区数据表',
 										cols : [ [//表头
 												{
 													type : 'checkbox',
 													fixed : 'left'
 												},
 												{
-													field : 'musicID',
-													title : '音乐ID',
-													width : 100,
+													field : 'categoryID',
+													title : '分区ID',
+													width : 90,
 													fixed : 'left',
 													unresize : true,
 													sort : true
 												},
 												{
-													field : 'musicName',
-													title : '音乐名',
-													width : 180,
+													field : 'categoryName',
+													title : '分区名',
+													width : 100,
 													edit : 'text'
 												},
 												{
-													field : 'singer',
-													title : '歌手名',
-													width : 140
+													field : 'userID',
+													title : '创建用户',
+													width : 100
+												},
+												{
+													field : 'categoryTxt',
+													title : '分区简介',
+													width : 160
 												}
-												//    ,{field:'gender', title:'性别', width:85, templet: '#switchTpl', unresize: true}
+											
 												,
 												{
-													field : 'album',
-													title : '专辑名',
-													width : 200
+													field : 'categoryCreatDay',
+													title : '创建时间',
+													width : 120,
+													sort : true,
+													templet : '<div>{{ Format(d.categoryCreatDay,"yyyy-MM-dd")}}</div>'
 												}											
 												
 												,
 												{
-													field : 'musicImgName',
-													title : '歌曲图片',
+													field : 'categoryImg',
+													title : '分区图片',
 													width : 120,
-													templet : '<div><img src="/music/img/{{d.musicImgName}}"></div>'
+													templet : '<div><img src="/categoryImg/{{d.categoryImg}}"></div>'
 												}
+												,{field:'lock', title:'分区锁定', width:110, templet: '#checkboxTpl', unresize: true}
 												,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:200} 
 												
 										] ],

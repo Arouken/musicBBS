@@ -7,10 +7,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into music(musicName,singer,album,musicOtherName,musicImgName) 
 		values(#{musicName},#{singer},#{album},#{musicOtherName},#{musicImgName})
 	</insert>
-	
-<!-- 	<delete id="disCollectPost" parameterType="com.bbs.pojo.Music"> -->
-<!-- 		delete from collect where userID=#{userID} and mainPostID=#{mainPostID} -->
-<!-- 	</delete> -->
 <!-- 查询所有歌曲	 -->
 	<select id="getMusicList"  resultType="com.bbs.pojo.Music">
 		select * from music
@@ -20,5 +16,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getOneMusic" parameterType="int" resultType="com.bbs.pojo.Music">
 		select * from music where musicID = #{musicID}
 	</select>
+	<!-- 	删除音乐 -->
+	<delete  id="deleteMusic" parameterType="int">
+	    delete from music where musicID=#{musicID}		
+	</delete>
+	<!-- 	管理员修改音乐信息 -->
+	<update  id="updateMusicById">
+	    update music set musicName=#{musicName}, password=#{password}, 
+	    phoneNum=#{phoneNum}, gender=#{gender}, competence=#{competence}
+        where musicID = #{musicID}		
+	</update>
 	
 </mapper>

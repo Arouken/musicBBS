@@ -3,6 +3,7 @@ package com.bbs.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -25,7 +26,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bbs.pojo.Music;
+import com.bbs.pojo.User;
 import com.bbs.service.MusicService;
 import com.bbs.utils.UploadTool;
 import com.github.pagehelper.PageInfo;
@@ -109,6 +112,22 @@ public class MusicController {
 		return "/bbs_front/user_music";
 	}
 	
+	//后台显示音乐
+	@ResponseBody // 自动返回json格式的数据
+	@RequestMapping("/getBackMusicList")
+	public Map<String, Object> getPage(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
+		// page、limit参数都是layui的table组件默认自动传递的，我们只需接收即可
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Music> list = musicService.getMuiscPage(page, limit);// 执行分页查询的方法
+		PageInfo<Music> musicPageInfo = new PageInfo<Music>(list);
+		// System.out.println("list的内容为：" + list.get(2));
+		System.out.println("pageInfo的内容为：" + musicPageInfo.getTotal());
+		map.put("code", 0);
+		map.put("msg", "操作成功");
+		map.put("count", musicPageInfo.getTotal());
+		map.put("data", musicPageInfo.getList());// layui的table会自动获取并显示该数据集
+		return map;
+	}
 	
 	
 	//点击播放音乐，进入详情页
@@ -121,6 +140,28 @@ public class MusicController {
 		attributes.addAttribute("musicID", musicID); 
 		return "redirect:/MusicPost/getMusicPost";
 	}
+	
+	//删除音乐
+	@RequestMapping("/deleteMusic")
+	@ResponseBody
+	public String deleteMusic(@RequestParam("musicID")int musicID) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("msg", "1");
+		try {
+			musicService.deleteMusic(musicID);
+			jsonObject.put("result", "1");
+		} catch (Exception e) {
+			jsonObject.put("result", "0");
+			e.printStackTrace();
+		}
+		System.out.println(jsonObject);
+		return jsonObject.toString();	
+	}
+	
+	//查询音乐
+	
+	
+	//修改音乐
 	
 
 	 

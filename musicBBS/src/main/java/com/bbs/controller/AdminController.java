@@ -35,18 +35,12 @@ public class AdminController {
 			@RequestParam("page")Integer page,
 			@RequestParam("limit")Integer limit) {
 		System.out.println(userKey + " " + value + " " + page + " " + limit);
-		if (userKey.equals("0")) {
-			
-			userKey = "userID";
-			System.out.println("userKey的内容为：userID");
-			}
+		if (userKey.equals("0")) {userKey = "userID";}
 		if (userKey.equals("1")) {userKey = "userName";}
 		if (userKey.equals("2")) {userKey = "phoneNum";}
-		
 		List<User> user = userService.findUserBySelect(userKey, value, page, limit);
 		Map<String, Object> map = new HashMap<String, Object>();
 		PageInfo<User> userByselect = new PageInfo<User>(user);
-		System.out.println("userByselect的内容为：" + userByselect.getTotal());
 		map.put("code", 0);
 		map.put("msg", "操作成功");
 		map.put("count", userByselect.getTotal());
@@ -95,7 +89,7 @@ public class AdminController {
 	public String toUserList() {
 		return "/bbs_back/user_list";
 	}
-	//跳转到更新用户数据界面
+	//跳转到修改用户数据界面
 	@RequestMapping("/toUpdateUser")
 	public String toUpdateUser() {
 		return "/bbs_back/admin_updateUser";
